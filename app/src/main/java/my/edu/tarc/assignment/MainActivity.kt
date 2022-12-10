@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.tree -> replaceFragment(Tree())
                 R.id.profile -> replaceFragment(Profile())
 
+            // This is for testing commit and push purposes
+
             }
 
             true
