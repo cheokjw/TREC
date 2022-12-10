@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/check_in"
+        android:id="@+id/checkin"
+        android:icon="@drawable/ic_baseline_calendar_month_24"/>
+
+    <item android:title="@string/quiz"
+        android:id="@+id/quiz"
+        android:icon="@drawable/ic_baseline_lightbulb_24"/>
+
+    <item android:title="@string/news"
+        android:id="@+id/news"
+        android:icon="@drawable/ic_baseline_newspaper_24"/>
+
+    <item android:title="@string/tree"
+        android:id="@+id/tree"
+        android:icon="@drawable/ic_baseline_energy_savings_leaf_24"/>
+
+    <item android:title="@string/profile"
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_baseline_person_24"/>
+</menu>
