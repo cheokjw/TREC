@@ -1,59 +1,121 @@
 package my.edu.tarc.assignment
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import my.edu.tarc.assignment.databinding.FragmentQuizBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Quiz.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Quiz : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class Quiz : Fragment(), View.OnClickListener {
+
+    private var mediaPlayer: MediaPlayer? = null
+    private lateinit var bindingQuiz : FragmentQuizBinding
+    private var mCurrentPosition:Int = 1
+    private var mQuestionsList: ArrayList<Question>? = null
+    private var mSelectedOption: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quiz, container, false)
+        bindingQuiz = FragmentQuizBinding.inflate(layoutInflater)
+        return bindingQuiz.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Quiz.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Quiz().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mQuestionsList = Constants.getQuestions()
+        setQuestions()
+        bindingQuiz.btnAnswer1.setOnClickListener(this)
+        bindingQuiz.btnAnswer2.setOnClickListener(this)
+        bindingQuiz.btnAnswer3.setOnClickListener(this)
+        bindingQuiz.btnAnswer4.setOnClickListener(this)
+
+    }
+
+    private fun setQuestions() {
+        val question: Question = mQuestionsList!!.get(mCurrentPosition - 1)
+
+        // Modifying the UI to show questions
+        bindingQuiz.tvQuestionNo.text = "$mCurrentPosition " + "/" +" 10"
+        bindingQuiz.tvQuestion.text = question.question
+        bindingQuiz.btnAnswer1.text = question.optionOne
+        bindingQuiz.btnAnswer2.text = question.optionTwo
+        bindingQuiz.btnAnswer3.text = question.optionThree
+        bindingQuiz.btnAnswer4.text = question.optionFour
+    }
+
+    override fun onClick(v: View) {
+        val answer = mQuestionsList!!.get(mCurrentPosition - 1).correctAns
+        when(v.id) {
+            R.id.btnAnswer1 -> {
+                mSelectedOption = 1
+                if(mSelectedOption == answer){
+                    mediaPlayer = MediaPlayer.create(activity, R.raw.correct)
+                    mediaPlayer?.start()
+                    mCurrentPosition++
+                    setQuestions()
+                }else {
+                    mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
+                    mediaPlayer?.start()
+                    mCurrentPosition++
+                    setQuestions()
                 }
             }
+            R.id.btnAnswer2 -> {
+                mSelectedOption = 2
+                if(mSelectedOption == answer){
+                    mediaPlayer = MediaPlayer.create(activity, R.raw.correct)
+                    mediaPlayer?.start()
+                    mCurrentPosition++
+                    setQuestions()
+                }else {
+                    mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
+                    mediaPlayer?.start()
+                    mCurrentPosition++
+                    setQuestions()
+                }
+            }
+            R.id.btnAnswer3 -> {
+                mSelectedOption = 3
+                if(mSelectedOption == answer){
+                    mediaPlayer = MediaPlayer.create(activity, R.raw.correct)
+                    mediaPlayer?.start()
+                    mCurrentPosition++
+                    setQuestions()
+                }else {
+                    mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
+                    mediaPlayer?.start()
+                    mCurrentPosition++
+                    setQuestions()
+                }
+            }
+            R.id.btnAnswer4 -> {
+                mSelectedOption = 4
+                if(mSelectedOption == answer){
+                    mediaPlayer = MediaPlayer.create(activity, R.raw.correct)
+                    mediaPlayer?.start()
+                    mCurrentPosition++
+                    setQuestions()
+                }else {
+                    mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
+                    mediaPlayer?.start()
+                    mCurrentPosition++
+                    setQuestions()
+
+                }
+            }
+        }
     }
+
+
 }

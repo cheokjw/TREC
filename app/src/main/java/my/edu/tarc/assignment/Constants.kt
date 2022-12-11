@@ -56,6 +56,57 @@ object Constants {
         )
         questionsList.add(que5)
 
+        val que6: Question = Question(6, "About how long does it take a Styrofoam cup to decompose?",
+            "10 years",
+            "2 months",
+            "400 years",
+            "200 years",
+            3,
+            "It only takes an orange peel six months to decompose"
+        )
+        questionsList.add(que6)
+
+        val que7: Question = Question(7, "According to the World Health Organization, what is the most polluted city in the world?",
+            "L.A California",
+            "Mexico City",
+            "New Delhi India",
+            "Shanghai China",
+            2,
+            "Mexico City has held the dubious distinction for at least four years in a row"
+        )
+        questionsList.add(que7)
+
+        val que8: Question = Question(8, "What is the most common type of debris that litters our oceans?",
+            "Bags",
+            "Plastic beverage bottles",
+            "Cigarettes",
+            "Food packaging",
+            3,
+            "Volunteers for the International Coastal Cleanup removed nearly two million cigarettes and cigarette filters in their most recent effort to clear litter from the world's oceans."
+        )
+        questionsList.add(que8)
+
+        val que9: Question = Question(9, "Three Mile Island was the site of what disaster?",
+            "The worst nuclear explosion in the world",
+            "The worst forest fires in US history",
+            "The worst accident in US nuclear reactor history",
+            "The worst oil spill in US history",
+            3,
+            "coolant (the fluid that keeps a machine cool) escaped from the reactor core due to a combination of mechanical failure and human error"
+        )
+        questionsList.add(que9)
+
+        val que10: Question = Question(10, "What is the most common type of trash thrown away by Americans?",
+            "Paper products and cardboard",
+            "Metals",
+            "Glass",
+            "Plastics",
+            4,
+            "Paper products and cardboard account for about 39% of all trash."
+        )
+        questionsList.add(que10)
+
+
 
 
 
