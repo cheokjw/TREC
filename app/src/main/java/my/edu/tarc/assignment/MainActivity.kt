@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.profile -> replaceFragment(Profile())
 
             // This is for testing commit and push purposes
-
             }
 
             true
