@@ -1,5 +1,6 @@
 package my.edu.tarc.assignment
 
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         // This is what users see when they first use our app (in this case: CheckIn Fragment will be shown first)
         replaceFragment(CheckIn())
-
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.checkin -> replaceFragment(CheckIn())
