@@ -1,14 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Tree">
+    android:background="@drawable/bg_quiz"
+    tools:context=".MainActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/p_whitebg"
+        android:layout_width="561dp"
+        android:layout_height="672dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/white"
+        app:layout_constraintBottom_toBottomOf="@+id/p_phonecover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/p_mountain"
+        android:layout_width="364dp"
+        android:layout_height="266dp"
+        android:layout_marginBottom="-80dp"
+        android:src="@drawable/mountain"
+        app:layout_constraintBottom_toTopOf="@+id/p_ground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/groundtwo"
+        android:layout_width="338dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="580dp"
+        android:src="@drawable/ground"
+        app:layout_constraintBottom_toBottomOf="@+id/p_phonecover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
+
+    <ImageView
+        android:id="@+id/treeone"
+        android:layout_width="337dp"
+        android:layout_height="629dp"
+        android:layout_marginTop="280dp"
+        android:src="@drawable/treeone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
+
+    <ImageView
+        android:id="@+id/p_ground"
+        android:layout_width="348dp"
+        android:layout_height="285dp"
+        android:layout_marginBottom="-140dp"
+        android:src="@drawable/ground"
+        app:layout_constraintBottom_toBottomOf="@+id/p_phonecover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/p_cloudone"
+        android:layout_width="191dp"
+        android:layout_height="121dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="-110dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/cloudone"
+        app:layout_constraintBottom_toTopOf="@+id/p_mountain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
+
+    <ImageView
+        android:id="@+id/p_cloudtwo"
+        android:layout_width="183dp"
+        android:layout_height="161dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="130dp"
+        android:src="@drawable/cloudtwo"
+        app:layout_constraintBottom_toTopOf="@+id/p_mountain"
+        app:layout_constraintEnd_toStartOf="@+id/p_cloudone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
+
+    <ImageView
+        android:id="@+id/potionframe"
+        android:layout_width="100dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/potionframe"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
+
+    <ImageView
+        android:id="@+id/treeframe"
+        android:layout_width="100dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="100dp"
+        android:src="@drawable/treeframe"
+        app:layout_constraintBottom_toBottomOf="@+id/potionframe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/potionframe"
+        app:layout_constraintTop_toTopOf="@+id/potionframe" />
+
+    <ImageView
+        android:id="@+id/p_phonecover"
+        android:layout_width="488dp"
+        android:layout_height="643dp"
+        android:layout_marginBottom="-30dp"
+        android:src="@drawable/phone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.691" />
+
+    <ImageView
+        android:id="@+id/finishbar"
+        android:layout_width="69dp"
+        android:layout_height="432dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/emptybar"
+        app:layout_constraintBottom_toBottomOf="@+id/p_phonecover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
+
+    <ImageView
+        android:id="@+id/imageViewitemone"
+        android:layout_width="92dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/itemone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewitemtwo"
+        android:layout_width="92dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/itemtwo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewitemone" />
+
+    <ImageView
+        android:id="@+id/imageViewitemthree"
+        android:layout_width="92dp"
+        android:layout_height="99dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/itemthree"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewitemtwo" />
+
+    <ImageButton
+        android:id="@+id/itemonebutton"
+        android:layout_width="70dp"
+        android:layout_height="76dp"
+        android:src="@drawable/itemone"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewitemone"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewitemone"
+        app:layout_constraintStart_toStartOf="@+id/imageViewitemone"
+        app:layout_constraintTop_toTopOf="@+id/imageViewitemone"
+        tools:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/itemtwobutton"
+        android:layout_width="70dp"
+        android:layout_height="76dp"
+        android:src="@drawable/itemone"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewitemtwo"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewitemtwo"
+        app:layout_constraintStart_toStartOf="@+id/imageViewitemtwo"
+        app:layout_constraintTop_toTopOf="@+id/imageViewitemtwo"
+        tools:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/itemthreebutton"
+        android:layout_width="70dp"
+        android:layout_height="76dp"
+        android:src="@drawable/itemone"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewitemthree"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewitemthree"
+        app:layout_constraintStart_toStartOf="@+id/imageViewitemthree"
+        app:layout_constraintTop_toTopOf="@+id/imageViewitemthree"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
