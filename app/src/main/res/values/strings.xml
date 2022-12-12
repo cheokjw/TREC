@@ -11,4 +11,17 @@
     <!-- Login Page -->
     <string name="forgtpw">FORGOT PASSWORD</string>
     <string name="create_acc">CREATE ONE</string>
+
+    <!-- CheckIn Page -->
+    <string name="balance">Balance</string>
+    <string name="daily_title">Daily Check-in Progress</string>
+    <string name="reminder">Reminder</string>
+    <string name="daily_description">Rewards will be given and progress will be reset every 7 days.
+    </string>
+    <string name="rewardhist_title">Rewards History</string>
+    <string name="rewardhist_description">Here you can check your rewards history with one simple click
+    </string>
+    <string name="rewardhist_click">click</string>
+    <string name="checkin">Check-In</string>
+
 </resources>
