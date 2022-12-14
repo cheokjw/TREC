@@ -85,26 +85,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
 
-    <ImageView
-        android:id="@+id/potionframe"
-        android:layout_width="100dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="70dp"
-        android:src="@drawable/potionframe"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
-
-    <ImageView
-        android:id="@+id/treeframe"
-        android:layout_width="100dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="100dp"
-        android:src="@drawable/treeframe"
-        app:layout_constraintBottom_toBottomOf="@+id/potionframe"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/potionframe"
-        app:layout_constraintTop_toTopOf="@+id/potionframe" />
 
     <ImageView
         android:id="@+id/p_phonecover"
@@ -198,5 +178,28 @@
         app:layout_constraintStart_toStartOf="@+id/imageViewitemthree"
         app:layout_constraintTop_toTopOf="@+id/imageViewitemthree"
         tools:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/potionShopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="70dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover"
+        app:srcCompat="@drawable/potionframe" />
+
+    <ImageButton
+        android:id="@+id/treeShopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/potionShopButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/potionShopButton"
+        app:srcCompat="@drawable/treeframe" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

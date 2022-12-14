@@ -86,16 +86,6 @@
         app:srcCompat="@drawable/grass" />
 
     <ImageView
-        android:id="@+id/treegrowtag"
-        android:layout_width="64dp"
-        android:layout_height="85dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="97dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/p_phonecover"
-        app:srcCompat="@drawable/treegrowframe" />
-
-    <ImageView
         android:id="@+id/potiontag"
         android:layout_width="342dp"
         android:layout_height="120dp"
@@ -191,5 +181,16 @@
         app:layout_constraintStart_toEndOf="@+id/p_grass"
         app:layout_constraintTop_toBottomOf="@+id/waterlevelone"
         app:srcCompat="@drawable/levelthree" />
+
+    <ImageButton
+        android:id="@+id/treeGrowthButton"
+        android:layout_width="98dp"
+        android:layout_height="101dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="88dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover"
+        app:srcCompat="@drawable/treegrowframe" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

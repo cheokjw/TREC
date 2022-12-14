@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentTransaction
+import my.edu.tarc.assignment.databinding.FragmentTreeBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
 
 /**
  * A simple [Fragment] subclass.
@@ -20,21 +23,45 @@ class Tree : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var bindingTree:FragmentTreeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+//        arguments?.let {
+//            param1 = it.getString(ARG_PARAM1)
+//            param2 = it.getString(ARG_PARAM2)
+//        }
     }
 
-    override fun onCreateView(
+    override fun onCreateView (
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tree, container, false)
+        bindingTree = FragmentTreeBinding.inflate(inflater)
+
+        bindingTree.potionShopButton.setOnClickListener {
+            replaceFragment(potionshop())
+        }
+        bindingTree.treeShopButton.setOnClickListener {
+            replaceFragment(treeshop())
+        }
+        return bindingTree.root
+
+
+//        return inflater.inflate(R.layout.fragment_tree, container, false)
+
+
+    }
+    //     Allowing fragment to replace the main Body
+    private fun replaceFragment(fragment : Fragment){
+
+        val fragmentManager = getActivity()?.supportFragmentManager
+        val fragmentTransaction = fragmentManager?.beginTransaction()
+
+        // Selecting which part of the UI should be replaced by the fragment
+        // in this case its the frameLayout in activity_main.xml
+        fragmentTransaction?.replace(R.id.frameLayout, fragment)
+        fragmentTransaction?.commit()
     }
 
     companion object {
@@ -56,4 +83,6 @@ class Tree : Fragment() {
                 }
             }
     }
+
+
 }
