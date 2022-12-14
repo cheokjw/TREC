@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFAQ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="FAQ"
+        android:clickable="true"
+        android:contentDescription="@string/faq"
+        app:backgroundTint="@color/slimy_green"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        app:srcCompat="@drawable/ic_baseline_question_answer_24" />
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"

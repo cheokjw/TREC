@@ -29,6 +29,10 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+
+        binding.fabFAQ.setOnClickListener {
+            replaceFragment(FAQ())
+        }
     }
 
 
