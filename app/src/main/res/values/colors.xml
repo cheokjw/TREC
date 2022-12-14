@@ -13,8 +13,12 @@
     <color name="dartmouth_green">#04773B</color>
     <color name="dark_green">#036016</color>
     <color name="forest_green">#03440C</color>
+    <color name="bg_green">#575A4B</color>
     <color name="army_green">#41521F</color>
 
     <color name="chalk_red">#E4BEB3</color>
+
+    <color name="baby_blue">#e3f2ff</color>
+    <color name="red">#fd0000</color>
 
 </resources>

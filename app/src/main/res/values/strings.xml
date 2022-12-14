@@ -25,4 +25,14 @@
     <string name="checkin">Check-In</string>
     <string name="faq">FAQ</string>
 
+    <!-- UserProfile Page -->
+    <string name="userprofile_title">USER PROFILE</string>
+    <string name="username">USERNAME</string>
+    <string name="edit_info">EDIT INFO</string>
+    <string name="email">EMAIL:</string>
+    <string name="Contact_no">CONTACT NO:</string>
+    <string name="DOB">DATE OF BIRTH:</string>
+    <string name="Register_Date">REGISTER DATE:</string>
+    <string name="Logout">Logout</string>
+
 </resources>
