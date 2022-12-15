@@ -31,10 +31,21 @@ class CheckIn : Fragment() {
         bindingCheckIn.buttonCheckIn.setOnClickListener {
             bindingCheckIn.notCheckedInStatus.setImageResource(R.drawable.checkedin)
         }
+        bindingCheckIn.buttonRewards.setOnClickListener {
+            replaceFragment(RewardsHistory())
+        }
         return bindingCheckIn.root
     }
 
-    //TODO: implement pop up scrollview for rewards history
+    private fun replaceFragment(fragment : Fragment){
 
+        val fragmentManager = getActivity()?.supportFragmentManager
+        val fragmentTransaction = fragmentManager?.beginTransaction()
+
+        // Selecting which part of the UI should be replaced by the fragment
+        // in this case its the frameLayout in activity_main.xml
+        fragmentTransaction?.replace(R.id.frameLayout, fragment)
+        fragmentTransaction?.commit()
+    }
 
 }
