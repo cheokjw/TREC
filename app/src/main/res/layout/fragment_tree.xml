@@ -165,5 +165,13 @@
         app:layout_constraintTop_toTopOf="@+id/itemonebutton"
         app:srcCompat="@drawable/itemtwo" />
 
+    <TextView
+        android:id="@+id/sprayqt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="41dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

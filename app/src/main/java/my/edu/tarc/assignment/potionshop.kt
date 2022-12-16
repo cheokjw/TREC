@@ -19,17 +19,16 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class potionshop : Fragment() {
-    // TODO: Rename and change types of parameters
-//    private var param1: String? = null
-//    private var param2: String? = null
     private lateinit var bindingPotion: FragmentPotionshopBinding
+    private lateinit var bindingTree: FragmentTreeBinding
+    var test = 10000
+    var sprayqtt = 0
+    var greenqtt = 0
+    var goldqtt = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
+
     }
 
     override fun onCreateView(
@@ -38,22 +37,39 @@ class potionshop : Fragment() {
     ): View? {
 
         bindingPotion = FragmentPotionshopBinding.inflate(inflater)
+        bindingPotion.testcoin.text = test.toString()
+//        bindingTree.sprayqt.text = sprayqtt.toString()
+        //price
+        bindingPotion.spraytagbutton.setOnClickListener{
+            test -= 500
+            bindingPotion.testcoin.text = test.toString()
+            sprayqtt += 1
+//            bindingTree.sprayqt.text = sprayqtt.toString()
+        }
+        bindingPotion.greentagbutton.setOnClickListener{
+            test -= 800
+            bindingPotion.testcoin.text = test.toString()
+            greenqtt += 1
+        }
+        bindingPotion.goldtagbutton.setOnClickListener{
+            test -= 1500
+            bindingPotion.testcoin.text = test.toString()
+            goldqtt += 1
+        }
+
+
+
         bindingPotion.treeGrowthButton.setOnClickListener {
             replaceFragment(Tree())
         }
 
         return bindingPotion.root
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_potionshop, container, false)
     }
 
     private fun replaceFragment(fragment : Fragment){
 
         val fragmentManager = getActivity()?.supportFragmentManager
         val fragmentTransaction = fragmentManager?.beginTransaction()
-
-        // Selecting which part of the UI should be replaced by the fragment
-        // in this case its the frameLayout in activity_main.xml
         fragmentTransaction?.replace(R.id.frameLayout, fragment)
         fragmentTransaction?.commit()
     }
