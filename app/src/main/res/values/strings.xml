@@ -12,6 +12,17 @@
     <string name="forgtpw">FORGOT PASSWORD</string>
     <string name="create_acc">CREATE ONE</string>
 
+    <!-- Register Page -->
+    <string name="register">Register</string>
+    <string name="register_button">REGISTER</string>
+    <string name="username_reg">Username</string>
+    <string name="full_name_reg">Full Name (as per IC)</string>
+    <string name="phone_reg">Phone Number</string>
+    <string name="address_reg">Address</string>
+    <string name="email_reg">Email</string>
+    <string name="password_reg">Password</string>
+    <string name="re_enter_password_reg">Re-Enter Password</string>
+
     <!-- CheckIn Page -->
     <string name="balance">Balance</string>
     <string name="daily_title">Daily Check-in Progress</string>
@@ -24,6 +35,7 @@
     <string name="rewardhist_click">click</string>
     <string name="checkin">Check-In</string>
     <string name="faq">FAQ</string>
+    
 
     <!-- UserProfile Page -->
     <string name="userprofile_title">USER PROFILE</string>
