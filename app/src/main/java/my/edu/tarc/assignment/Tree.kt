@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
+import my.edu.tarc.assignment.databinding.FragmentPotionshopBinding
 import my.edu.tarc.assignment.databinding.FragmentTreeBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,7 +22,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class Tree : Fragment() {
     private lateinit var bindingTree:FragmentTreeBinding
-
+    private lateinit var bindingPotion: FragmentPotionshopBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +41,6 @@ class Tree : Fragment() {
             replaceFragment(treeshop())
         }
         return bindingTree.root
-
 
 //        return inflater.inflate(R.layout.fragment_tree, container, false)
 

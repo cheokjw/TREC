@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import my.edu.tarc.assignment.databinding.FragmentPotionshopBinding
 import my.edu.tarc.assignment.databinding.FragmentTreeBinding
 
@@ -38,23 +39,35 @@ class potionshop : Fragment() {
 
         bindingPotion = FragmentPotionshopBinding.inflate(inflater)
         bindingPotion.testcoin.text = test.toString()
-//        bindingTree.sprayqt.text = sprayqtt.toString()
+
         //price
         bindingPotion.spraytagbutton.setOnClickListener{
-            test -= 500
-            bindingPotion.testcoin.text = test.toString()
-            sprayqtt += 1
-//            bindingTree.sprayqt.text = sprayqtt.toString()
-        }
+            if (test>=500){
+                    test -= 500
+                    bindingPotion.testcoin.text = test.toString()
+                    sprayqtt += 1
+                Toast.makeText(activity, "Successfully bought 1 Spray!\n Spray Balance: "+ sprayqtt , Toast.LENGTH_SHORT).show()
+                }else
+                Toast.makeText(activity, "Insufficient GAME COIN!\n Spray Balance: " + sprayqtt, Toast.LENGTH_SHORT).show()
+            }
+
         bindingPotion.greentagbutton.setOnClickListener{
-            test -= 800
-            bindingPotion.testcoin.text = test.toString()
-            greenqtt += 1
+            if(test>=800) {
+                test -= 800
+                bindingPotion.testcoin.text = test.toString()
+                greenqtt += 1
+                Toast.makeText(activity, "Successfully bought 1 Green Pot!\n Green Pot Balance: "+ greenqtt , Toast.LENGTH_SHORT).show()
+            }else
+                Toast.makeText(activity, "Insufficient GAME COIN!\n Green Pot Balance: " + greenqtt, Toast.LENGTH_SHORT).show()
         }
         bindingPotion.goldtagbutton.setOnClickListener{
-            test -= 1500
-            bindingPotion.testcoin.text = test.toString()
-            goldqtt += 1
+            if(test>=1500) {
+                test -= 1500
+                bindingPotion.testcoin.text = test.toString()
+                goldqtt += 1
+                Toast.makeText(activity, "Successfully bought 1 Gold Pot!\n Gold Pot Balance: "+ goldqtt , Toast.LENGTH_SHORT).show()
+            }else
+                Toast.makeText(activity, "Insufficient GAME COIN!\n Gold Pot Balance: " + goldqtt, Toast.LENGTH_SHORT).show()
         }
 
 
