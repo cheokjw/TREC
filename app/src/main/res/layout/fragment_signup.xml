@@ -5,27 +5,17 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Signup" >
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="419dp"
-        android:layout_height="742dp"
-        android:src="@drawable/background_reg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.545" />
+    android:background="@drawable/background_reg"
+    tools:context=".Signup">
 
     <EditText
         android:id="@+id/editTextUsernameReg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="164dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/register_bg"
+        android:background="@drawable/register_input_bg"
         android:ems="10"
         android:fontFamily="@font/mulish"
         android:hint="@string/username_reg"
@@ -48,7 +38,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/register_bg"
+        android:background="@drawable/register_input_bg"
         android:ems="10"
         android:fontFamily="@font/mulish"
         android:hint="@string/full_name_reg"
@@ -70,7 +60,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/register_bg"
+        android:background="@drawable/register_input_bg"
         android:ems="10"
         android:fontFamily="@font/mulish"
         android:hint="@string/password_reg"
@@ -92,7 +82,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/register_bg"
+        android:background="@drawable/register_input_bg"
         android:ems="10"
         android:fontFamily="@font/mulish"
         android:hint="@string/email_reg"
@@ -114,7 +104,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/register_bg"
+        android:background="@drawable/register_input_bg"
         android:ems="10"
         android:fontFamily="@font/mulish"
         android:hint="@string/address_reg"
@@ -134,7 +124,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/register_bg"
+        android:background="@drawable/register_input_bg"
         android:ems="10"
         android:fontFamily="@font/mulish"
         android:hint="@string/phone_reg"
@@ -156,7 +146,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/register_bg"
+        android:background="@drawable/register_input_bg"
         android:ems="10"
         android:fontFamily="@font/mulish"
         android:hint="@string/re_enter_password_reg"
@@ -178,6 +168,7 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/mulish_semibold"
         android:text="@string/register_button"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextReEnterPassReg" />
@@ -193,5 +184,6 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextUsernameReg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.603" />
 </androidx.constraintlayout.widget.ConstraintLayout>
