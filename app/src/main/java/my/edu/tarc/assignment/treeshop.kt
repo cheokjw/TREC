@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import my.edu.tarc.assignment.databinding.FragmentPotionshopBinding
+import my.edu.tarc.assignment.databinding.FragmentTreeshopBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +22,7 @@ class treeshop : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var bindingTreeShop: FragmentTreeshopBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +37,23 @@ class treeshop : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_treeshop, container, false)
+//        return inflater.inflate(R.layout.fragment_treeshop, container, false)
+        bindingTreeShop = FragmentTreeshopBinding.inflate(inflater)
+        bindingTreeShop.treeGrowthButton.setOnClickListener {
+            replaceFragment(Tree())
+        }
+        return bindingTreeShop.root
+    }
+
+    private fun replaceFragment(fragment : Fragment){
+
+        val fragmentManager = getActivity()?.supportFragmentManager
+        val fragmentTransaction = fragmentManager?.beginTransaction()
+
+        // Selecting which part of the UI should be replaced by the fragment
+        // in this case its the frameLayout in activity_main.xml
+        fragmentTransaction?.replace(R.id.frameLayout, fragment)
+        fragmentTransaction?.commit()
     }
 
     companion object {

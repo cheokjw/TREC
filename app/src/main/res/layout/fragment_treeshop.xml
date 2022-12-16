@@ -1,14 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".treeshop">
+    android:background="@drawable/bg_quiz"
+    tools:context=".MainActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/p_whitebg"
+        android:layout_width="561dp"
+        android:layout_height="672dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/white"
+        app:layout_constraintBottom_toBottomOf="@+id/p_phonecover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/p_mountain"
+        android:layout_width="364dp"
+        android:layout_height="266dp"
+        android:layout_marginBottom="-80dp"
+        android:src="@drawable/mountain"
+        app:layout_constraintBottom_toTopOf="@+id/p_ground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/p_ground"
+        android:layout_width="348dp"
+        android:layout_height="285dp"
+        android:layout_marginBottom="-140dp"
+        android:src="@drawable/ground"
+        app:layout_constraintBottom_toBottomOf="@+id/p_phonecover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/p_cloudone"
+        android:layout_width="191dp"
+        android:layout_height="121dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="-110dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/cloudone"
+        app:layout_constraintBottom_toTopOf="@+id/p_mountain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
+
+    <ImageView
+        android:id="@+id/p_cloudtwo"
+        android:layout_width="183dp"
+        android:layout_height="161dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="130dp"
+        android:src="@drawable/cloudtwo"
+        app:layout_constraintBottom_toTopOf="@+id/p_mountain"
+        app:layout_constraintEnd_toStartOf="@+id/p_cloudone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
+
+    <ImageView
+        android:id="@+id/p_tree"
+        android:layout_width="198dp"
+        android:layout_height="389dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_whitebg"
+        app:srcCompat="@drawable/tree" />
+
+    <ImageView
+        android:id="@+id/p_grass"
+        android:layout_width="123dp"
+        android:layout_height="117dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/grass" />
+
+    <ImageButton
+        android:id="@+id/treeGrowthButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="102dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover"
+        app:srcCompat="@drawable/treegrowframe" />
+
+    <ImageView
+        android:id="@+id/treestoretag"
+        android:layout_width="331dp"
+        android:layout_height="457dp"
+        android:layout_marginBottom="380dp"
+        android:src="@drawable/treestoretag"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
+
+    <ImageView
+        android:id="@+id/voucherlist"
+        android:layout_width="359dp"
+        android:layout_height="467dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/voucherlist"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
+
+    <ImageView
+        android:id="@+id/treeshoplist"
+        android:layout_width="331dp"
+        android:layout_height="447dp"
+        android:layout_marginTop="300dp"
+        android:src="@drawable/shoplist"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
+
+    <ImageView
+        android:id="@+id/p_phonecover"
+        android:layout_width="488dp"
+        android:layout_height="643dp"
+        android:layout_marginBottom="-30dp"
+        android:src="@drawable/phone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.691" />
+
+    <ImageButton
+        android:id="@+id/fivevoucherprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="80dp"
+        android:background="@null"
+        android:src="@drawable/fivevc"
+        app:layout_constraintBottom_toBottomOf="@+id/treestoretag"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/treeshoplist" />
+
+    <ImageButton
+        android:id="@+id/fifthyvoucherprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="25dp"
+        android:background="@null"
+        android:src="@drawable/fifthyvc"
+        app:layout_constraintBottom_toBottomOf="@+id/treestoretag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fivevoucherprice"
+        app:layout_constraintTop_toTopOf="@+id/treeshoplist" />
+
+    <ImageButton
+        android:id="@+id/treepricebutton"
+        android:layout_width="69dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginBottom="8dp"
+        android:background="@null"
+        android:src="@drawable/treepr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fivevoucherprice" />
+
+    <ImageButton
+        android:id="@+id/foodpricebutton"
+        android:layout_width="74dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="120dp"
+        android:background="@null"
+        android:src="@drawable/foodsuppr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/treepricebutton" />
+
+    <ImageButton
+        android:id="@+id/waterpricebutton"
+        android:layout_width="79dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="6dp"
+        android:background="@null"
+        android:src="@drawable/waterpr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/foodpricebutton"
+        app:layout_constraintTop_toBottomOf="@+id/fifthyvoucherprice" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

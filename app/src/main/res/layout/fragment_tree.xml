@@ -86,6 +86,28 @@
         app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
 
 
+    <ImageButton
+        android:id="@+id/potionShopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="70dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/p_phonecover"
+        app:srcCompat="@drawable/potionframe" />
+
+    <ImageButton
+        android:id="@+id/treeShopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/potionShopButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/potionShopButton"
+        app:srcCompat="@drawable/treeframe" />
+
     <ImageView
         android:id="@+id/p_phonecover"
         android:layout_width="488dp"
@@ -112,94 +134,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/p_phonecover" />
 
-    <ImageView
-        android:id="@+id/imageViewitemone"
-        android:layout_width="92dp"
-        android:layout_height="99dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/itemone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageViewitemtwo"
-        android:layout_width="92dp"
-        android:layout_height="99dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/itemtwo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewitemone" />
-
-    <ImageView
-        android:id="@+id/imageViewitemthree"
-        android:layout_width="92dp"
-        android:layout_height="99dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/itemthree"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewitemtwo" />
-
     <ImageButton
         android:id="@+id/itemonebutton"
-        android:layout_width="70dp"
-        android:layout_height="76dp"
-        android:src="@drawable/itemone"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewitemone"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewitemone"
-        app:layout_constraintStart_toStartOf="@+id/imageViewitemone"
-        app:layout_constraintTop_toTopOf="@+id/imageViewitemone"
-        tools:visibility="visible" />
-
-    <ImageButton
-        android:id="@+id/itemtwobutton"
-        android:layout_width="70dp"
-        android:layout_height="76dp"
-        android:src="@drawable/itemone"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewitemtwo"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewitemtwo"
-        app:layout_constraintStart_toStartOf="@+id/imageViewitemtwo"
-        app:layout_constraintTop_toTopOf="@+id/imageViewitemtwo"
-        tools:visibility="visible" />
+        android:layout_width="105dp"
+        android:layout_height="101dp"
+        android:layout_marginStart="35dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/itemone" />
 
     <ImageButton
         android:id="@+id/itemthreebutton"
-        android:layout_width="70dp"
-        android:layout_height="76dp"
-        android:src="@drawable/itemone"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewitemthree"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewitemthree"
-        app:layout_constraintStart_toStartOf="@+id/imageViewitemthree"
-        app:layout_constraintTop_toTopOf="@+id/imageViewitemthree"
-        tools:visibility="visible" />
+        android:layout_width="105dp"
+        android:layout_height="101dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/p_phonecover"
+        app:layout_constraintStart_toEndOf="@+id/itemtwobutton"
+        app:layout_constraintTop_toTopOf="@+id/itemtwobutton"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/itemthree" />
 
     <ImageButton
-        android:id="@+id/potionShopButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="70dp"
+        android:id="@+id/itemtwobutton"
+        android:layout_width="105dp"
+        android:layout_height="101dp"
         android:background="@null"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/p_phonecover"
-        app:srcCompat="@drawable/potionframe" />
-
-    <ImageButton
-        android:id="@+id/treeShopButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/potionShopButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/potionShopButton"
-        app:srcCompat="@drawable/treeframe" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/itemonebutton"
+        app:layout_constraintTop_toTopOf="@+id/itemonebutton"
+        app:srcCompat="@drawable/itemtwo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
