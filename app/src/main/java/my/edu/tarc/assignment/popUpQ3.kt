@@ -1,3 +1,4 @@
+
 package my.edu.tarc.assignment
 
 import android.os.Bundle
@@ -6,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import my.edu.tarc.assignment.databinding.FragmentPopUpBinding
+import my.edu.tarc.assignment.databinding.FragmentFAQBinding
+import my.edu.tarc.assignment.databinding.FragmentPopUpQ3Binding
 
 
-// This class is for popup view in FAQ page
-class PopUpFragment : DialogFragment() {
+class popUpQ3 : DialogFragment() {
 
-    private lateinit var bindingPopUp:FragmentPopUpBinding
+    private lateinit var bindingPopUpQ3: FragmentPopUpQ3Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,15 +24,16 @@ class PopUpFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        bindingPopUp = FragmentPopUpBinding.inflate(layoutInflater)
+        bindingPopUpQ3 = FragmentPopUpQ3Binding.inflate(layoutInflater)
+
         // Inflate the layout for this fragment
-        return bindingPopUp.root
+        return bindingPopUpQ3.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bindingPopUp.btnDismiss.setOnClickListener{
+        bindingPopUpQ3.btnDismissQ3.setOnClickListener{
             dismiss()
         }
     }
