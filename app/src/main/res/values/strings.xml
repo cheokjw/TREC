@@ -11,6 +11,9 @@
     <!-- Login Page -->
     <string name="forgtpw">FORGOT PASSWORD</string>
     <string name="create_acc">CREATE ONE</string>
+    <string name="reset_pw">RESET PASSWORD</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Reset">Reset</string>
 
     <!-- Register Page -->
     <string name="register">Register</string>
@@ -46,6 +49,8 @@
     <string name="DOB">DATE OF BIRTH:</string>
     <string name="Register_Date">REGISTER DATE:</string>
     <string name="Logout">Logout</string>
+    <string name="avatar_title">PLEASE SELECT AN AVATAR</string>
+    <string name="avatar_select">SELECT</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

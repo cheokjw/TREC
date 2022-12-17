@@ -15,11 +15,12 @@
     <color name="forest_green">#03440C</color>
     <color name="bg_green">#575A4B</color>
     <color name="army_green">#41521F</color>
+    <color name="grass_green">#CBF8B8</color>
     <color name="darker_mint_green">#B1D3C5</color>
     <color name="lighter_mint_green">#E1F1E7</color>
 
     <color name="chalk_red">#E4BEB3</color>
-
+    <color name="transpbaby_blue">#66e3f2ff</color>
     <color name="baby_blue">#e3f2ff</color>
     <color name="red">#fd0000</color>
 
