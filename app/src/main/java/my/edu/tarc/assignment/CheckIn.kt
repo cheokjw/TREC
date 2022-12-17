@@ -48,7 +48,7 @@ class CheckIn : Fragment() {
                     bindingCheckIn.progressBarCheckIn.progress = 0
                     bindingCheckIn.imageViewDay1.setImageResource((R.drawable.checked_in_progress))
                     coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT).show()
                     counter++
                 }
                 1 -> {
@@ -56,7 +56,7 @@ class CheckIn : Fragment() {
                         (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
                     bindingCheckIn.imageViewDay2.setImageResource((R.drawable.checked_in_progress))
                     coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT).show()
                     counter++
                 }
                 2 -> {
@@ -64,7 +64,7 @@ class CheckIn : Fragment() {
                         (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
                     bindingCheckIn.imageViewDay3.setImageResource((R.drawable.checked_in_progress))
                     coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT).show()
                     counter++
                 }
                 3 -> {
@@ -72,7 +72,7 @@ class CheckIn : Fragment() {
                         (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
                     bindingCheckIn.imageViewDay4.setImageResource((R.drawable.checked_in_progress))
                     coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT).show()
                     counter++
                 }
                 4 -> {
@@ -80,7 +80,7 @@ class CheckIn : Fragment() {
                         (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
                     bindingCheckIn.imageViewDay5.setImageResource((R.drawable.checked_in_progress))
                     coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT).show()
                     counter++
                 }
                 5 -> {
@@ -88,12 +88,18 @@ class CheckIn : Fragment() {
                         (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
                     bindingCheckIn.imageViewDay6.setImageResource((R.drawable.checked_in_progress))
                     coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT).show()
                     counter++
                 }
                 6 -> {
-                    bindingCheckIn.progressBarCheckIn.progress = 0
+                    bindingCheckIn.progressBarCheckIn.progress = 100
                     bindingCheckIn.imageViewDay7.setImageResource((R.drawable.checked_in_progress))
+                    coinBalance += 25
+                    Toast.makeText(activity, "25 Coins Added!$coinBalance", Toast.LENGTH_SHORT).show()
+                    counter++
+                }
+                7 -> {
+                    bindingCheckIn.progressBarCheckIn.progress = 0
                     bindingCheckIn.imageViewDay1.setImageResource((R.drawable.check_in_progress))
                     bindingCheckIn.imageViewDay2.setImageResource((R.drawable.check_in_progress))
                     bindingCheckIn.imageViewDay3.setImageResource((R.drawable.check_in_progress))
@@ -101,9 +107,8 @@ class CheckIn : Fragment() {
                     bindingCheckIn.imageViewDay5.setImageResource((R.drawable.check_in_progress))
                     bindingCheckIn.imageViewDay6.setImageResource((R.drawable.check_in_progress))
                     bindingCheckIn.imageViewDay7.setImageResource((R.drawable.check_in_progress))
-                    coinBalance += 25
-                    Toast.makeText(activity, "25 Coins Added!$coinBalance", Toast.LENGTH_LONG).show()
-                    counter = 0
+                    counter=0
+                    //TODO: Pop up announce bonus reward
                 }
             }
         }
