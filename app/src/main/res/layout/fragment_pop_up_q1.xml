@@ -4,28 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PopUpFragment">
+    tools:context=".popUpQ1" >
 
     <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TESTING"
-        android:textSize="30sp"
+        android:id="@+id/textView13"
+        android:layout_width="336dp"
+        android:layout_height="170dp"
+        android:padding="25dp"
+        android:text="We are a bunch of developers with the same motives. We aim to help the world to become a better place :heart:"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.449" />
 
     <Button
-        android:id="@+id/btnDismiss"
+        android:id="@+id/btnDismissQ1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TESTING"
+        android:drawablePadding="20dp"
+        android:text="OKAY"
+        app:iconPadding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.077" />
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

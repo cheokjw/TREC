@@ -37,13 +37,34 @@ class FAQ : Fragment(), View.OnClickListener {
         bindingFAQ.cvQ4.setOnClickListener(this)
 
         bindingFAQ.btnEmail.setOnClickListener {
-            val showPopUp = PopUpFragment()
-            showPopUp.show((activity as AppCompatActivity).supportFragmentManager, "showPopUp")
+
         }
 
     }
 
     override fun onClick(v:View){
+
+        when(v.id){
+            R.id.cvQ1 -> {
+                val showPopUp = popUpQ1()
+                showPopUp.show((activity as AppCompatActivity).supportFragmentManager, "showPopUp")
+            }
+
+            R.id.cvQ2 -> {
+                val showPopUp = popUpQ2()
+                showPopUp.show((activity as AppCompatActivity).supportFragmentManager, "showPopUp")
+            }
+
+            R.id.cvQ3 -> {
+                val showPopUp = popUpQ3()
+                showPopUp.show((activity as AppCompatActivity).supportFragmentManager, "showPopUp")
+            }
+
+            R.id.cvQ4 -> {
+                val showPopUp = popUpQ4()
+                showPopUp.show((activity as AppCompatActivity).supportFragmentManager, "showPopUp")
+            }
+        }
 
     }
 
