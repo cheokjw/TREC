@@ -240,4 +240,30 @@
         app:layout_constraintStart_toStartOf="@+id/progressBarCheckIn"
         app:layout_constraintTop_toBottomOf="@+id/dailyDesc" />
 
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/mulish_bold"
+        android:text="@string/balance"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/notCheckedInStatus"
+        app:layout_constraintEnd_toEndOf="@+id/notCheckedInStatus"
+        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintStart_toStartOf="@+id/notCheckedInStatus"
+        app:layout_constraintTop_toTopOf="@+id/notCheckedInStatus"
+        app:layout_constraintVertical_bias="0.521" />
+
+    <TextView
+        android:id="@+id/textViewRegBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/mulish"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView22"
+        app:layout_constraintStart_toEndOf="@+id/textView22"
+        app:layout_constraintTop_toTopOf="@+id/textView22" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
