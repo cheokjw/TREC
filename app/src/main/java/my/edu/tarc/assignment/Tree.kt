@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
 import my.edu.tarc.assignment.databinding.FragmentPotionshopBinding
 import my.edu.tarc.assignment.databinding.FragmentTreeBinding
@@ -13,7 +14,7 @@ import my.edu.tarc.assignment.databinding.FragmentTreeBinding
 
 class Tree : Fragment() {
     private lateinit var bindingTree:FragmentTreeBinding
-    private lateinit var bindingPotion: FragmentPotionshopBinding
+    // var below need to store database
     var sprayqt = 5
     var greenqt = 5
     var goldqt = 5
@@ -39,84 +40,62 @@ class Tree : Fragment() {
         bindingTree.itemonebutton.setOnClickListener{
             if(sprayqt>=1){
                 if(barprocess >=20) {
-                    barprocess = 0
-                    Toast.makeText(activity, "Successfully Received 1 TREE COIN!\n Spray Balance: "+ sprayqt , Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Collect Tree Coin Now\n Spray Balance: " + sprayqt, Toast.LENGTH_SHORT).show()
                 }else{
                     sprayqt -= 1
                     barprocess += 1
                     Toast.makeText(activity, "Successfully spent 1 Spray!\n Spray Balance: "+ sprayqt , Toast.LENGTH_SHORT).show()
-
-                }
-                replaceTree(barprocess)
-                replacePhoto(barprocess)
-                }else if(barprocess >=20) {
-                barprocess = 0
-                Toast.makeText(activity, "Successfully Received 1 TREE COIN!\n Spray Balance: " + sprayqt, Toast.LENGTH_SHORT).show()
+                    }
                 replaceTree(barprocess)
                 replacePhoto(barprocess)
                 }else
-                Toast.makeText(activity, "Insufficient Spray Potion!\n Earn more to PLAY!!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Insufficient Spray Potion!\n Earn more to PLAY!!!", Toast.LENGTH_SHORT).show()
         }
 
 
         bindingTree.itemtwobutton.setOnClickListener{
             if(greenqt>=1){
                 if(barprocess >=20) {
-                    barprocess = 0
-                    Toast.makeText(activity, "Successfully Received 1 TREE COIN!\n Green Pot Balance: "+ greenqt , Toast.LENGTH_SHORT).show()
-                    if(barprocess == 0){
-                        replacePhoto(barprocess)
-                    }
+                    Toast.makeText(activity, "Collect Tree Coin Now\n Green Pot Balance: " + greenqt, Toast.LENGTH_SHORT).show()
                 }else{
                     greenqt -= 1
                     barprocess += 2
                     Toast.makeText(activity, "Successfully spent 1 Green Pot!\n Green Pot Balance: "+ greenqt , Toast.LENGTH_SHORT).show()
-                }
+                    }
                 replaceTree(barprocess)
                 replacePhoto(barprocess)
-                }else if(barprocess >=20) {
-                barprocess = 0
-                Toast.makeText(activity, "Successfully Received 1 TREE COIN!\n Green Pot Balance: " + greenqt, Toast.LENGTH_SHORT).show()
-                replaceTree(barprocess)
-                replacePhoto(barprocess)
-                }else
+            }else
                 Toast.makeText(activity, "Insufficient Green Pot!\n Earn more to PLAY!!!", Toast.LENGTH_SHORT).show()
         }
 
         bindingTree.itemthreebutton.setOnClickListener{
             if(goldqt>=1){
                 if(barprocess >= 20) {
-                    barprocess = 0
-                    Toast.makeText(activity, "Successfully Received 1 TREE COIN!\n Gold Pot Balance: "+ goldqt , Toast.LENGTH_SHORT).show()
-                    if(barprocess == 0){
-                        replacePhoto(barprocess)
-                    }
+                    Toast.makeText(activity, "Collect Tree Coin Now\n Green Pot Balance: " + greenqt, Toast.LENGTH_SHORT).show()
                 }else{
                     goldqt -= 1
                     barprocess += 4
                     Toast.makeText(activity, "Successfully spent 1 Gold Pot!\n Gold Pot Balance: "+ goldqt , Toast.LENGTH_SHORT).show()
-                }
+                    }
                 replaceTree(barprocess)
                 replacePhoto(barprocess)
-                }else if(barprocess >=20) {
-                barprocess = 0
-                Toast.makeText(activity, "Successfully Received 1 TREE COIN!\n Gold Pot Balance: " + goldqt, Toast.LENGTH_SHORT).show()
-                replaceTree(barprocess)
-                replacePhoto(barprocess)
-                }else
+            }else
                 Toast.makeText(activity, "Insufficient Gold Pot!\n Earn more to PLAY!!!", Toast.LENGTH_SHORT).show()
         }
-
+        bindingTree.collectBtn.setOnClickListener {
+            barprocess = 0
+            Toast.makeText(activity, "Successfully Received 1 TREE COIN!", Toast.LENGTH_SHORT).show()
+            replaceTree(barprocess)
+            replacePhoto(barprocess)
+            bindingTree.collectBtn.isVisible = false
+        }
 
         return bindingTree.root
 
-//        return inflater.inflate(R.layout.fragment_tree, container, false)
-
-
     }
-
+    // to represent tree in different states
     private fun replaceTree(barprocess: Number){
-        if(barprocess == 0)
+        if (barprocess == 0)
             bindingTree.treeone.setImageResource(R.drawable.treeone)
         else if(barprocess == 1)
             bindingTree.treeone.setImageResource(R.drawable.treeone)
@@ -161,6 +140,8 @@ class Tree : Fragment() {
         else
             bindingTree.treeone.setImageResource(R.drawable.treefour)
     }
+
+    // replace the progress bar
     private fun replacePhoto(barprocess: Number){
         if(barprocess == 0)
             bindingTree.finishbar.setImageResource(R.drawable.emptybar)
@@ -202,8 +183,10 @@ class Tree : Fragment() {
             bindingTree.finishbar.setImageResource(R.drawable.eightthbar)
         else if(barprocess == 19)
             bindingTree.finishbar.setImageResource(R.drawable.ninethbar)
-        else
+        else {
             bindingTree.finishbar.setImageResource(R.drawable.tenthbar)
+            bindingTree.collectBtn.isVisible = true
+        }
     }
     //     Allowing fragment to replace the main Body
     private fun replaceFragment(fragment : Fragment){
