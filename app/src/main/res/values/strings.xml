@@ -44,13 +44,17 @@
     <string name="userprofile_title">USER PROFILE</string>
     <string name="username">USERNAME</string>
     <string name="edit_info">EDIT INFO</string>
+    <string name="fullname">FULL NAME:</string>
     <string name="email">EMAIL:</string>
     <string name="Contact_no">CONTACT NO:</string>
-    <string name="DOB">DATE OF BIRTH:</string>
+    <string name="address">ADDRESS:</string>
     <string name="Register_Date">REGISTER DATE:</string>
     <string name="Logout">Logout</string>
     <string name="avatar_title">PLEASE SELECT AN AVATAR</string>
     <string name="avatar_select">SELECT</string>
+    <string name="profile_info">USER INFO</string>
+    <string name="edit">Edit</string>
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

@@ -6,27 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import my.edu.tarc.assignment.databinding.FragmentAvatarBinding
+import my.edu.tarc.assignment.databinding.FragmentEditprofileBinding
 
-class Avatar : DialogFragment() {
+class EditProfile : DialogFragment() {
 
-    private lateinit var bindingAvatar: FragmentAvatarBinding
+    private lateinit var bindingeditinfo:FragmentEditprofileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        bindingAvatar = FragmentAvatarBinding.inflate(layoutInflater)
-        return bindingAvatar.root
+        bindingeditinfo = FragmentEditprofileBinding.inflate(layoutInflater)
+        return bindingeditinfo.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bindingAvatar.imageButtonQuit.setOnClickListener {
+        bindingeditinfo.buttonCancel.setOnClickListener{
             dismiss()
         }
-
     }
 
 }

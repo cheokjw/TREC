@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import my.edu.tarc.assignment.databinding.FragmentProfileBinding
+import kotlin.math.E
 
 class Profile : Fragment(), View.OnClickListener {
 
@@ -30,14 +31,24 @@ class Profile : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         bindingProfile.cvAvatar.setOnClickListener(this)
+        bindingProfile.buttonEditInfo.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
         when(v.id){
             R.id.cvAvatar -> {
-                val showPopUp = Avatar()
-                showPopUp.show((activity as AppCompatActivity).supportFragmentManager, "showPopUp")
+                val showPopUpAvatar = Avatar()
+                showPopUpAvatar.show((activity as AppCompatActivity).supportFragmentManager, "showPopUp")
             }
+
+            R.id.buttonEditInfo -> {
+                val showPopUpEdit = EditProfile()
+                showPopUpEdit.show((activity as AppCompatActivity).supportFragmentManager, "showPopUp")
+            }
+
+            /*R.id.buttonLogout -> {
+
+            }*/
         }
 
     }
