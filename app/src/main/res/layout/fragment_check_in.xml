@@ -110,15 +110,20 @@
         app:layout_constraintStart_toStartOf="@+id/checkInCard2"
         app:layout_constraintTop_toBottomOf="@+id/checkInCard" />
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="4dp"
         android:minHeight="48dp"
         android:text="@string/reminder"
         app:layout_constraintBottom_toBottomOf="@+id/dailyTitle"
         app:layout_constraintEnd_toEndOf="@+id/checkInCard"
-        app:layout_constraintTop_toTopOf="@+id/dailyTitle" />
+        app:layout_constraintStart_toEndOf="@+id/dailyTitle"
+        app:layout_constraintTop_toTopOf="@+id/dailyTitle"
+        app:thumbTint="@drawable/check_in_reminder_thump"
+        app:trackTint="@drawable/check_in_reminder_track" />
 
     <TextView
         android:id="@+id/dailyTitle"

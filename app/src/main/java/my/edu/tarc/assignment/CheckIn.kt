@@ -1,6 +1,5 @@
 package my.edu.tarc.assignment
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,20 +8,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentActivity
 import my.edu.tarc.assignment.databinding.FragmentCheckInBinding
-import java.util.logging.Handler
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CheckIn.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CheckIn : Fragment() {
     private lateinit var bindingCheckIn: FragmentCheckInBinding
+    private lateinit var counterTextView: TextView
+    private lateinit var builder : AlertDialog.Builder
     private var counter = 0
     var coinBalance = 0
     val handler = android.os.Handler()
-    private lateinit var counterTextView: TextView
+    private var checkInCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,17 +30,26 @@ class CheckIn : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         bindingCheckIn = FragmentCheckInBinding.inflate(inflater)
+        return bindingCheckIn.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val activity: FragmentActivity?= activity
+        //Starting Point of the Check In Bar
         bindingCheckIn.progressBarCheckIn.progress = 0
 
+        //Show Balance Constantly
         counterTextView = bindingCheckIn.textViewRegBalance
         handler.post(updateCounter)
 
-        //Check in function
+        //Check In Button
         bindingCheckIn.buttonCheckIn.setOnClickListener {
             bindingCheckIn.notCheckedInStatus.setImageResource(R.drawable.checkedin)
 
             when (counter) {
                 0 -> {
+                    //Day 1 CheckIn
                     bindingCheckIn.progressBarCheckIn.progress = 0
                     bindingCheckIn.imageViewDay1.setImageResource((R.drawable.checked_in_progress))
                     coinBalance += 5
@@ -52,14 +57,23 @@ class CheckIn : Fragment() {
                     counter++
                 }
                 1 -> {
-                    bindingCheckIn.progressBarCheckIn.progress =
-                        (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
-                    bindingCheckIn.imageViewDay2.setImageResource((R.drawable.checked_in_progress))
-                    coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT).show()
-                    counter++
+                    //Day 2 CheckIn
+                    //If Statement to Prevent User from checking in twice
+                    if(checkInCount==1) {
+                        bindingCheckIn.progressBarCheckIn.progress =
+                            (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
+                        bindingCheckIn.imageViewDay2.setImageResource((R.drawable.checked_in_progress))
+                        coinBalance += 5
+                        Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
+                            .show()
+                        counter++
+                        checkInCount++
+                    }else{
+                        Toast.makeText(activity, "Already Checked In Today!\nPlease Try Again Tomorrow!", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 2 -> {
+                    //Day 3 CheckIn
                     bindingCheckIn.progressBarCheckIn.progress =
                         (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
                     bindingCheckIn.imageViewDay3.setImageResource((R.drawable.checked_in_progress))
@@ -68,6 +82,7 @@ class CheckIn : Fragment() {
                     counter++
                 }
                 3 -> {
+                    //Day 4 CheckIn
                     bindingCheckIn.progressBarCheckIn.progress =
                         (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
                     bindingCheckIn.imageViewDay4.setImageResource((R.drawable.checked_in_progress))
@@ -76,6 +91,7 @@ class CheckIn : Fragment() {
                     counter++
                 }
                 4 -> {
+                    //Day 5 CheckIn
                     bindingCheckIn.progressBarCheckIn.progress =
                         (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
                     bindingCheckIn.imageViewDay5.setImageResource((R.drawable.checked_in_progress))
@@ -84,6 +100,7 @@ class CheckIn : Fragment() {
                     counter++
                 }
                 5 -> {
+                    //Day 6 CheckIn
                     bindingCheckIn.progressBarCheckIn.progress =
                         (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
                     bindingCheckIn.imageViewDay6.setImageResource((R.drawable.checked_in_progress))
@@ -92,34 +109,42 @@ class CheckIn : Fragment() {
                     counter++
                 }
                 6 -> {
+                    //Day 7 CheckIn
                     bindingCheckIn.progressBarCheckIn.progress = 100
                     bindingCheckIn.imageViewDay7.setImageResource((R.drawable.checked_in_progress))
                     coinBalance += 25
                     Toast.makeText(activity, "25 Coins Added!$coinBalance", Toast.LENGTH_SHORT).show()
-                    counter++
-                }
-                7 -> {
-                    bindingCheckIn.progressBarCheckIn.progress = 0
-                    bindingCheckIn.imageViewDay1.setImageResource((R.drawable.check_in_progress))
-                    bindingCheckIn.imageViewDay2.setImageResource((R.drawable.check_in_progress))
-                    bindingCheckIn.imageViewDay3.setImageResource((R.drawable.check_in_progress))
-                    bindingCheckIn.imageViewDay4.setImageResource((R.drawable.check_in_progress))
-                    bindingCheckIn.imageViewDay5.setImageResource((R.drawable.check_in_progress))
-                    bindingCheckIn.imageViewDay6.setImageResource((R.drawable.check_in_progress))
-                    bindingCheckIn.imageViewDay7.setImageResource((R.drawable.check_in_progress))
                     counter=0
-                    //TODO: Pop up announce bonus reward
+
+                    //Show Pop To Notify User
+                    builder = AlertDialog.Builder(activity!!)
+                    builder.setTitle("Congratulations!")
+                        .setMessage("You have checked in for 7 days")
+                        .setCancelable(true)
+                        .setPositiveButton("Ok"){dialogInterface,it ->
+                            bindingCheckIn.progressBarCheckIn.progress = 0
+                            bindingCheckIn.imageViewDay1.setImageResource((R.drawable.check_in_progress))
+                            bindingCheckIn.imageViewDay2.setImageResource((R.drawable.check_in_progress))
+                            bindingCheckIn.imageViewDay3.setImageResource((R.drawable.check_in_progress))
+                            bindingCheckIn.imageViewDay4.setImageResource((R.drawable.check_in_progress))
+                            bindingCheckIn.imageViewDay5.setImageResource((R.drawable.check_in_progress))
+                            bindingCheckIn.imageViewDay6.setImageResource((R.drawable.check_in_progress))
+                            bindingCheckIn.imageViewDay7.setImageResource((R.drawable.check_in_progress))
+                            dialogInterface.cancel()
+                        }
+                        .show()
                 }
             }
         }
 
         //Nav to History Page
         bindingCheckIn.buttonRewards.setOnClickListener {
+
             replaceFragment(RewardsHistory())
         }
-        return bindingCheckIn.root
     }
 
+    //Function to Constantly Update Counter without Delay
     private val updateCounter = object : Runnable {
         override fun run() {
             counterTextView.text = coinBalance.toString()
