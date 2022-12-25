@@ -1,8 +1,11 @@
 package my.edu.tarc.assignment
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.alpha
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.DialogFragment
@@ -23,11 +26,11 @@ class Avatar : DialogFragment() {
     }
 
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //finger touch on avatar
+        //select avatar function
         bindingAvatar.imageViewAvatar1.setOnClickListener {
             bindingAvatar.imageViewAvatar1.alpha = 1F
             bindingAvatar.imageViewAvatar2.alpha = 0.5F
@@ -83,11 +86,15 @@ class Avatar : DialogFragment() {
         }
 
 
-        bindingAvatar.imageButtonQuit.setOnClickListener {
+
+        bindingAvatar.buttonSelectAvatar.setOnClickListener{
+            Toast.makeText(activity, "Avatar Changed", Toast.LENGTH_SHORT).show()
             dismiss()
         }
 
-
+        bindingAvatar.imageButtonQuit.setOnClickListener {
+            dismiss()
+        }
 
     }
 

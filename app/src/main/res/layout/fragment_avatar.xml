@@ -106,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/baby_blue"
-        android:fontFamily="@font/mulish_bold"
+        android:fontFamily="sans-serif-black"
         android:text="@string/avatar_select"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
