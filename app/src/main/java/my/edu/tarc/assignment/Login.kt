@@ -67,7 +67,7 @@ import my.edu.tarc.assignment.databinding.FragmentLoginBinding
              R.id.textViewSignup -> {
                  val SignUpFragment = Signup()
                  val transaction: FragmentTransaction = parentFragmentManager!!.beginTransaction()
-                 transaction.replace(R.id.frameLayout,SignUpFragment)
+                 transaction.replace(R.id.frameLayout_login,SignUpFragment)
                  transaction.commit()
              }
 
