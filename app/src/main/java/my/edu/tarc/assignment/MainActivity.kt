@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // This is what users see when they first use our app (in this case: CheckIn Fragment will be shown first)
-        replaceFragment(CheckIn())
+        replaceFragment(Login())
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.checkin -> replaceFragment(CheckIn())

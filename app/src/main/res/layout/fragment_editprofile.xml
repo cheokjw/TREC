@@ -21,7 +21,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView6"
-        android:layout_width="400dp"
+        android:layout_width="370dp"
         android:layout_height="380dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="150dp" />
+                app:layout_constraintGuide_begin="126dp" />
 
             <TextView
                 android:id="@+id/textView30"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:text="@string/email"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:text="@string/Contact_no"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:text="@string/address"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="@string/fullname"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -83,7 +83,7 @@
                 android:id="@+id/editTextFullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="20dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
@@ -97,7 +97,7 @@
                 android:id="@+id/editTextEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="20dp"
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
@@ -111,7 +111,7 @@
                 android:id="@+id/editTextPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="20dp"
                 android:ems="10"
                 android:inputType="phone"
                 android:minHeight="48dp"
@@ -125,7 +125,7 @@
                 android:id="@+id/editTextAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="20dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
@@ -141,19 +141,23 @@
         android:id="@+id/buttonEdit"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="28dp"
         android:backgroundTint="@color/black"
         android:text="@string/edit"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonCancel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/buttonCancel" />
+        app:layout_constraintHorizontal_bias="0.634"
+        app:layout_constraintStart_toEndOf="@+id/buttonCancel"
+        app:layout_constraintTop_toTopOf="@+id/buttonCancel"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonCancel"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/black"
         android:text="@string/Cancel"

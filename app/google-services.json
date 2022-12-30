@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "618827513423",
+    "firebase_url": "https://trec-54cc7-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "trec-54cc7",
+    "storage_bucket": "trec-54cc7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618827513423:android:0d8c80bed2b38dbac4343a",
+        "android_client_info": {
+          "package_name": "my.edu.tarc.assignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618827513423-emmun9ff119ubkj07bjrpa1mujmv2gln.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMTioa8o6scCzUeHinP4Gw13FcaGmaIuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618827513423-emmun9ff119ubkj07bjrpa1mujmv2gln.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
