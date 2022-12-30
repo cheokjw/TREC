@@ -5,12 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import my.edu.tarc.assignment.databinding.FragmentLoginBinding
 
 
  class Login : Fragment(), View.OnClickListener {
+
+     lateinit var database: FirebaseDatabase
+     lateinit var databaseReference: DatabaseReference
 
      private lateinit var bindinglogin:FragmentLoginBinding
 
@@ -19,8 +28,9 @@ import my.edu.tarc.assignment.databinding.FragmentLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       /* val useredittext = bindinglogin.editTextUsername
-        val passwordedittext = bindinglogin.editTextPassword*/
+
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database.getReference().child("user")
 
     }
 
@@ -44,7 +54,7 @@ import my.edu.tarc.assignment.databinding.FragmentLoginBinding
          super.onViewCreated(view, savedInstanceState)
 
          bindinglogin.textViewForgotPw.setOnClickListener(this)
-
+         bindinglogin.buttonSignIn.setOnClickListener(this)
          bindinglogin.textViewSignup.setOnClickListener(this)
 
 
@@ -59,7 +69,14 @@ import my.edu.tarc.assignment.databinding.FragmentLoginBinding
              }
 
              R.id.buttonSignIn -> {
+                 val username = bindinglogin.editTextUsername.text.toString()
+                 val password = bindinglogin.editTextPassword.text.toString()
 
+                 if(username.isEmpty() || password.isEmpty()){
+                     Toast.makeText(activity, "Empty Field", Toast.LENGTH_SHORT).show()
+                 }else{
+
+                 }
              }
 
 
@@ -73,6 +90,7 @@ import my.edu.tarc.assignment.databinding.FragmentLoginBinding
 
          }
      }
+
 
 
 
