@@ -20,5 +20,7 @@ class LoginActivity : AppCompatActivity() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.frameLayout_login, fragment)
         fragmentTransaction.commit()
+
     }
+
 }
