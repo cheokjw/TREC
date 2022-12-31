@@ -95,10 +95,13 @@ import android.content.SharedPreferences
                  if(bindinglogin.editTextPassword.text.toString() == veripw){
                      //toast msg
                      Toast.makeText(activity, "Login Successful", Toast.LENGTH_SHORT).show()
+
                      //create session
-                    //activityfunction.setsess(bindinglogin.editTextUsername.text.toString())
+                     startSess(bindinglogin.editTextUsername.text.toString())
+
                      //start mainactivity
                      activityfunction.access()
+
                  }else{
                      Toast.makeText(activity, "Password Error", Toast.LENGTH_SHORT).show()
                  }
@@ -109,6 +112,14 @@ import android.content.SharedPreferences
          }.addOnFailureListener{
              Toast.makeText(activity, "Failed to get username", Toast.LENGTH_SHORT).show()
          }
+     }
+
+     private fun startSess(username: String){
+         val preferences = requireContext().getSharedPreferences("sess_store", Context.MODE_PRIVATE)
+         val editor = preferences.edit()
+         editor.putString("username", username)
+         editor.apply()
+
      }
 
 

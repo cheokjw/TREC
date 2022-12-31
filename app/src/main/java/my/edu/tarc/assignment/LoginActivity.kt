@@ -13,8 +13,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     //creating session
-    private val sharedPref = this.getSharedPreferences("SessPref", Context.MODE_PRIVATE)
-    private val editor = sharedPref.edit()
+    /*private val sharedPref = this.getSharedPreferences("SessPref", Context.MODE_PRIVATE)
+    private val editor = sharedPref.edit()*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,24 +38,6 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    //used in login.kt (login)
-    fun setsess(username: String?) {
-        editor.apply {
-            putString("username", username)
-            apply()
-        }
-    }
-
-    //used in profile.kt(username)
-    fun getsess(): String? {
-        return sharedPref.getString("username",null)
-    }
-
-    //used in profile.kt(logout)
-    fun removeData() {
-        editor?.clear()
-        editor?.apply()
-    }
 }
 
 
