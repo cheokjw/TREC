@@ -39,7 +39,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="18dp"
                 android:fontFamily="@font/mulish_bold"
                 android:text="@string/userprofile_title"
                 android:textSize="30sp"
@@ -64,7 +64,7 @@
                 android:id="@+id/buttonEditInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="50dp"
                 android:backgroundTint="@color/black"
                 android:fontFamily="@font/mulish_bold"
                 android:text="@string/edit_info"
@@ -75,10 +75,10 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
                 android:layout_width="250dp"
-                android:layout_height="180dp"
-                android:layout_marginTop="20dp"
-                app:cardCornerRadius="25dp"
+                android:layout_height="220dp"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="@color/baby_blue"
+                app:cardCornerRadius="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonEditInfo">
@@ -88,35 +88,40 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/textViewRegDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="15dp"
                         android:fontFamily="@font/mulish_bold"
                         android:text="@string/Register_Date"
+                        android:textAlignment="viewEnd"
                         android:textColor="@color/black"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toStartOf="@+id/guideline2"
                         app:layout_constraintTop_toBottomOf="@+id/textViewAddress" />
 
                     <TextView
-                        android:id="@+id/textViewRegisterDate2"
+                        android:id="@+id/textViewRegisterDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                        android:ems="6"
+                        android:fontFamily="@font/mulish_semibold"
+                        android:textAlignment="viewStart"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/textViewRegDate"
                         app:layout_constraintStart_toStartOf="@+id/guideline2"
-                        app:layout_constraintTop_toTopOf="@+id/textView2" />
+                        app:layout_constraintTop_toTopOf="@+id/textViewRegDate" />
 
                     <TextView
                         android:id="@+id/textView14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="15dp"
                         android:fontFamily="@font/mulish_bold"
                         android:text="@string/email"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
+                        android:textSize="15sp"
                         app:layout_constraintEnd_toStartOf="@+id/guideline2"
                         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
@@ -132,8 +137,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:ems="6"
                         android:fontFamily="@font/mulish"
-                        android:textSize="12sp"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView14"
                         app:layout_constraintStart_toStartOf="@+id/guideline2"
                         app:layout_constraintTop_toTopOf="@+id/textView14" />
@@ -142,11 +149,11 @@
                         android:id="@+id/textView16"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="15dp"
                         android:fontFamily="@font/mulish_bold"
                         android:text="@string/Contact_no"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
+                        android:textSize="15sp"
                         app:layout_constraintEnd_toStartOf="@+id/guideline2"
                         app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
@@ -155,8 +162,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:ems="6"
                         android:fontFamily="@font/mulish"
-                        android:textSize="12sp"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView16"
                         app:layout_constraintStart_toEndOf="@+id/textView16"
                         app:layout_constraintTop_toTopOf="@+id/textView16" />
@@ -165,11 +174,11 @@
                         android:id="@+id/textView18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="15dp"
                         android:fontFamily="@font/mulish_bold"
                         android:text="@string/address"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
+                        android:textSize="15sp"
                         app:layout_constraintEnd_toStartOf="@+id/guideline2"
                         app:layout_constraintTop_toBottomOf="@+id/textViewContact" />
 
@@ -178,9 +187,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:ems="6"
                         android:fontFamily="@font/mulish"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView18"
+                        android:maxLines="3"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="@+id/guideline2"
                         app:layout_constraintTop_toTopOf="@+id/textView18" />
 
@@ -192,15 +203,19 @@
                         android:fontFamily="@font/mulish_bold"
                         android:text="@string/fullname"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
+                        android:textSize="15sp"
                         app:layout_constraintEnd_toStartOf="@+id/guideline2"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textViewRegisterDate"
+                        android:id="@+id/textViewFullName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:ems="6"
+                        android:fontFamily="@font/mulish"
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView20"
                         app:layout_constraintStart_toStartOf="@+id/guideline2"
                         app:layout_constraintTop_toTopOf="@+id/textView20" />
@@ -214,7 +229,7 @@
                 android:layout_width="125dp"
                 android:layout_height="125dp"
                 android:layout_marginStart="44dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="18dp"
                 android:backgroundTint="@color/transpbaby_blue"
                 app:cardCornerRadius="250dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -228,7 +243,7 @@
                     app:cardCornerRadius="250dp">
 
                     <ImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/imageViewAvatar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

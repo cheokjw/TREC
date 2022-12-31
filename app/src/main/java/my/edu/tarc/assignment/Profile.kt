@@ -8,16 +8,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import my.edu.tarc.assignment.databinding.FragmentProfileBinding
 import kotlin.math.E
 
 class Profile : Fragment(), View.OnClickListener {
 
+    lateinit var database: FirebaseDatabase
+    lateinit var databaseReference: DatabaseReference
     private lateinit var bindingProfile:FragmentProfileBinding
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database.getReference().child("user")
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,10 +43,11 @@ class Profile : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getSess()
+        displayinfo()
+        flexlayout()
         bindingProfile.cvAvatar.setOnClickListener(this)
         bindingProfile.buttonEditInfo.setOnClickListener(this)
         bindingProfile.buttonLogout.setOnClickListener(this)
-        //sessfunction.setsess(bindingProfile.textViewUsername.text.toString())
     }
 
     override fun onClick(v: View) {
@@ -52,10 +64,35 @@ class Profile : Fragment(), View.OnClickListener {
 
             R.id.buttonLogout -> {
                 val activityfunction = activity as MainActivity
-               //sessfunction.removeData()
                 activityfunction.logout()
             }
         }
+    }
+
+    private fun displayinfo(){
+        getData(bindingProfile.textViewUsername.text.toString())
+    }
+
+
+    private fun getData(username: String) {
+        //get fullname
+        databaseReference.child(username).child("fullname").get().addOnSuccessListener {
+            val full_name = it.getValue(String::class.java)
+            bindingProfile.textViewFullName.text = full_name}
+        //get email
+        databaseReference.child(username).child("email").get().addOnSuccessListener {
+            val email = it.getValue(String::class.java)
+            bindingProfile.textViewEmail.text = email}
+        //get phone
+        databaseReference.child(username).child("phone").get().addOnSuccessListener {
+            val phone = it.getValue(String::class.java)
+            bindingProfile.textViewContact.text = phone}
+        //get address
+        databaseReference.child(username).child("address").get().addOnSuccessListener {
+            val address = it.getValue(String::class.java)
+            bindingProfile.textViewAddress.text = address}
+        //get image
+            //bindingProfile.imageViewAvatar.setImageURI(it.child("img").toString())
     }
 
     private fun getSess(){
@@ -68,7 +105,19 @@ class Profile : Fragment(), View.OnClickListener {
         }
     }
 
-
+    private fun flexlayout() {
+        val regdate =  bindingProfile.textViewRegDate.layoutParams as ViewGroup.MarginLayoutParams
+        if (bindingProfile.textViewAddress.lineCount == 3) {
+            regdate.topMargin = 5
+        } else if (bindingProfile.textViewAddress.lineCount == 2) {
+            regdate.topMargin = 10
+        } else{
+            val linecount = bindingProfile.textViewAddress.lineCount
+            val msg = String.format("Err detect,%s",linecount)
+            Toast.makeText(activity,msg,Toast.LENGTH_SHORT).show()
+        }
+        bindingProfile.textViewRegDate.layoutParams = regdate
+    }
 
 
 
