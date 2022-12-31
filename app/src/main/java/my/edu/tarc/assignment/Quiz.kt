@@ -22,6 +22,8 @@ class Quiz : Fragment(), View.OnClickListener {
     private var mSelectedOption: Int = 0
     private var mCorrectTotal: Int = 0
     private var mCorrectPercentage: Double = 0.0
+    // TODO: Change to Gamecoin from database
+    private var mGameCoinEarned: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +86,7 @@ class Quiz : Fragment(), View.OnClickListener {
                         mCorrectTotal++
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        mGameCoinEarned += 5
                         Log.i("End", mCorrectPercentage.toString())
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
@@ -111,6 +114,7 @@ class Quiz : Fragment(), View.OnClickListener {
                         mCorrectTotal++
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        mGameCoinEarned += 5
                         Log.i("End", mCorrectPercentage.toString())
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
@@ -138,6 +142,7 @@ class Quiz : Fragment(), View.OnClickListener {
                         mCorrectTotal++
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        mGameCoinEarned += 5
                         Log.i("End", mCorrectPercentage.toString())
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
@@ -164,6 +169,7 @@ class Quiz : Fragment(), View.OnClickListener {
                         mCorrectTotal++
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        mGameCoinEarned += 5
                         Log.i("End", mCorrectPercentage.toString())
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
