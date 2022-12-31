@@ -50,6 +50,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun logout(){
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
         finish()
     }
 }

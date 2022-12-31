@@ -51,12 +51,13 @@
                 android:id="@+id/textViewUsername"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 android:fontFamily="@font/mulish_semibold"
-                android:text="@string/username"
-                android:textSize="16sp"
+                android:textSize="26sp"
                 app:layout_constraintBottom_toBottomOf="@+id/cardView4"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardView4"
                 app:layout_constraintTop_toTopOf="@+id/cardView4" />
 
             <Button

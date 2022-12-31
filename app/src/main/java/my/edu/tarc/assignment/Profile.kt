@@ -34,6 +34,7 @@ class Profile : Fragment(), View.OnClickListener {
         getSess()
         bindingProfile.cvAvatar.setOnClickListener(this)
         bindingProfile.buttonEditInfo.setOnClickListener(this)
+        bindingProfile.buttonLogout.setOnClickListener(this)
         //sessfunction.setsess(bindingProfile.textViewUsername.text.toString())
     }
 
@@ -52,7 +53,7 @@ class Profile : Fragment(), View.OnClickListener {
             R.id.buttonLogout -> {
                 val activityfunction = activity as MainActivity
                //sessfunction.removeData()
-                activityfunction.finish()
+                activityfunction.logout()
             }
         }
     }
