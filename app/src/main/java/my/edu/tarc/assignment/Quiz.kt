@@ -20,6 +20,8 @@ class Quiz : Fragment(), View.OnClickListener {
     private var mCurrentPosition:Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
     private var mSelectedOption: Int = 0
+    private var mCorrectTotal: Int = 0
+    private var mCorrectPercentage: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +61,10 @@ class Quiz : Fragment(), View.OnClickListener {
         bindingQuiz.btnAnswer2.text = question.optionTwo
         bindingQuiz.btnAnswer3.text = question.optionThree
         bindingQuiz.btnAnswer4.text = question.optionFour
+
+        if (mCurrentPosition > 1){
+            bindingQuiz.tvHint.text = question.hint
+        }
     }
 
 
@@ -75,16 +81,22 @@ class Quiz : Fragment(), View.OnClickListener {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.correct)
                         mediaPlayer?.start()
                         mCurrentPosition++
+                        mCorrectTotal++
                         setQuestions()
+                        mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        Log.i("End", mCorrectPercentage.toString())
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
                         mediaPlayer?.start()
                         mCurrentPosition++
                         setQuestions()
+                        mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        Log.i("End", mCorrectPercentage.toString())
                     }
                 }else {
-                        Log.i("Test","else triggered")
-                        Toast.makeText(activity, "Maximum Quiz achieved! Please come back tomorrow for more quiz!", Toast.LENGTH_SHORT).show()
+                    Log.i("Test","else triggered")
+                    Toast.makeText(activity, "Maximum Quiz achieved! Please come back tomorrow for more quiz!", Toast.LENGTH_SHORT).show()
+
                 }
             }
 
@@ -96,18 +108,26 @@ class Quiz : Fragment(), View.OnClickListener {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.correct)
                         mediaPlayer?.start()
                         mCurrentPosition++
+                        mCorrectTotal++
                         setQuestions()
+                        mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        Log.i("End", mCorrectPercentage.toString())
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
                         mediaPlayer?.start()
                         mCurrentPosition++
                         setQuestions()
+                        mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        Log.i("End", mCorrectPercentage.toString())
                     }
                 }else {
                     Log.i("Test","else triggered")
                     Toast.makeText(activity, "Maximum Quiz achieved! Please come back tomorrow for more quiz!", Toast.LENGTH_SHORT).show()
                 }
+
             }
+
+            // Third Answer
             R.id.btnAnswer3 -> {
                 mSelectedOption = 3
                 if(mCurrentPosition < 10) {
@@ -115,18 +135,25 @@ class Quiz : Fragment(), View.OnClickListener {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.correct)
                         mediaPlayer?.start()
                         mCurrentPosition++
+                        mCorrectTotal++
                         setQuestions()
+                        mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        Log.i("End", mCorrectPercentage.toString())
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
                         mediaPlayer?.start()
                         mCurrentPosition++
                         setQuestions()
+                        mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        Log.i("End", mCorrectPercentage.toString())
                     }
                 }else {
                     Log.i("Test","else triggered")
                     Toast.makeText(activity, "Maximum Quiz achieved! Please come back tomorrow for more quiz!", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            // Fourth Answer
             R.id.btnAnswer4 -> {
                 mSelectedOption = 4
                 if(mCurrentPosition < 10) {
@@ -134,12 +161,17 @@ class Quiz : Fragment(), View.OnClickListener {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.correct)
                         mediaPlayer?.start()
                         mCurrentPosition++
+                        mCorrectTotal++
                         setQuestions()
+                        mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        Log.i("End", mCorrectPercentage.toString())
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
                         mediaPlayer?.start()
                         mCurrentPosition++
                         setQuestions()
+                        mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
+                        Log.i("End", mCorrectPercentage.toString())
                     }
                 }else {
                     Log.i("Test","else triggered")
