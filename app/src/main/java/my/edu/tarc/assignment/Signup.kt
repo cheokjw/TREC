@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
@@ -56,7 +57,7 @@ class Signup : Fragment() {
                 }
             }
 
-            replaceFragment(Login())
+           returnlogin()
         }
 
 
@@ -67,15 +68,12 @@ class Signup : Fragment() {
 
     //TODO: Receive input
 
-    private fun replaceFragment(fragment : Fragment){
+    private fun returnlogin(){
 
-        val fragmentManager = getActivity()?.supportFragmentManager
-        val fragmentTransaction = fragmentManager?.beginTransaction()
-
-        // Selecting which part of the UI should be replaced by the fragment
-        // in this case its the frameLayout in activity_main.xml
-        fragmentTransaction?.replace(R.id.frameLayout, fragment)
-        fragmentTransaction?.commit()
+        val LoginFragment = Login()
+        val transaction: FragmentTransaction = parentFragmentManager!!.beginTransaction()
+        transaction.replace(R.id.frameLayout_login, LoginFragment)
+        transaction.commit()
     }
 
 }
