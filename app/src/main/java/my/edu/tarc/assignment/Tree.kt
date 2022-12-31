@@ -1,5 +1,6 @@
 package my.edu.tarc.assignment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import my.edu.tarc.assignment.databinding.FragmentPotionshopBinding
 import my.edu.tarc.assignment.databinding.FragmentTreeBinding
 
@@ -15,13 +18,20 @@ import my.edu.tarc.assignment.databinding.FragmentTreeBinding
 class Tree : Fragment() {
     private lateinit var bindingTree:FragmentTreeBinding
     // var below need to store database
+    lateinit var database: FirebaseDatabase
+    lateinit var databaseReference: DatabaseReference
     var sprayqt = 5
     var greenqt = 5
     var goldqt = 5
     var barprocess = 0
+    var username =""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        database = FirebaseDatabase.getInstance()
+        getSess()
+        databaseReference = database.getReference().child("user").child(username)
     }
 
     override fun onCreateView (
@@ -29,6 +39,7 @@ class Tree : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         bindingTree = FragmentTreeBinding.inflate(inflater)
+
 
         bindingTree.potionShopButton.setOnClickListener {
             replaceFragment(potionshop())
@@ -198,6 +209,17 @@ class Tree : Fragment() {
         // in this case its the frameLayout in activity_main.xml
         fragmentTransaction?.replace(R.id.frameLayout, fragment)
         fragmentTransaction?.commit()
+    }
+
+    private fun getSess(){
+        val preferences = requireContext().getSharedPreferences("sess_store",Context.MODE_PRIVATE)
+        val sess_username = preferences.getString("username", "")
+        if (sess_username != ""){
+            username = sess_username.toString()
+        }else{
+            Toast.makeText(activity, "failed to retrieve username", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
 
