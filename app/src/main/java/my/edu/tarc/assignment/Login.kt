@@ -1,6 +1,6 @@
  package my.edu.tarc.assignment
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,16 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
-import my.edu.tarc.assignment.Regis.Signup_regis
 import my.edu.tarc.assignment.databinding.FragmentLoginBinding
-import java.util.regex.Pattern
+import android.content.SharedPreferences
 
 
  class Login : Fragment(), View.OnClickListener {
@@ -26,7 +19,6 @@ import java.util.regex.Pattern
      lateinit var database: FirebaseDatabase
      lateinit var databaseReference: DatabaseReference
      private lateinit var bindinglogin: FragmentLoginBinding
-
 
 
 
@@ -83,7 +75,6 @@ import java.util.regex.Pattern
      }
 
 
-
      private fun login() {
         val username = bindinglogin.editTextUsername.text.toString()
         val password = bindinglogin.editTextPassword.text.toString()
@@ -102,7 +93,11 @@ import java.util.regex.Pattern
              if(it.exists()){
                  val veripw = it.child("pass").value
                  if(bindinglogin.editTextPassword.text.toString() == veripw){
+                     //toast msg
                      Toast.makeText(activity, "Login Successful", Toast.LENGTH_SHORT).show()
+                     //create session
+                    //activityfunction.setsess(bindinglogin.editTextUsername.text.toString())
+                     //start mainactivity
                      activityfunction.access()
                  }else{
                      Toast.makeText(activity, "Password Error", Toast.LENGTH_SHORT).show()
@@ -114,8 +109,11 @@ import java.util.regex.Pattern
          }.addOnFailureListener{
              Toast.makeText(activity, "Failed to get username", Toast.LENGTH_SHORT).show()
          }
-
      }
+
+
+
+
  }
 
 

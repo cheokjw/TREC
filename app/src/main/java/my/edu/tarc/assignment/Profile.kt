@@ -10,7 +10,8 @@ import my.edu.tarc.assignment.databinding.FragmentProfileBinding
 import kotlin.math.E
 
 class Profile : Fragment(), View.OnClickListener {
-
+    val activityfunction = activity as MainActivity
+    val sessfunction = activity as LoginActivity
     private lateinit var bindingProfile:FragmentProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +33,7 @@ class Profile : Fragment(), View.OnClickListener {
 
         bindingProfile.cvAvatar.setOnClickListener(this)
         bindingProfile.buttonEditInfo.setOnClickListener(this)
+        //sessfunction.setsess(bindingProfile.textViewUsername.text.toString())
     }
 
     override fun onClick(v: View) {
@@ -46,12 +48,16 @@ class Profile : Fragment(), View.OnClickListener {
                 showPopUpEdit.show((activity as AppCompatActivity).supportFragmentManager, "showPopUp")
             }
 
-            /*R.id.buttonLogout -> {
-
-            }*/
+            R.id.buttonLogout -> {
+               //sessfunction.removeData()
+                activityfunction.logout()
+            }
         }
-
     }
+
+
+
+
 
 
 }

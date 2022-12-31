@@ -1,5 +1,6 @@
 package my.edu.tarc.assignment
 
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -46,5 +47,11 @@ class MainActivity : AppCompatActivity() {
         // in this case its the frameLayout in activity_main.xml
         fragmentTransaction.replace(R.id.frameLayout, fragment)
         fragmentTransaction.commit()
+    }
+
+    fun logout(){
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
