@@ -1,5 +1,6 @@
 package my.edu.tarc.assignment
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,6 +22,15 @@ class LoginActivity : AppCompatActivity() {
         fragmentTransaction.add(R.id.frameLayout_login, fragment)
         fragmentTransaction.commit()
 
+
+        }
+
+    fun access(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
+
+
 
 }
