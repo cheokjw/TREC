@@ -2,7 +2,6 @@ package my.edu.tarc.assignment
 
 import android.content.Context
 import android.os.Bundle
-import android.service.controls.ControlsProviderService.TAG
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,27 +11,27 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
-import com.google.android.material.tabs.TabLayout.TabGravity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.database.*
-import com.google.firebase.database.core.Tag
-import my.edu.tarc.assignment.Regis.Signup_regis
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import my.edu.tarc.assignment.databinding.FragmentCheckInBinding
 
-class CheckIn : Fragment() {
+
+class CheckIn: Fragment() {
     private lateinit var bindingCheckIn: FragmentCheckInBinding
 
-    private lateinit var counterTextView: TextView
-    private lateinit var builder : AlertDialog.Builder
+    lateinit var counterTextView: TextView
+    lateinit var builder : AlertDialog.Builder
 
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
 
-    private var counter = 0
-    var gameCoin = 0
-    val handler = android.os.Handler()
     private var checkInCount = 0
+    private var counter = 0
+    private var user = ""
+
+    var gameCoinBal = 0
+    val handler = android.os.Handler()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,28 +44,21 @@ class CheckIn : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        bindingCheckIn = FragmentCheckInBinding.inflate(inflater)
+        bindingCheckIn = FragmentCheckInBinding.inflate(layoutInflater)
         return bindingCheckIn.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity: FragmentActivity?= activity
-
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("user")
-        //Starting Point of the Check In Bar
         bindingCheckIn.progressBarCheckIn.progress = 0
 
         //Show Balance Constantly
-        counterTextView = bindingCheckIn.textViewRegBalance
         handler.post(updateCounter)
 
         //Check In Button
         bindingCheckIn.buttonCheckIn.setOnClickListener {
             bindingCheckIn.notCheckedInStatus.setImageResource(R.drawable.checkedin)
-
-
 
 //        if(checkInCount<1) {
 //            when (counter) {
@@ -179,7 +171,9 @@ class CheckIn : Fragment() {
     //Function to Constantly Update Counter without Delay
     private val updateCounter = object : Runnable {
         override fun run() {
-            counterTextView.text = gameCoin.toString()
+//            counterTextView.text = gameCoinBal.toString()
+            getSess()
+            displayinfo()
             handler.postDelayed(this, 0) // run instantly
         }
     }
@@ -206,6 +200,27 @@ class CheckIn : Fragment() {
 //            // It has not been at least one day, so prevent the button from being clicked
 //        }
 //    }
+
+    private fun displayinfo(){
+        getData(user)
+    }
+
+    private fun getData(username: String) {
+        //get coin
+        databaseReference.child(username).child("gameCoin").get().addOnSuccessListener {
+            val coinBal = it.getValue(Int::class.java).toString()
+            bindingCheckIn.textViewRegBalance.text = coinBal}
+    }
+
+    private fun getSess(){
+        val preferences = requireContext().getSharedPreferences("sess_store", Context.MODE_PRIVATE)
+        val sess_username = preferences.getString("username", "")
+        if (sess_username != ""){
+            user = sess_username!!
+        } else {
+            Toast.makeText(activity,"failed to retrieve username", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun replaceFragment(fragment : Fragment){
 
