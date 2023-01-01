@@ -74,14 +74,11 @@ class CheckIn : Fragment() {
 
                 if (it.exists()){
 
-<<<<<<< HEAD
+
                     var dbCheckIn = it.child("checkin").value.toString().toInt()
                     var dbGameCoin = it.child("gameCoin").value.toString().toInt()
                     Log.i("SessionValue", dbCheckIn.toString())
-=======
-                    var dbCheckIn = it.child(sessionUser).child("checkin").value.toString().toInt()
-                    var dbGameCoin = it.child(sessionUser).child("gameCoin").value
->>>>>>> c250e49ace8f9d9f7f0110e8f4ca35dea5e5f150
+
                     var checkin : Int
 
                     checkin = if (dbCheckIn == null){
