@@ -26,36 +26,58 @@ class Tree : Fragment() {
     var goldqt = 5
     var barprocess = 0
     var username =""
-
+    var treecoin = 0
+    var gamecoin = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getSess()
-        database = FirebaseDatabase.getInstance()
-        databaseReference = database.getReference().child("user").child(username)
+
     }
 
     override fun onCreateView (
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        getSess()
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database.getReference().child("user").child(username)
         bindingTree = FragmentTreeBinding.inflate(inflater)
         //retrieve game coin
         databaseReference.child("gameCoin").get().addOnSuccessListener {
-            bindingTree.sprayqt.text = it.value.toString()
+            gamecoin = it.value.toString().toInt()
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
         }
         //retrieve tree coin
         databaseReference.child("treeCoin").get().addOnSuccessListener {
-//            bindingTree.sprayqt.text = it.value.toString()
+            bindingTree.sprayqt.text = it.value.toString()
+            treecoin = it.value.toString().toInt()
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
         }
         //retrieve tree progress
-        databaseReference.child("gameCoin").get().addOnSuccessListener {
-//            bindingTree.sprayqt.text = it.value.toString()
+        databaseReference.child("treeProgress").get().addOnSuccessListener {
+            barprocess = it.value.toString().toInt()
+            replaceTree(barprocess)
+            replacePhoto(barprocess)
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
+        //spray portion quantity
+        databaseReference.child("spray_quantity").get().addOnSuccessListener {
+            sprayqt = it.value.toString().toInt()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
+        //green portion quantity
+        databaseReference.child("green_quantity").get().addOnSuccessListener {
+            greenqt = it.value.toString().toInt()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
+        //gold portion quantity
+        databaseReference.child("golden_quantity").get().addOnSuccessListener {
+            goldqt = it.value.toString().toInt()
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
         }
@@ -72,10 +94,12 @@ class Tree : Fragment() {
             if(sprayqt>=1){
                 if(barprocess >=20) {
                     Toast.makeText(activity, "Collect Tree Coin Now\n Spray Balance: " + sprayqt, Toast.LENGTH_SHORT).show()
+
                 }else{
                     sprayqt -= 1
                     barprocess += 1
                     Toast.makeText(activity, "Successfully spent 1 Spray!\n Spray Balance: "+ sprayqt , Toast.LENGTH_SHORT).show()
+
                     }
                 replaceTree(barprocess)
                 replacePhoto(barprocess)
@@ -92,6 +116,7 @@ class Tree : Fragment() {
                     greenqt -= 1
                     barprocess += 2
                     Toast.makeText(activity, "Successfully spent 1 Green Pot!\n Green Pot Balance: "+ greenqt , Toast.LENGTH_SHORT).show()
+
                     }
                 replaceTree(barprocess)
                 replacePhoto(barprocess)
@@ -115,10 +140,17 @@ class Tree : Fragment() {
         }
         bindingTree.collectBtn.setOnClickListener {
             barprocess = 0
+            treecoin += 1
             Toast.makeText(activity, "Successfully Received 1 TREE COIN!", Toast.LENGTH_SHORT).show()
             replaceTree(barprocess)
             replacePhoto(barprocess)
+            //update treecoin and barprocess in firebase
             bindingTree.collectBtn.isVisible = false
+            var treeCoinUpdate = hashMapOf<String, Any>(
+                "treeProgress" to barprocess,
+                "treeCoin" to treecoin
+            )
+            databaseReference.updateChildren(treeCoinUpdate)
         }
 
         return bindingTree.root
@@ -244,3 +276,4 @@ class Tree : Fragment() {
 
 
 }
+
