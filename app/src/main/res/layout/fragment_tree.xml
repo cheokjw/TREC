@@ -202,7 +202,7 @@
         app:srcCompat="@drawable/gamecoin" />
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/textViewGameCoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-25dp"
@@ -213,7 +213,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/textViewTreeCoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"

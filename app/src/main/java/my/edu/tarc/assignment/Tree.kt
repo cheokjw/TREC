@@ -45,13 +45,14 @@ class Tree : Fragment() {
         //retrieve game coin
         databaseReference.child("gameCoin").get().addOnSuccessListener {
             gamecoin = it.value.toString().toInt()
-
+            bindingTree.textViewGameCoin.text = it.value.toString()
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
         }
         //retrieve tree coin
         databaseReference.child("treeCoin").get().addOnSuccessListener {
             treecoin = it.value.toString().toInt()
+            bindingTree.textViewTreeCoin.text = it.value.toString()
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
         }
@@ -99,16 +100,27 @@ class Tree : Fragment() {
                     sprayqt -= 1
                     barprocess += 1
                     Toast.makeText(activity, "Successfully spent 1 Spray!\n Spray Balance: "+ sprayqt , Toast.LENGTH_SHORT).show()
-                    updateData("treeProgress", "spray_quantity",barprocess, sprayqt)
+
                     }
                 replaceTree(barprocess)
                 replacePhoto(barprocess)
                 }else
                     Toast.makeText(activity, "Insufficient Spray Potion!\n Earn more to PLAY!!!", Toast.LENGTH_SHORT).show()
+            var sprayUpdate = hashMapOf<String, Any>(
+                "treeProgress" to barprocess,
+                "spray_quantity" to sprayqt
+            )
+            databaseReference.updateChildren(sprayUpdate)
         }
 
 
         bindingTree.itemtwobutton.setOnClickListener{
+            //green portion quantity
+            databaseReference.child("green_quantity").get().addOnSuccessListener {
+                greenqt = it.value.toString().toInt()
+            }.addOnFailureListener {
+                Log.e("firebase", "Error getting data", it)
+            }
             if(greenqt>=1){
                 if(barprocess >=20) {
                     Toast.makeText(activity, "Collect Tree Coin Now\n Green Pot Balance: " + greenqt, Toast.LENGTH_SHORT).show()
@@ -116,15 +128,26 @@ class Tree : Fragment() {
                     greenqt -= 1
                     barprocess += 2
                     Toast.makeText(activity, "Successfully spent 1 Green Pot!\n Green Pot Balance: "+ greenqt , Toast.LENGTH_SHORT).show()
-                    updateData("treeProgress", "green_quantity",barprocess, greenqt)
+
                     }
                 replaceTree(barprocess)
                 replacePhoto(barprocess)
             }else
                 Toast.makeText(activity, "Insufficient Green Pot!\n Earn more to PLAY!!!", Toast.LENGTH_SHORT).show()
+            var greenUpdate = hashMapOf<String, Any>(
+                "treeProgress" to barprocess,
+                "green_quantity" to greenqt
+            )
+            databaseReference.updateChildren(greenUpdate)
         }
 
         bindingTree.itemthreebutton.setOnClickListener{
+            //gold portion quantity
+            databaseReference.child("golden_quantity").get().addOnSuccessListener {
+                goldqt = it.value.toString().toInt()
+            }.addOnFailureListener {
+                Log.e("firebase", "Error getting data", it)
+            }
             if(goldqt>=1){
                 if(barprocess >= 20) {
                     Toast.makeText(activity, "Collect Tree Coin Now\n Green Pot Balance: " + greenqt, Toast.LENGTH_SHORT).show()
@@ -132,12 +155,16 @@ class Tree : Fragment() {
                     goldqt -= 1
                     barprocess += 4
                     Toast.makeText(activity, "Successfully spent 1 Gold Pot!\n Gold Pot Balance: "+ goldqt , Toast.LENGTH_SHORT).show()
-                    updateData("treeProgress", "golden_quantity",barprocess, goldqt)
                     }
                 replaceTree(barprocess)
                 replacePhoto(barprocess)
             }else
                 Toast.makeText(activity, "Insufficient Gold Pot!\n Earn more to PLAY!!!", Toast.LENGTH_SHORT).show()
+            var goldenUpdate = hashMapOf<String, Any>(
+                "treeProgress" to barprocess,
+                "golden_quantity" to goldqt
+            )
+            databaseReference.updateChildren(goldenUpdate)
         }
         bindingTree.collectBtn.setOnClickListener {
             barprocess = 0
@@ -152,20 +179,18 @@ class Tree : Fragment() {
                 "treeCoin" to treecoin
             )
             databaseReference.updateChildren(treeCoinUpdate)
+            //retrieve tree coin
+            databaseReference.child("treeCoin").get().addOnSuccessListener {
+                treecoin = it.value.toString().toInt()
+                bindingTree.textViewTreeCoin.text = it.value.toString()
+            }.addOnFailureListener {
+                Log.e("firebase", "Error getting data", it)
+            }
         }
 
         return bindingTree.root
 
     }
-
-    private fun updateData(string1: String, string2: String, barprocess: Number, quantity: Number){
-        var dataUpdate = hashMapOf<String, Any>(
-            string1 to barprocess,
-            string2 to quantity
-        )
-        databaseReference.updateChildren(dataUpdate)
-    }
-
     // to represent tree in different states
     private fun replaceTree(barprocess: Number){
         if (barprocess == 0)

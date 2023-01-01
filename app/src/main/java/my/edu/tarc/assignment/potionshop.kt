@@ -16,14 +16,15 @@ import my.edu.tarc.assignment.databinding.FragmentTreeBinding
 
 class potionshop : Fragment() {
     private lateinit var bindingPotion: FragmentPotionshopBinding
+    private lateinit var bindingTree: FragmentTreeBinding
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
+    var gamecoin = 0
     var sprayqtt = 0
     var greenqtt = 0
     var goldqtt = 0
     var username =""
     var treecoin = 0
-    var gamecoin = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,21 +36,20 @@ class potionshop : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         getSess()
-        bindingPotion = FragmentPotionshopBinding.inflate(inflater)
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference().child("user").child(username)
-
+        bindingPotion = FragmentPotionshopBinding.inflate(inflater)
         //retrieve game coin
         databaseReference.child("gameCoin").get().addOnSuccessListener {
             gamecoin = it.value.toString().toInt()
-//            bindingPotion.textViewGameCoin.text = gamecoin.toString()
+            bindingPotion.textViewGameCoin.text = it.value.toString()
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
         }
         //retrieve tree coin
         databaseReference.child("treeCoin").get().addOnSuccessListener {
             treecoin = it.value.toString().toInt()
-//            bindingPotion.textViewTreeCoin.text = treecoin.toString()
+            bindingPotion.textViewTreeCoin.text = it.value.toString()
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
         }
@@ -71,38 +71,64 @@ class potionshop : Fragment() {
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
         }
-
         //price
         bindingPotion.spraytagbutton.setOnClickListener{
             if (gamecoin>=500){
                 gamecoin -= 500
-//                bindingPotion.textViewGameCoin.text = gamecoin.toString()
                 sprayqtt += 1
-                updateData("gameCoin","spray_quantity",gamecoin, sprayqtt)
                 Toast.makeText(activity, "Successfully bought 1 Spray!\n Spray Balance: "+ sprayqtt , Toast.LENGTH_SHORT).show()
-            }else
+                }else
                 Toast.makeText(activity, "Insufficient GAME COIN!\n Spray Balance: " + sprayqtt, Toast.LENGTH_SHORT).show()
+            var sprayUpdate = hashMapOf<String, Any>(
+                "gameCoin" to gamecoin,
+                "spray_quantity" to sprayqtt
+            )
+            databaseReference.updateChildren(sprayUpdate)
+            databaseReference.child("gameCoin").get().addOnSuccessListener {
+                gamecoin = it.value.toString().toInt()
+                bindingPotion.textViewGameCoin.text = it.value.toString()
+            }.addOnFailureListener {
+                Log.e("firebase", "Error getting data", it)
+            }
         }
 
         bindingPotion.greentagbutton.setOnClickListener{
             if(gamecoin>=800) {
                 gamecoin -= 800
-//                bindingPotion.textViewGameCoin.text = gamecoin.toString()
                 greenqtt += 1
-                updateData("gameCoin","green_quantity",gamecoin, greenqtt)
                 Toast.makeText(activity, "Successfully bought 1 Green Pot!\n Green Pot Balance: "+ greenqtt , Toast.LENGTH_SHORT).show()
             }else
                 Toast.makeText(activity, "Insufficient GAME COIN!\n Green Pot Balance: " + greenqtt, Toast.LENGTH_SHORT).show()
+            var greenUpdate = hashMapOf<String, Any>(
+                "gameCoin" to gamecoin,
+                "green_quantity" to greenqtt
+            )
+            databaseReference.updateChildren(greenUpdate)
+            databaseReference.child("gameCoin").get().addOnSuccessListener {
+                gamecoin = it.value.toString().toInt()
+                bindingPotion.textViewGameCoin.text = it.value.toString()
+            }.addOnFailureListener {
+                Log.e("firebase", "Error getting data", it)
+            }
         }
         bindingPotion.goldtagbutton.setOnClickListener{
             if(gamecoin>=1500) {
                 gamecoin -= 1500
-//                bindingPotion.textViewGameCoin.text = gamecoin.toString()
                 goldqtt += 1
-                updateData("gameCoin","golden_quantity",gamecoin, goldqtt)
                 Toast.makeText(activity, "Successfully bought 1 Gold Pot!\n Gold Pot Balance: "+ goldqtt , Toast.LENGTH_SHORT).show()
             }else
                 Toast.makeText(activity, "Insufficient GAME COIN!\n Gold Pot Balance: " + goldqtt, Toast.LENGTH_SHORT).show()
+            var goldenUpdate = hashMapOf<String, Any>(
+                "gameCoin" to gamecoin,
+                "golden_quantity" to goldqtt
+            )
+            databaseReference.updateChildren(goldenUpdate)
+            databaseReference.child("gameCoin").get().addOnSuccessListener {
+                gamecoin = it.value.toString().toInt()
+                bindingPotion.textViewGameCoin.text = it.value.toString()
+            }.addOnFailureListener {
+                Log.e("firebase", "Error getting data", it)
+            }
         }
 
 
@@ -112,14 +138,6 @@ class potionshop : Fragment() {
         }
 
         return bindingPotion.root
-    }
-
-    private fun updateData(string1: String, string2: String, gamecoin: Number, quantity: Number){
-        var dataUpdate = hashMapOf<String, Any>(
-            string1 to gamecoin,
-            string2 to quantity
-        )
-        databaseReference.updateChildren(dataUpdate)
     }
 
     private fun replaceFragment(fragment : Fragment){
@@ -138,7 +156,6 @@ class potionshop : Fragment() {
         }else{
             Toast.makeText(activity, "failed to retrieve username", Toast.LENGTH_SHORT).show()
         }
-
     }
 
 
