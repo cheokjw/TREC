@@ -44,7 +44,7 @@ class Profile : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         getSess()
         displayinfo()
-        flexlayout()
+        //flexlayout()
         bindingProfile.cvAvatar.setOnClickListener(this)
         bindingProfile.buttonEditInfo.setOnClickListener(this)
         bindingProfile.buttonLogout.setOnClickListener(this)
@@ -105,7 +105,7 @@ class Profile : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun flexlayout() {
+    /*private fun flexlayout() {
         val regdate =  bindingProfile.textViewRegDate.layoutParams as ViewGroup.MarginLayoutParams
         if (bindingProfile.textViewAddress.lineCount == 3) {
             regdate.topMargin = 5
@@ -117,7 +117,7 @@ class Profile : Fragment(), View.OnClickListener {
             Toast.makeText(activity,msg,Toast.LENGTH_SHORT).show()
         }
         bindingProfile.textViewRegDate.layoutParams = regdate
-    }
+    }*/
 
 
 
