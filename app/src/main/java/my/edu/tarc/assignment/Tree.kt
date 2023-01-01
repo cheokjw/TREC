@@ -21,9 +21,9 @@ class Tree : Fragment() {
     // var below need to store database
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
-    var sprayqt = 5
-    var greenqt = 5
-    var goldqt = 5
+    var sprayqt = 0
+    var greenqt = 0
+    var goldqt = 0
     var barprocess = 0
     var username =""
     var treecoin = 0
@@ -45,12 +45,12 @@ class Tree : Fragment() {
         //retrieve game coin
         databaseReference.child("gameCoin").get().addOnSuccessListener {
             gamecoin = it.value.toString().toInt()
+
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
         }
         //retrieve tree coin
         databaseReference.child("treeCoin").get().addOnSuccessListener {
-            bindingTree.sprayqt.text = it.value.toString()
             treecoin = it.value.toString().toInt()
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
@@ -99,7 +99,7 @@ class Tree : Fragment() {
                     sprayqt -= 1
                     barprocess += 1
                     Toast.makeText(activity, "Successfully spent 1 Spray!\n Spray Balance: "+ sprayqt , Toast.LENGTH_SHORT).show()
-
+                    updateData("treeProgress", "spray_quantity",barprocess, sprayqt)
                     }
                 replaceTree(barprocess)
                 replacePhoto(barprocess)
@@ -116,7 +116,7 @@ class Tree : Fragment() {
                     greenqt -= 1
                     barprocess += 2
                     Toast.makeText(activity, "Successfully spent 1 Green Pot!\n Green Pot Balance: "+ greenqt , Toast.LENGTH_SHORT).show()
-
+                    updateData("treeProgress", "green_quantity",barprocess, greenqt)
                     }
                 replaceTree(barprocess)
                 replacePhoto(barprocess)
@@ -132,6 +132,7 @@ class Tree : Fragment() {
                     goldqt -= 1
                     barprocess += 4
                     Toast.makeText(activity, "Successfully spent 1 Gold Pot!\n Gold Pot Balance: "+ goldqt , Toast.LENGTH_SHORT).show()
+                    updateData("treeProgress", "golden_quantity",barprocess, goldqt)
                     }
                 replaceTree(barprocess)
                 replacePhoto(barprocess)
@@ -156,6 +157,15 @@ class Tree : Fragment() {
         return bindingTree.root
 
     }
+
+    private fun updateData(string1: String, string2: String, barprocess: Number, quantity: Number){
+        var dataUpdate = hashMapOf<String, Any>(
+            string1 to barprocess,
+            string2 to quantity
+        )
+        databaseReference.updateChildren(dataUpdate)
+    }
+
     // to represent tree in different states
     private fun replaceTree(barprocess: Number){
         if (barprocess == 0)
