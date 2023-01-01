@@ -271,4 +271,48 @@
         app:layout_constraintStart_toEndOf="@+id/textView22"
         app:layout_constraintTop_toTopOf="@+id/textView22" />
 
+    <ImageView
+        android:id="@+id/imageViewTreeCoin"
+        android:layout_width="290dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="-25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/treecoin" />
+
+    <ImageView
+        android:id="@+id/imageViewGamecoin"
+        android:layout_width="290dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="-25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gamecoin" />
+
+    <TextView
+        android:id="@+id/textViewGameCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-25dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewGamecoin"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewGamecoin"
+        app:layout_constraintStart_toStartOf="@+id/imageViewGamecoin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTreeCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewTreeCoin"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewTreeCoin"
+        app:layout_constraintStart_toStartOf="@+id/imageViewTreeCoin"
+        app:layout_constraintTop_toTopOf="@+id/imageViewTreeCoin" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,7 +33,8 @@ class CheckIn : Fragment() {
     var gameCoin = 0
     val handler = android.os.Handler()
     private var checkin = 0
-
+    var treecoin = 0
+    var username = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +46,24 @@ class CheckIn : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         bindingCheckIn = FragmentCheckInBinding.inflate(inflater)
+        getSess()
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database.getReference().child("user").child(username)
+        //retrieve game coin
+        databaseReference.child("gameCoin").get().addOnSuccessListener {
+            gameCoin = it.value.toString().toInt()
+            bindingCheckIn.textViewGameCoin.text = it.value.toString()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
+
+        //retrieve tree coin
+        databaseReference.child("treeCoin").get().addOnSuccessListener {
+            treecoin = it.value.toString().toInt()
+            bindingCheckIn.textViewTreeCoin.text = it.value.toString()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
         return bindingCheckIn.root
     }
 
@@ -274,6 +293,15 @@ class CheckIn : Fragment() {
         // in this case its the frameLayout in activity_main.xml
         fragmentTransaction?.replace(R.id.frameLayout, fragment)
         fragmentTransaction?.commit()
+    }
+    private fun getSess(){
+        val preferences = requireContext().getSharedPreferences("sess_store", Context.MODE_PRIVATE)
+        val sess_username = preferences.getString("username", "")
+        if (sess_username != ""){
+            username = sess_username.toString()
+        }else{
+            Toast.makeText(activity, "failed to retrieve username", Toast.LENGTH_SHORT).show()
+        }
     }
 
 

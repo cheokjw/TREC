@@ -90,6 +90,16 @@ class Profile : Fragment(), View.OnClickListener {
         databaseReference.child(username).child("address").get().addOnSuccessListener {
             val address = it.getValue(String::class.java)
             bindingProfile.textViewAddress.text = address}
+        //get treecoin
+        databaseReference.child(username).child("treeCoin").get().addOnSuccessListener {
+            val treecoin = it.value.toString().toInt()
+            bindingProfile.textViewTreeCoin.text = treecoin.toString()
+        }
+        //get gamecoin
+        databaseReference.child(username).child("gameCoin").get().addOnSuccessListener {
+            val gamecoin = it.value.toString().toInt()
+            bindingProfile.textViewGameCoin.text = gamecoin.toString()
+        }
         //get image
             //bindingProfile.imageViewAvatar.setImageURI(it.child("img").toString())
     }
