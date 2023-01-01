@@ -44,7 +44,6 @@ class Profile : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         getSess()
         displayinfo()
-        //flexlayout()
         bindingProfile.cvAvatar.setOnClickListener(this)
         bindingProfile.buttonEditInfo.setOnClickListener(this)
         bindingProfile.buttonLogout.setOnClickListener(this)
@@ -105,19 +104,12 @@ class Profile : Fragment(), View.OnClickListener {
         }
     }
 
-    /*private fun flexlayout() {
-        val regdate =  bindingProfile.textViewRegDate.layoutParams as ViewGroup.MarginLayoutParams
-        if (bindingProfile.textViewAddress.lineCount == 3) {
-            regdate.topMargin = 5
-        } else if (bindingProfile.textViewAddress.lineCount == 2) {
-            regdate.topMargin = 10
-        } else{
-            val linecount = bindingProfile.textViewAddress.lineCount
-            val msg = String.format("Err detect,%s",linecount)
-            Toast.makeText(activity,msg,Toast.LENGTH_SHORT).show()
-        }
-        bindingProfile.textViewRegDate.layoutParams = regdate
-    }*/
+
+    //used at Avatar.kt & editprofile.kt
+    fun refresh() {
+        val profile = activity as MainActivity
+        profile.replaceFragment(Profile())
+    }
 
 
 

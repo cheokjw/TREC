@@ -31,16 +31,26 @@ class EditProfile : DialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val profile = Profile()
         super.onViewCreated(view, savedInstanceState)
         getSess()
         displayinfo()
         bindingeditinfo.buttonEdit.setOnClickListener{
             updateInfo()
+            Toast.makeText(activity,"User info updated!",Toast.LENGTH_SHORT).show()
+            dismiss()
+            profile.refresh()
         }
         bindingeditinfo.buttonCancel.setOnClickListener{
             dismiss()
         }
     }
+
+
+    private fun displayinfo(){
+        getData(username)
+    }
+
 
     private fun getSess(){
         val preferences = requireContext().getSharedPreferences("sess_store", Context.MODE_PRIVATE)
@@ -51,11 +61,6 @@ class EditProfile : DialogFragment() {
             Toast.makeText(activity,"failed to retrieve username", Toast.LENGTH_SHORT).show()
         }
     }
-
-    private fun displayinfo(){
-        getData(username)
-    }
-
 
     private fun getData(username: String) {
         //get fullname
@@ -86,9 +91,7 @@ class EditProfile : DialogFragment() {
         update["email"] = email
         update["phone"] = phone
         update["address"] = address
-        update
         databaseReference.child(username).updateChildren(update)
     }
-
 
 }

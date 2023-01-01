@@ -1,6 +1,7 @@
 package my.edu.tarc.assignment
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.*
@@ -9,13 +10,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.alpha
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.DialogFragment
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import my.edu.tarc.assignment.databinding.FragmentAvatarBinding
 
 class Avatar : DialogFragment() {
 
+    lateinit var database: FirebaseDatabase
+    lateinit var databaseReference: DatabaseReference
     private lateinit var bindingAvatar: FragmentAvatarBinding
-
-
+    var num = ""
+    var username = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,74 +34,104 @@ class Avatar : DialogFragment() {
     @SuppressLint("ClickableViewAccessibility", "ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database.getReference().child("user")
+        getSess()
+        getAvatar()
 
         //select avatar function
         bindingAvatar.imageViewAvatar1.setOnClickListener {
-            bindingAvatar.imageViewAvatar1.alpha = 1F
-            bindingAvatar.imageViewAvatar2.alpha = 0.5F
-            bindingAvatar.imageViewAvatar3.alpha = 0.5F
-            bindingAvatar.imageViewAvatar4.alpha = 0.5F
-            bindingAvatar.imageViewAvatar5.alpha = 0.5F
-            bindingAvatar.imageViewAvatar6.alpha = 0.5F
+            imageAlpha(1)
+            num = "1"
         }
 
         bindingAvatar.imageViewAvatar2.setOnClickListener {
-            bindingAvatar.imageViewAvatar1.alpha = 0.5F
-            bindingAvatar.imageViewAvatar2.alpha = 1F
-            bindingAvatar.imageViewAvatar3.alpha = 0.5F
-            bindingAvatar.imageViewAvatar4.alpha = 0.5F
-            bindingAvatar.imageViewAvatar5.alpha = 0.5F
-            bindingAvatar.imageViewAvatar6.alpha = 0.5F
+            imageAlpha(2)
+            num = "2"
         }
 
         bindingAvatar.imageViewAvatar3.setOnClickListener {
-            bindingAvatar.imageViewAvatar1.alpha = 0.5F
-            bindingAvatar.imageViewAvatar2.alpha = 0.5F
-            bindingAvatar.imageViewAvatar3.alpha = 1F
-            bindingAvatar.imageViewAvatar4.alpha = 0.5F
-            bindingAvatar.imageViewAvatar5.alpha = 0.5F
-            bindingAvatar.imageViewAvatar6.alpha = 0.5F
+            imageAlpha(3)
+            num = "3"
         }
 
         bindingAvatar.imageViewAvatar4.setOnClickListener {
-            bindingAvatar.imageViewAvatar1.alpha = 0.5F
-            bindingAvatar.imageViewAvatar2.alpha = 0.5F
-            bindingAvatar.imageViewAvatar3.alpha = 0.5F
-            bindingAvatar.imageViewAvatar4.alpha = 1F
-            bindingAvatar.imageViewAvatar5.alpha = 0.5F
-            bindingAvatar.imageViewAvatar6.alpha = 0.5F
+            imageAlpha(4)
+            num = "4"
         }
 
         bindingAvatar.imageViewAvatar5.setOnClickListener {
-            bindingAvatar.imageViewAvatar1.alpha = 0.5F
-            bindingAvatar.imageViewAvatar2.alpha = 0.5F
-            bindingAvatar.imageViewAvatar3.alpha = 0.5F
-            bindingAvatar.imageViewAvatar4.alpha = 0.5F
-            bindingAvatar.imageViewAvatar5.alpha = 1F
-            bindingAvatar.imageViewAvatar6.alpha = 0.5F
+            imageAlpha(5)
+            num = "5"
         }
 
         bindingAvatar.imageViewAvatar6.setOnClickListener {
-            bindingAvatar.imageViewAvatar1.alpha = 0.5F
-            bindingAvatar.imageViewAvatar2.alpha = 0.5F
-            bindingAvatar.imageViewAvatar3.alpha = 0.5F
-            bindingAvatar.imageViewAvatar4.alpha = 0.5F
-            bindingAvatar.imageViewAvatar5.alpha = 0.5F
-            bindingAvatar.imageViewAvatar6.alpha = 1F
+            imageAlpha(6)
+            num = "6"
         }
 
-
-
         bindingAvatar.buttonSelectAvatar.setOnClickListener{
+            val profile = Profile()
             Toast.makeText(activity, "Avatar Changed", Toast.LENGTH_SHORT).show()
             dismiss()
+            profile.refresh()
         }
 
         bindingAvatar.imageButtonQuit.setOnClickListener {
             dismiss()
         }
+    }
+
+    //set image alpha
+    private fun imageAlpha(n: Int){
+        bindingAvatar.imageViewAvatar1.alpha = 0.5F
+        bindingAvatar.imageViewAvatar2.alpha = 0.5F
+        bindingAvatar.imageViewAvatar3.alpha = 0.5F
+        bindingAvatar.imageViewAvatar4.alpha = 0.5F
+        bindingAvatar.imageViewAvatar5.alpha = 0.5F
+        bindingAvatar.imageViewAvatar6.alpha = 0.5F
+        when (n){
+            1 -> bindingAvatar.imageViewAvatar1.alpha = 1F
+            2 -> bindingAvatar.imageViewAvatar2.alpha = 1F
+            3 -> bindingAvatar.imageViewAvatar3.alpha = 1F
+            4 -> bindingAvatar.imageViewAvatar4.alpha = 1F
+            5 -> bindingAvatar.imageViewAvatar5.alpha = 1F
+            6 -> bindingAvatar.imageViewAvatar6.alpha = 1F
+        }
+    }
+
+    private fun getSess(){
+        val preferences = requireContext().getSharedPreferences("sess_store", Context.MODE_PRIVATE)
+        val sess_username = preferences.getString("username", "")
+        if (sess_username != ""){
+            username = sess_username.toString()
+        } else {
+            Toast.makeText(activity,"failed to retrieve username", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    //update image to firebase
+    private fun updateAvatar(){
 
     }
+
+    private fun getAvatar() {
+        //get fullname
+        databaseReference.child(username).child("imgProfile").get().addOnSuccessListener {
+            val number = it.getValue(String::class.java)!!.toInt()
+            if (number == null){
+                Toast.makeText(activity,"Err, no avatar found",Toast.LENGTH_SHORT).show()
+            }else if(number == 0) {
+                Toast.makeText(activity,"No avatar saved",Toast.LENGTH_SHORT).show()
+            }else{
+                imageAlpha(number)
+            }
+        }
+    }
+
+
+
 
 
 }

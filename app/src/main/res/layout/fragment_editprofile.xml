@@ -88,7 +88,6 @@
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView33"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toTopOf="@+id/textView33"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -102,7 +101,6 @@
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView30"
                 app:layout_constraintStart_toEndOf="@+id/textView30"
                 app:layout_constraintTop_toTopOf="@+id/textView30"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -116,7 +114,6 @@
                 android:inputType="phone"
                 android:minHeight="48dp"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView31"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toTopOf="@+id/textView31"
                 tools:ignore="SpeakableTextPresentCheck" />

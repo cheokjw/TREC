@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
 
     // Allowing fragment to replace the main Body
-    private fun replaceFragment(fragment : Fragment) {
+    fun replaceFragment(fragment : Fragment) {
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
