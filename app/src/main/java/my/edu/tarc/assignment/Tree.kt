@@ -281,7 +281,6 @@ class Tree : Fragment() {
         }else{
             Toast.makeText(activity, "failed to retrieve username", Toast.LENGTH_SHORT).show()
         }
-
     }
 
 
