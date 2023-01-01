@@ -119,7 +119,7 @@ class Avatar : DialogFragment() {
     private fun getAvatar() {
         //get fullname
         databaseReference.child(username).child("imgProfile").get().addOnSuccessListener {
-            val number = it.getValue(String::class.java)!!.toInt()
+            val number = it.value.toString().toInt()
             if (number == null){
                 Toast.makeText(activity,"Err, no avatar found",Toast.LENGTH_SHORT).show()
             }else if(number == 0) {
