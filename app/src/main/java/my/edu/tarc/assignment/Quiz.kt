@@ -99,12 +99,12 @@ class Quiz : Fragment(), View.OnClickListener {
 
                             if (it.exists()) {
 
-                                var dbGameCoin = it.child(sessionUser).child("gameCoin").value
+                                var dbGameCoin = it.child("gameCoin").value.toString().toInt()
 
                                 var gameCoin = if (dbGameCoin == null){
                                     0
                                 }else {
-                                    dbGameCoin as Int
+                                    dbGameCoin
                                 }
 
                                 gameCoin += 5
@@ -121,6 +121,12 @@ class Quiz : Fragment(), View.OnClickListener {
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
                         Log.i("End", mCorrectPercentage.toString())
+
+                        databaseReference.child(sessionUser).get().addOnSuccessListener {
+                            if (it.exists()) {
+                                databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                            }
+                        }
                     }
                 }else {
                     Log.i("Test","else triggered")
@@ -141,6 +147,27 @@ class Quiz : Fragment(), View.OnClickListener {
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
                         Log.i("End", mCorrectPercentage.toString())
+
+                        databaseReference.child(sessionUser).get().addOnSuccessListener {
+
+                            if (it.exists()) {
+
+                                var dbGameCoin = it.child("gameCoin").value.toString().toInt()
+
+                                var gameCoin = if (dbGameCoin == null){
+                                    0
+                                }else {
+                                    dbGameCoin
+                                }
+
+                                gameCoin += 5
+
+                                databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                                databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
+                            }
+
+                        }
+
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
                         mediaPlayer?.start()
@@ -148,6 +175,11 @@ class Quiz : Fragment(), View.OnClickListener {
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
                         Log.i("End", mCorrectPercentage.toString())
+                        databaseReference.child(sessionUser).get().addOnSuccessListener {
+                            if (it.exists()) {
+                                databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                            }
+                        }
                     }
                 }else {
                     Log.i("Test","else triggered")
@@ -168,6 +200,27 @@ class Quiz : Fragment(), View.OnClickListener {
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
                         Log.i("End", mCorrectPercentage.toString())
+
+                        databaseReference.child(sessionUser).get().addOnSuccessListener {
+
+                            if (it.exists()) {
+
+                                var dbGameCoin = it.child("gameCoin").value.toString().toInt()
+
+                                var gameCoin = if (dbGameCoin == null){
+                                    0
+                                }else {
+                                    dbGameCoin
+                                }
+
+                                gameCoin += 5
+
+                                databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                                databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
+                            }
+
+                        }
+
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
                         mediaPlayer?.start()
@@ -175,6 +228,11 @@ class Quiz : Fragment(), View.OnClickListener {
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
                         Log.i("End", mCorrectPercentage.toString())
+                        databaseReference.child(sessionUser).get().addOnSuccessListener {
+                            if (it.exists()) {
+                                databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                            }
+                        }
                     }
                 }else {
                     Log.i("Test","else triggered")
@@ -194,6 +252,27 @@ class Quiz : Fragment(), View.OnClickListener {
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
                         Log.i("End", mCorrectPercentage.toString())
+
+                        databaseReference.child(sessionUser).get().addOnSuccessListener {
+
+                            if (it.exists()) {
+
+                                var dbGameCoin = it.child("gameCoin").value.toString().toInt()
+
+                                var gameCoin = if (dbGameCoin == null){
+                                    0
+                                }else {
+                                    dbGameCoin
+                                }
+
+                                gameCoin += 5
+
+                                databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                                databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
+                            }
+
+                        }
+
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
                         mediaPlayer?.start()
@@ -201,6 +280,11 @@ class Quiz : Fragment(), View.OnClickListener {
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
                         Log.i("End", mCorrectPercentage.toString())
+                        databaseReference.child(sessionUser).get().addOnSuccessListener {
+                            if (it.exists()) {
+                                databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                            }
+                        }
                     }
                 }else {
                     Log.i("Test","else triggered")
