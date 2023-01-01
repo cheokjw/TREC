@@ -10,11 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import my.edu.tarc.assignment.databinding.FragmentQuizBinding
 
 
 class Quiz : Fragment(), View.OnClickListener {
 
+
+    private lateinit var database: FirebaseDatabase
+    private lateinit var databaseReference: DatabaseReference
     private var mediaPlayer: MediaPlayer? = null
     private lateinit var bindingQuiz : FragmentQuizBinding
     private var mCurrentPosition:Int = 1
@@ -23,7 +28,6 @@ class Quiz : Fragment(), View.OnClickListener {
     private var mCorrectTotal: Int = 0
     private var mCorrectPercentage: Double = 0.0
     // TODO: Change to Gamecoin from database
-    private var mGameCoinEarned: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,18 +46,17 @@ class Quiz : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         val activity: FragmentActivity? = activity
 
-
-        mQuestionsList = Constants.getQuestions()
-        setQuestions()
-        bindingQuiz.btnAnswer1.setOnClickListener(this)
-        bindingQuiz.btnAnswer2.setOnClickListener(this)
-        bindingQuiz.btnAnswer3.setOnClickListener(this)
-        bindingQuiz.btnAnswer4.setOnClickListener(this)
+            mQuestionsList = Constants.getQuestions()
+            setQuestions()
+            bindingQuiz.btnAnswer1.setOnClickListener(this)
+            bindingQuiz.btnAnswer2.setOnClickListener(this)
+            bindingQuiz.btnAnswer3.setOnClickListener(this)
+            bindingQuiz.btnAnswer4.setOnClickListener(this)
 
     }
 
 
-    private fun setQuestions() {
+    fun setQuestions() {
         val question: Question = mQuestionsList!!.get(mCurrentPosition - 1)
 
         // Modifying the UI to show questions
@@ -72,8 +75,12 @@ class Quiz : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View) {
         val answer = mQuestionsList!!.get(mCurrentPosition - 1).correctAns
-        when(v.id) {
+        val mainActivity: MainActivity = getActivity() as MainActivity
+        val sessionUser = mainActivity.getSessionUser()
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database.getReference("user")
 
+        when(v.id) {
             // First Answer
             R.id.btnAnswer1 -> {
                 mSelectedOption = 1
@@ -86,8 +93,27 @@ class Quiz : Fragment(), View.OnClickListener {
                         mCorrectTotal++
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
-                        mGameCoinEarned += 5
                         Log.i("End", mCorrectPercentage.toString())
+
+                        databaseReference.child(sessionUser).get().addOnSuccessListener {
+
+                            if (it.exists()) {
+
+                                var dbGameCoin = it.child(sessionUser).child("gameCoin").value
+
+                                var gameCoin = if (dbGameCoin == null){
+                                    0
+                                }else {
+                                    dbGameCoin as Int
+                                }
+
+                                gameCoin += 5
+
+                                databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                                databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
+                            }
+
+                        }
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
                         mediaPlayer?.start()
@@ -114,7 +140,6 @@ class Quiz : Fragment(), View.OnClickListener {
                         mCorrectTotal++
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
-                        mGameCoinEarned += 5
                         Log.i("End", mCorrectPercentage.toString())
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
@@ -142,7 +167,6 @@ class Quiz : Fragment(), View.OnClickListener {
                         mCorrectTotal++
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
-                        mGameCoinEarned += 5
                         Log.i("End", mCorrectPercentage.toString())
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
@@ -169,7 +193,6 @@ class Quiz : Fragment(), View.OnClickListener {
                         mCorrectTotal++
                         setQuestions()
                         mCorrectPercentage = mCorrectTotal.toDouble() / mCurrentPosition
-                        mGameCoinEarned += 5
                         Log.i("End", mCorrectPercentage.toString())
                     }else {
                         mediaPlayer = MediaPlayer.create(activity, R.raw.wrong)
@@ -188,3 +211,6 @@ class Quiz : Fragment(), View.OnClickListener {
     }
 
 }
+
+
+

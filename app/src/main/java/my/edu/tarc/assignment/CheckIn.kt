@@ -74,13 +74,20 @@ class CheckIn : Fragment() {
 
                 if (it.exists()){
 
-                    var dbCheckIn = it.child(sessionUser).child("checkin").value
+<<<<<<< HEAD
+                    var dbCheckIn = it.child("checkin").value.toString().toInt()
+                    var dbGameCoin = it.child("gameCoin").value.toString().toInt()
+                    Log.i("SessionValue", dbCheckIn.toString())
+=======
+                    var dbCheckIn = it.child(sessionUser).child("checkin").value.toString().toInt()
                     var dbGameCoin = it.child(sessionUser).child("gameCoin").value
+>>>>>>> c250e49ace8f9d9f7f0110e8f4ca35dea5e5f150
                     var checkin : Int
 
                     checkin = if (dbCheckIn == null){
                         0
-                    }else {
+                    }
+                    else {
                         dbCheckIn as Int
                     }
 
@@ -101,28 +108,37 @@ class CheckIn : Fragment() {
                                 counter++
                                 checkin++
 
-                                databaseReference.child(sessionUser).child("checkin").setValue(checkin)
-                                databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
+                                var coinUpdate = hashMapOf<String, Any>(
+                                    "gameCoin" to gameCoin,
+                                    "checkin" to checkin
+                                )
+
+                                databaseReference.child(sessionUser).updateChildren(coinUpdate)
                             }
                             1 -> {
                                 //Day 2 CheckIn
                                 //If Statement to Prevent User from checking in twice
                                 bindingCheckIn.progressBarCheckIn.progress = (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
                                 bindingCheckIn.imageViewDay2.setImageResource((R.drawable.checked_in_progress))
-                                gameCoin += 5
+                                gameCoin += 10
                                 Toast.makeText(activity, "5 Coins Added!$gameCoin", Toast.LENGTH_SHORT)
                                     .show()
                                 counter++
-                                checkin++
-                                databaseReference.child(sessionUser).child("checkin").setValue(checkin)
-                                databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
+                                checkin+=2
+
+                                var coinUpdate = hashMapOf<String, Any>(
+                                    "gameCoin" to gameCoin,
+                                    "checkin" to checkin
+                                )
+
+                                databaseReference.child(sessionUser).updateChildren(coinUpdate)
 
                             }
                             2 -> {
                                 //Day 3 CheckIn
                                 bindingCheckIn.progressBarCheckIn.progress = (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
                                 bindingCheckIn.imageViewDay2.setImageResource((R.drawable.checked_in_progress))
-                                gameCoin += 5
+                                gameCoin += 15
                                 Toast.makeText(activity, "5 Coins Added!$gameCoin", Toast.LENGTH_SHORT)
                                     .show()
                                 counter++
