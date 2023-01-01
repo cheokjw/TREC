@@ -2,6 +2,7 @@ package my.edu.tarc.assignment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,8 +30,8 @@ class Tree : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        database = FirebaseDatabase.getInstance()
         getSess()
+        database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference().child("user").child(username)
     }
 
@@ -38,7 +39,26 @@ class Tree : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         bindingTree = FragmentTreeBinding.inflate(inflater)
+        //retrieve game coin
+        databaseReference.child("gameCoin").get().addOnSuccessListener {
+            bindingTree.sprayqt.text = it.value.toString()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
+        //retrieve tree coin
+        databaseReference.child("treeCoin").get().addOnSuccessListener {
+//            bindingTree.sprayqt.text = it.value.toString()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
+        //retrieve tree progress
+        databaseReference.child("gameCoin").get().addOnSuccessListener {
+//            bindingTree.sprayqt.text = it.value.toString()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
 
 
         bindingTree.potionShopButton.setOnClickListener {

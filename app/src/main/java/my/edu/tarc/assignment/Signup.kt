@@ -49,7 +49,7 @@ class Signup : Fragment() {
                 if(pass == repass){
 
                     var idSign = databaseReference.push().key
-                    var regis = Signup_regis(username, fullName, phone, address, email, pass, idSign!!, treeCoin = 0, gameCoin = 0, checkin = 0)
+                    var regis = Signup_regis(username, fullName, phone, address, email, pass, idSign!!, treeCoin = 0, gameCoin = 0, checkin = 0, treeProgress = 0)
 
                     //Here Data Inserted
                     databaseReference.child(username).setValue(regis)
@@ -59,8 +59,6 @@ class Signup : Fragment() {
 
            returnlogin()
         }
-
-
 
 
         return bindingSignup.root
