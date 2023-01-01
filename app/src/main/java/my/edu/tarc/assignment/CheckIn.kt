@@ -326,7 +326,7 @@ class CheckIn : Fragment() {
         //Nav to History Page
         bindingCheckIn.buttonRewards.setOnClickListener {
 
-            replaceFragment(Signup())
+            replaceFragment(RewardsHistory())
         }
     }
     private fun saved(checkin: Int){
