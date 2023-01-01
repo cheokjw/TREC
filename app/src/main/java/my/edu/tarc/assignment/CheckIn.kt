@@ -32,26 +32,26 @@ class CheckIn : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getSess()
-        database = FirebaseDatabase.getInstance()
-        databaseReference = database.getReference().child("user").child(username)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         bindingCheckIn = FragmentCheckInBinding.inflate(inflater)
+
         return bindingCheckIn.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val activity: FragmentActivity? = activity
+        val activity: FragmentActivity?= activity
 
-        //Retrieve Tree Coin
-//        getSess()
-//        retrieveGameCoin()
+        getSess()
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database.getReference().child("user").child(username)
+
 
         //Starting Point of the Check In Bar
         bindingCheckIn.progressBarCheckIn.progress = 0
@@ -64,111 +64,110 @@ class CheckIn : Fragment() {
         bindingCheckIn.buttonCheckIn.setOnClickListener {
             bindingCheckIn.notCheckedInStatus.setImageResource(R.drawable.checkedin)
 
+            if(checkInCount<1) {
+                when (counter) {
+                    0 -> {
+                        //Day 1 CheckIn
+                        bindingCheckIn.progressBarCheckIn.progress = 0
+                        bindingCheckIn.imageViewDay1.setImageResource((R.drawable.checked_in_progress))
+                        coinBalance += 5
+                        Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
+                            .show()
+                        counter++
+                        checkInCount++
+                        var coinBalanceUpdate = hashMapOf<String, Any>(
+                            "gameCoin" to coinBalance
+                        )
+                        databaseReference.updateChildren(coinBalanceUpdate)
+                    }
+                    1 -> {
+                        //Day 2 CheckIn
+                        //If Statement to Prevent User from checking in twice
+                        bindingCheckIn.progressBarCheckIn.progress =
+                            (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
+                        bindingCheckIn.imageViewDay2.setImageResource((R.drawable.checked_in_progress))
+                        coinBalance += 5
+                        Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
+                            .show()
+                        counter++
+                        checkInCount++
 
+                    }
+                    2 -> {
+                        //Day 3 CheckIn
+                        bindingCheckIn.progressBarCheckIn.progress =
+                            (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
+                        bindingCheckIn.imageViewDay3.setImageResource((R.drawable.checked_in_progress))
+                        coinBalance += 5
+                        Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
+                            .show()
+                        counter++
+                    }
+                    3 -> {
+                        //Day 4 CheckIn
+                        bindingCheckIn.progressBarCheckIn.progress =
+                            (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
+                        bindingCheckIn.imageViewDay4.setImageResource((R.drawable.checked_in_progress))
+                        coinBalance += 5
+                        Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
+                            .show()
+                        counter++
+                    }
+                    4 -> {
+                        //Day 5 CheckIn
+                        bindingCheckIn.progressBarCheckIn.progress =
+                            (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
+                        bindingCheckIn.imageViewDay5.setImageResource((R.drawable.checked_in_progress))
+                        coinBalance += 5
+                        Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
+                            .show()
+                        counter++
+                    }
+                    5 -> {
+                        //Day 6 CheckIn
+                        bindingCheckIn.progressBarCheckIn.progress =
+                            (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
+                        bindingCheckIn.imageViewDay6.setImageResource((R.drawable.checked_in_progress))
+                        coinBalance += 5
+                        Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
+                            .show()
+                        counter++
+                    }
+                    6 -> {
+                        //Day 7 CheckIn
+                        bindingCheckIn.progressBarCheckIn.progress = 100
+                        bindingCheckIn.imageViewDay7.setImageResource((R.drawable.checked_in_progress))
+                        coinBalance += 25
+                        Toast.makeText(activity, "25 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
+                            .show()
+                        counter = 0
 
-        if(checkInCount<1) {
-            when (counter) {
-                0 -> {
-                    //Day 1 CheckIn
-                    bindingCheckIn.progressBarCheckIn.progress = 0
-                    bindingCheckIn.imageViewDay1.setImageResource((R.drawable.checked_in_progress))
-                    coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
-                        .show()
-                    counter++
-                    checkInCount++
-                    getSess()
-                    getData2(user)
-                    updateGameCoin()
+                        //Show Pop To Notify User
+                        builder = AlertDialog.Builder(activity!!)
+                        builder.setTitle("Congratulations!")
+                            .setMessage("You have checked in for 7 days")
+                            .setCancelable(true)
+                            .setPositiveButton("Ok") { dialogInterface, it ->
+                                bindingCheckIn.progressBarCheckIn.progress = 0
+                                bindingCheckIn.imageViewDay1.setImageResource((R.drawable.check_in_progress))
+                                bindingCheckIn.imageViewDay2.setImageResource((R.drawable.check_in_progress))
+                                bindingCheckIn.imageViewDay3.setImageResource((R.drawable.check_in_progress))
+                                bindingCheckIn.imageViewDay4.setImageResource((R.drawable.check_in_progress))
+                                bindingCheckIn.imageViewDay5.setImageResource((R.drawable.check_in_progress))
+                                bindingCheckIn.imageViewDay6.setImageResource((R.drawable.check_in_progress))
+                                bindingCheckIn.imageViewDay7.setImageResource((R.drawable.check_in_progress))
+                                dialogInterface.cancel()
+                            }
+                            .show()
+                    }
                 }
-                1 -> {
-                    //Day 2 CheckIn
-                    //If Statement to Prevent User from checking in twice
-                    bindingCheckIn.progressBarCheckIn.progress =
-                        (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
-                    bindingCheckIn.imageViewDay2.setImageResource((R.drawable.checked_in_progress))
-                    coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
-                        .show()
-                    counter++
-                    checkInCount++
-
-                }
-                2 -> {
-                    //Day 3 CheckIn
-                    bindingCheckIn.progressBarCheckIn.progress =
-                        (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
-                    bindingCheckIn.imageViewDay3.setImageResource((R.drawable.checked_in_progress))
-                    coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
-                        .show()
-                    counter++
-                }
-                3 -> {
-                    //Day 4 CheckIn
-                    bindingCheckIn.progressBarCheckIn.progress =
-                        (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
-                    bindingCheckIn.imageViewDay4.setImageResource((R.drawable.checked_in_progress))
-                    coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
-                        .show()
-                    counter++
-                }
-                4 -> {
-                    //Day 5 CheckIn
-                    bindingCheckIn.progressBarCheckIn.progress =
-                        (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
-                    bindingCheckIn.imageViewDay5.setImageResource((R.drawable.checked_in_progress))
-                    coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
-                        .show()
-                    counter++
-                }
-                5 -> {
-                    //Day 6 CheckIn
-                    bindingCheckIn.progressBarCheckIn.progress =
-                        (bindingCheckIn.progressBarCheckIn.progress + 15) % 100
-                    bindingCheckIn.imageViewDay6.setImageResource((R.drawable.checked_in_progress))
-                    coinBalance += 5
-                    Toast.makeText(activity, "5 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
-                        .show()
-                    counter++
-                }
-                6 -> {
-                    //Day 7 CheckIn
-                    bindingCheckIn.progressBarCheckIn.progress = 100
-                    bindingCheckIn.imageViewDay7.setImageResource((R.drawable.checked_in_progress))
-                    coinBalance += 25
-                    Toast.makeText(activity, "25 Coins Added!$coinBalance", Toast.LENGTH_SHORT)
-                        .show()
-                    counter = 0
-
-                    //Show Pop To Notify User
-                    builder = AlertDialog.Builder(activity!!)
-                    builder.setTitle("Congratulations!")
-                        .setMessage("You have checked in for 7 days")
-                        .setCancelable(true)
-                        .setPositiveButton("Ok") { dialogInterface, it ->
-                            bindingCheckIn.progressBarCheckIn.progress = 0
-                            bindingCheckIn.imageViewDay1.setImageResource((R.drawable.check_in_progress))
-                            bindingCheckIn.imageViewDay2.setImageResource((R.drawable.check_in_progress))
-                            bindingCheckIn.imageViewDay3.setImageResource((R.drawable.check_in_progress))
-                            bindingCheckIn.imageViewDay4.setImageResource((R.drawable.check_in_progress))
-                            bindingCheckIn.imageViewDay5.setImageResource((R.drawable.check_in_progress))
-                            bindingCheckIn.imageViewDay6.setImageResource((R.drawable.check_in_progress))
-                            bindingCheckIn.imageViewDay7.setImageResource((R.drawable.check_in_progress))
-                            dialogInterface.cancel()
-                        }
-                        .show()
-                }
+            }else {
+                Toast.makeText(
+                    activity,
+                    "Already Checked In Today!\nPlease Try Again Tomorrow!",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-        }else {
-            Toast.makeText(
-                activity,
-                "Already Checked In Today!\nPlease Try Again Tomorrow!",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
         }
         //TODO: setAlarm function and create variables to be stored as data set
 
@@ -177,7 +176,9 @@ class CheckIn : Fragment() {
 
             replaceFragment(Signup())
         }
+
     }
+
 
     //Function to Constantly Update Counter without Delay
     private val updateCounter = object : Runnable {
@@ -200,10 +201,6 @@ class CheckIn : Fragment() {
         }
     }
 
-    private fun retrieveGameCoin(){
-        getData2(user)
-    }
-
 
     //TODO: Solve Issue where I can't use the retrieved coinBalance from database
     private fun getData2(username: String) {
@@ -215,16 +212,12 @@ class CheckIn : Fragment() {
         }
     }
 
-    private fun updateGameCoin(){
-        var gameCoinUpdate = hashMapOf<String, Any>(
-            "gameCoin" to coinBalance)
-        databaseReference.updateChildren(gameCoinUpdate)
-    }
 
     //Get Current username
     private fun getSess() {
         val preferences = requireContext().getSharedPreferences("sess_store", Context.MODE_PRIVATE)
         val sessUsername = preferences.getString("username", "")
+
         if (sessUsername != ""){
             user = sessUsername.toString()
         } else {
