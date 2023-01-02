@@ -22,9 +22,11 @@
     <string name="full_name_reg">Full Name (as per IC)</string>
     <string name="phone_reg">Phone Number</string>
     <string name="address_reg">Address</string>
-    <string name="email_reg">Email</string>
-    <string name="password_reg">Password</string>
+    <string name="email_reg">Email (Must be a Valid Email)</string>
+    <string name="password_reg">Password (More than 6 Characters)</string>
     <string name="re_enter_password_reg">Re-Enter Password</string>
+    <string name="have_account">ALREADY SIGNED UP?</string>
+    <string name="have_click">CLICK HERE</string>
 
     <!-- CheckIn Page -->
     <string name="balance">Balance</string>
@@ -32,8 +34,8 @@
     <string name="reminder">Reminder</string>
     <string name="daily_description">Rewards will be given and progress will be reset every 7 days.
     </string>
-    <string name="rewardhist_title">Rewards History</string>
-    <string name="rewardhist_description">Here you can check your rewards history with one simple click
+    <string name="rewardhist_title">Spend Your Coins Here!</string>
+    <string name="rewardhist_description">Click here to Earn More Coins and Rewards!
     </string>
     <string name="rewardhist_click">click</string>
     <string name="checkin">Check-In</string>

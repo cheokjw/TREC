@@ -158,26 +158,26 @@ class CheckIn : Fragment() {
 
 
         //ResetCounter **will reset even if it's not 24 after coming back from another fragment
-        databaseReference.child(sessionUser).get().addOnSuccessListener {
-            if (it.exists()) {
-                var dbCheckInCounter = it.child("checkInCounter").value.toString().toInt()
-                var checkInCounter : Int
-
-                checkInCounter = if (dbCheckInCounter == null){
-                    0
-                }
-                else {
-                    dbCheckInCounter as Int
-                }
-                resetCheckInCounter()
-                var counterUpdate = hashMapOf<String, Any>(
-                    "checkInCounter" to resetCount
-                )
-                databaseReference.child(sessionUser).updateChildren(counterUpdate)
-            }else {
-                Toast.makeText(activity, "User Doesn't Exists", Toast.LENGTH_SHORT).show()
-            }
-        }
+//        databaseReference.child(sessionUser).get().addOnSuccessListener {
+//            if (it.exists()) {
+//                var dbCheckInCounter = it.child("checkInCounter").value.toString().toInt()
+//                var checkInCounter : Int
+//
+//                checkInCounter = if (dbCheckInCounter == null){
+//                    0
+//                }
+//                else {
+//                    dbCheckInCounter as Int
+//                }
+//                resetCheckInCounter()
+//                var counterUpdate = hashMapOf<String, Any>(
+//                    "checkInCounter" to resetCount
+//                )
+//                databaseReference.child(sessionUser).updateChildren(counterUpdate)
+//            }else {
+//                Toast.makeText(activity, "User Doesn't Exists", Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
         //Check In Button
         bindingCheckIn.buttonCheckIn.setOnClickListener {
@@ -397,9 +397,9 @@ class CheckIn : Fragment() {
 
         //TODO: setAlarm function and create variables to be stored as data set
 
-        //Nav to History Page
+        //Nav to Tree
         bindingCheckIn.buttonRewards.setOnClickListener {
-            showNotification()
+            replaceFragment(Tree())
 //            replaceFragment(RewardsHistory())
         }
     }
@@ -581,29 +581,6 @@ class CheckIn : Fragment() {
             }
         }
     }
-
-//    private fun getSharedPreferences(s: String, modePrivate: Int): Any {
-//        // First, get a reference to the SharedPreferences object
-//        val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-//
-//        var currentTime = System.currentTimeMillis()
-//
-//        var lastClickTime = sharedPreferences.getLong("last_click_time", 0)
-//
-//        val timeSinceLastClick = currentTime - lastClickTime
-//
-//
-//        if (timeSinceLastClick == 86400000) {
-//            // It has been at least one day, so allow the button to be clicked
-//
-//            // Perform the button's action here
-//
-//            // Save the current time as the "last_click_time" in the SharedPreferences object
-//            sharedPreferences.edit().putLong("last_click_time", currentTime).apply()
-//        } else {
-//            // It has not been at least one day, so prevent the button from being clicked
-//        }
-//    }
 
     //Attempt to Reset Variable
     private fun resetCheckInCounter(){

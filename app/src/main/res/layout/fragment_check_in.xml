@@ -59,6 +59,7 @@
         android:id="@+id/buttonRewards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="12dp"
         android:backgroundTint="@color/chalk_red"
         android:fontFamily="@font/mulish_bold"
@@ -66,20 +67,10 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:cornerRadius="@dimen/cornerRadius"
-        app:layout_constraintBottom_toBottomOf="@+id/rewardDesc"
+        app:layout_constraintBottom_toBottomOf="@+id/checkInCard2"
         app:layout_constraintEnd_toEndOf="@+id/checkInCard2"
-        app:layout_constraintTop_toTopOf="@+id/rewardTitle"
-        app:layout_constraintVertical_bias="0.684" />
-
-    <ImageView
-        android:id="@+id/rewardHistLogo"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:src="@drawable/rewardhist_logo"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonRewards"
-        app:layout_constraintStart_toStartOf="@+id/checkInCard2"
-        app:layout_constraintTop_toTopOf="@+id/buttonRewards" />
+        app:layout_constraintTop_toBottomOf="@+id/checkInCard"
+        app:layout_constraintVertical_bias="0.416" />
 
     <TextView
         android:id="@+id/rewardDesc"
@@ -99,14 +90,14 @@
         android:id="@+id/rewardTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="18dp"
         android:fontFamily="@font/mulish_bold"
         android:text="@string/rewardhist_title"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/checkInCard2"
-        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintHorizontal_bias="0.232"
         app:layout_constraintStart_toStartOf="@+id/checkInCard2"
         app:layout_constraintTop_toBottomOf="@+id/checkInCard" />
 
@@ -314,5 +305,17 @@
         app:layout_constraintEnd_toEndOf="@+id/imageViewTreeCoin"
         app:layout_constraintStart_toStartOf="@+id/imageViewTreeCoin"
         app:layout_constraintTop_toTopOf="@+id/imageViewTreeCoin" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/rewardlogo"
+        app:layout_constraintBottom_toBottomOf="@+id/checkInCard2"
+        app:layout_constraintStart_toStartOf="@+id/checkInCard2"
+        app:layout_constraintTop_toBottomOf="@+id/checkInCard"
+        app:layout_constraintVertical_bias="0.428" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

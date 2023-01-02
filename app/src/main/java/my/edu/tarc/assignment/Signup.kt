@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -67,50 +68,73 @@ class Signup : Fragment() {
 
             if(username.isNotEmpty() && fullName.isNotEmpty() && phone.isNotEmpty() && address.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty() && repass.isNotEmpty()){
                 if(pass == repass && pass.length > 6){
+                    if(pass.length > 6){
                     val isValid = isValidEmail(email)
-                    if(isValid) {
+                        if(isValid) {
 
-                        var idSign = databaseReference.push().key
-                        var regis = Signup_regis(
-                            username,
-                            fullName,
-                            phone,
-                            address,
-                            email,
-                            pass,
-                            idSign!!,
-                            treeCoin = 0,
-                            gameCoin = 0,
-                            checkin = 0,
-                            treeProgress = 0,
-                            spray_quantity = 0,
-                            green_quantity = 0,
-                            golden_quantity = 0,
-                            quizCorrect = 0.0,
-                            imgProfile = 0,
-                            checkInCounter = 0
-                        )
+                            var idSign = databaseReference.push().key
+                            var regis = Signup_regis(
+                                username,
+                                fullName,
+                                phone,
+                                address,
+                                email,
+                                pass,
+                                idSign!!,
+                                treeCoin = 0,
+                                gameCoin = 0,
+                                checkin = 0,
+                                treeProgress = 0,
+                                spray_quantity = 0,
+                                green_quantity = 0,
+                                golden_quantity = 0,
+                                quizCorrect = 0.0,
+                                imgProfile = 0,
+                                checkInCounter = 0
+                            )
 
-                        //Here Data Inserted
-                        addToAuth()
-                        databaseReference.child(username).setValue(regis)
-                        Toast.makeText(activity, "Signup Successful", Toast.LENGTH_SHORT).show()
+                            //Here Data Inserted
+                            addToAuth()
+                            databaseReference.child(username).setValue(regis)
+                            Toast.makeText(activity, "Signup Successful", Toast.LENGTH_SHORT).show()
+                            returnlogin()
+                        }else{
+                            Toast.makeText(activity, "Invalid Email", Toast.LENGTH_SHORT).show()
+                        }
                     }else{
-                        Toast.makeText(activity, "Invalid Email", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "Password is Less than 6 Characters", Toast.LENGTH_SHORT).show()
                     }
                 }else{
-                    Toast.makeText(activity, "Password is Less than 6 Characters", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Password Does not Match", Toast.LENGTH_SHORT).show()
                 }
             }
-
-           returnlogin()
         }
 
-
+        bindingSignup.textViewLogin.setOnClickListener() {
+//            val LogInFragment = Login()
+//            val transaction: FragmentTransaction = parentFragmentManager!!.beginTransaction()
+//            transaction.replace(R.id.frameLayout_login, LogInFragment)
+//            transaction.commit()
+            returnlogin()
+        }
         return bindingSignup.root
     }
 
-    //TODO: Receive input
+
+//    fun onClick(v: View) {
+//        when (v.id) {
+//
+//
+//            //create acc
+//            R.id.textViewSignup -> {
+//                val LogInFragment = Login()
+//                val transaction: FragmentTransaction = parentFragmentManager!!.beginTransaction()
+//                transaction.replace(R.id.frameLayout_login, LogInFragment)
+//                transaction.commit()
+//            }
+//
+//        }
+//    }
 
     private fun returnlogin(){
 
