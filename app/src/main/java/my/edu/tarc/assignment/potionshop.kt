@@ -100,7 +100,7 @@ class potionshop : Fragment() {
         }
         bindingPotion.goldtagbutton.setOnClickListener{
             if(gamecoin>=1500) {
-                alertDialog("golden_quantity","Gold Pot",sprayqtt+1,gamecoin-1500)
+                alertDialog("golden_quantity","Gold Pot",goldqtt+1,gamecoin-1500)
             }else
                 Toast.makeText(activity, "Insufficient GAME COIN!\n Gold Pot Balance: " + goldqtt, Toast.LENGTH_SHORT).show()
         }

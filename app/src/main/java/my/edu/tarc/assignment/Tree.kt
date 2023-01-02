@@ -115,12 +115,6 @@ class Tree : Fragment() {
 
 
         bindingTree.itemtwobutton.setOnClickListener{
-            //green portion quantity
-            databaseReference.child("green_quantity").get().addOnSuccessListener {
-                greenqt = it.value.toString().toInt()
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-            }
             if(greenqt>=1){
                 if(barprocess >=20) {
                     Toast.makeText(activity, "Collect Tree Coin Now\n Green Pot Balance: " + greenqt, Toast.LENGTH_SHORT).show()
@@ -142,15 +136,9 @@ class Tree : Fragment() {
         }
 
         bindingTree.itemthreebutton.setOnClickListener{
-            //gold portion quantity
-            databaseReference.child("golden_quantity").get().addOnSuccessListener {
-                goldqt = it.value.toString().toInt()
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-            }
             if(goldqt>=1){
                 if(barprocess >= 20) {
-                    Toast.makeText(activity, "Collect Tree Coin Now\n Green Pot Balance: " + greenqt, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Collect Tree Coin Now\n Green Pot Balance: " + goldqt, Toast.LENGTH_SHORT).show()
                 }else{
                     goldqt -= 1
                     barprocess += 4
