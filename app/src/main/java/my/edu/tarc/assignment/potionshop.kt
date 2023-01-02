@@ -1,6 +1,12 @@
 package my.edu.tarc.assignment
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.media.metrics.Event
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +14,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import my.edu.tarc.assignment.databinding.FragmentPotionshopBinding
@@ -35,6 +43,7 @@ class potionshop : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         getSess()
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference().child("user").child(username)
@@ -74,61 +83,26 @@ class potionshop : Fragment() {
         //price
         bindingPotion.spraytagbutton.setOnClickListener{
             if (gamecoin>=500){
-                gamecoin -= 500
-                sprayqtt += 1
-                Toast.makeText(activity, "Successfully bought 1 Spray!\n Spray Balance: "+ sprayqtt , Toast.LENGTH_SHORT).show()
-                }else
+                alertDialog("spray_quantity","Spray",sprayqtt+1,gamecoin-500)
+                }
+            else {
                 Toast.makeText(activity, "Insufficient GAME COIN!\n Spray Balance: " + sprayqtt, Toast.LENGTH_SHORT).show()
-            var sprayUpdate = hashMapOf<String, Any>(
-                "gameCoin" to gamecoin,
-                "spray_quantity" to sprayqtt
-            )
-            databaseReference.updateChildren(sprayUpdate)
-            databaseReference.child("gameCoin").get().addOnSuccessListener {
-                gamecoin = it.value.toString().toInt()
-                bindingPotion.textViewGameCoin.text = it.value.toString()
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-            }
+                }
+
         }
 
         bindingPotion.greentagbutton.setOnClickListener{
             if(gamecoin>=800) {
-                gamecoin -= 800
-                greenqtt += 1
-                Toast.makeText(activity, "Successfully bought 1 Green Pot!\n Green Pot Balance: "+ greenqtt , Toast.LENGTH_SHORT).show()
+                alertDialog("green_quantity","Green Pot",greenqtt+1,gamecoin-800)
             }else
                 Toast.makeText(activity, "Insufficient GAME COIN!\n Green Pot Balance: " + greenqtt, Toast.LENGTH_SHORT).show()
-            var greenUpdate = hashMapOf<String, Any>(
-                "gameCoin" to gamecoin,
-                "green_quantity" to greenqtt
-            )
-            databaseReference.updateChildren(greenUpdate)
-            databaseReference.child("gameCoin").get().addOnSuccessListener {
-                gamecoin = it.value.toString().toInt()
-                bindingPotion.textViewGameCoin.text = it.value.toString()
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-            }
+
         }
         bindingPotion.goldtagbutton.setOnClickListener{
             if(gamecoin>=1500) {
-                gamecoin -= 1500
-                goldqtt += 1
-                Toast.makeText(activity, "Successfully bought 1 Gold Pot!\n Gold Pot Balance: "+ goldqtt , Toast.LENGTH_SHORT).show()
+                alertDialog("golden_quantity","Gold Pot",sprayqtt+1,gamecoin-1500)
             }else
                 Toast.makeText(activity, "Insufficient GAME COIN!\n Gold Pot Balance: " + goldqtt, Toast.LENGTH_SHORT).show()
-            var goldenUpdate = hashMapOf<String, Any>(
-                "gameCoin" to gamecoin,
-                "golden_quantity" to goldqtt
-            )
-            databaseReference.updateChildren(goldenUpdate)
-            databaseReference.child("gameCoin").get().addOnSuccessListener {
-                gamecoin = it.value.toString().toInt()
-                bindingPotion.textViewGameCoin.text = it.value.toString()
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-            }
         }
 
 
@@ -139,6 +113,8 @@ class potionshop : Fragment() {
 
         return bindingPotion.root
     }
+
+
 
     private fun replaceFragment(fragment : Fragment){
 
@@ -158,5 +134,34 @@ class potionshop : Fragment() {
         }
     }
 
+    private fun alertDialog(item_string: String ,portion : String, quantity: Int, gCoin: Int){
+        var buyDialog = AlertDialog.Builder(activity)
+            .setTitle("Confirmation")
+            .setMessage("Are you sure to purchase?")
+            .setPositiveButton("Yes"){_,_->
+                Toast.makeText(activity, "Successfully bought 1 " + portion +" !\n " + portion +"Balance: "+ quantity , Toast.LENGTH_SHORT).show()
+                var sprayUpdate = hashMapOf<String, Any>(
+                    "gameCoin" to gCoin,
+                    item_string to quantity
+                )
+                databaseReference.updateChildren(sprayUpdate)
+                databaseReference.child("gameCoin").get().addOnSuccessListener {
+                    gamecoin = it.value.toString().toInt()
+                    bindingPotion.textViewGameCoin.text = it.value.toString()
+                }.addOnFailureListener {
+                    Log.e("firebase", "Error getting data", it)
+                }
+                databaseReference.child(item_string).get().addOnSuccessListener {
+                    sprayqtt = it.value.toString().toInt()
+                }.addOnFailureListener {
+                    Log.e("firebase", "Error getting data", it)
+                }
+            }
+            .setNegativeButton("No"){_,_ ->
+                Toast.makeText(activity, "Please purchase again", Toast.LENGTH_SHORT).show()
+            }.create().show()
+    }
+
 
 }
+

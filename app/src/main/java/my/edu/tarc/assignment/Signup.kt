@@ -54,7 +54,7 @@ class Signup : Fragment() {
             val repass = bindingSignup.editTextReEnterPassReg.text.toString()
 
             if(username.isNotEmpty() && fullName.isNotEmpty() && phone.isNotEmpty() && address.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty() && repass.isNotEmpty()){
-                if(pass == repass && pass.length > 6){
+                if(pass == repass ){
                     if(pass.length > 6){
                         val isValid = isValidEmail(email)
                         if(isValid) {
