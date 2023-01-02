@@ -7,12 +7,14 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -45,10 +47,12 @@ class CheckIn : Fragment() {
     val handler = android.os.Handler()
     private var checkin = 0
 
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var switch: Switch
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
     }
 
@@ -162,31 +166,10 @@ class CheckIn : Fragment() {
         val switch: SwitchCompat = bindingCheckIn.switchReminder
         switch.setOnCheckedChangeListener{ _, isChecked ->
             if (isChecked) {
-                // Set up the notification
-                val notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val channel = NotificationChannel(
-                        "reminder", "channel_name", NotificationManager.IMPORTANCE_DEFAULT
-                    )
-                    notificationManager.createNotificationChannel(channel)
-                }
-
                 val calendar = Calendar.getInstance()
-                calendar.set(Calendar.HOUR_OF_DAY, 10)
-                calendar.set(Calendar.MINUTE, 0)
+                calendar.set(Calendar.HOUR_OF_DAY, 4)
+                calendar.set(Calendar.MINUTE, 1)
                 calendar.set(Calendar.SECOND, 0)
-
-                val notification = NotificationCompat.Builder(requireContext(), "reminder")
-                    .setSmallIcon(R.drawable.rewardlogo)
-                    .setContentTitle("Reminder")
-                    .setContentText("This is a reminder notification")
-                    .setWhen(calendar.timeInMillis)
-                    .setShowWhen(true)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .build()
-
-                notificationManager.notify(1, notification)
 
                 // Schedule the notification to be shown at a specific time every day
                 val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -200,24 +183,8 @@ class CheckIn : Fragment() {
                     AlarmManager.INTERVAL_DAY,
                     pendingIntent
                 )
-            } else {
-                // Cancel the notification
-                val notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                notificationManager.cancel(1)
-
-                // Cancel the alarm
-                val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-                val intent = Intent(requireContext(), Notification::class.java)
-                val pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_MUTABLE)
-
-                alarmManager.cancel(pendingIntent)
             }
         }
-            var reminder = bindingCheckIn.switchReminder.isChecked
-            if(reminder){
-                showNotification()
-            }
 
         //Check In Button
         bindingCheckIn.buttonCheckIn.setOnClickListener {
