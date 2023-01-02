@@ -189,6 +189,7 @@ class CheckIn : Fragment() {
                     var dbCheckIn = it.child("checkin").value.toString().toInt()
                     var dbGameCoin = it.child("gameCoin").value.toString().toInt()
                     var dbCheckInCounter = it.child("checkInCounter").value.toString().toInt()
+                    var dbCheckInDate = it.child("checkInDate").value.toString().toInt()
                     Log.i("SessionValue", dbCheckIn.toString())
 
                     var checkin : Int
@@ -213,6 +214,13 @@ class CheckIn : Fragment() {
                         dbCheckInCounter as Int
                     }
 
+                    val c = Calendar.getInstance()
+                    val day = c.get(Calendar.DAY_OF_MONTH)
+
+                    if (dbCheckInDate != day){
+                        checkInCounter = 0
+                    }
+
                     if(checkInCounter<1) {
                         when (checkin) {
                             0 -> {
@@ -227,7 +235,8 @@ class CheckIn : Fragment() {
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
-                                    "checkInCounter" to checkInCounter
+                                    "checkInCounter" to checkInCounter,
+                                    "checkInDate" to day
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
                             }
@@ -243,7 +252,8 @@ class CheckIn : Fragment() {
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
-                                    "checkInCounter" to checkInCounter
+                                    "checkInCounter" to checkInCounter,
+                                    "checkInDate" to day
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
 
@@ -260,7 +270,8 @@ class CheckIn : Fragment() {
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
-                                    "checkInCounter" to checkInCounter
+                                    "checkInCounter" to checkInCounter,
+                                    "checkInDate" to day
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
                             }
@@ -276,7 +287,8 @@ class CheckIn : Fragment() {
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
-                                    "checkInCounter" to checkInCounter
+                                    "checkInCounter" to checkInCounter,
+                                    "checkInDate" to day
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
                             }
@@ -292,7 +304,8 @@ class CheckIn : Fragment() {
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
-                                    "checkInCounter" to checkInCounter
+                                    "checkInCounter" to checkInCounter,
+                                    "checkInDate" to day
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
                             }
@@ -308,7 +321,8 @@ class CheckIn : Fragment() {
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
-                                    "checkInCounter" to checkInCounter
+                                    "checkInCounter" to checkInCounter,
+                                    "checkInDate" to day
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
                             }
@@ -324,7 +338,8 @@ class CheckIn : Fragment() {
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
-                                    "checkInCounter" to checkInCounter
+                                    "checkInCounter" to checkInCounter,
+                                    "checkInDate" to day
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
 
