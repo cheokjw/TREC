@@ -222,7 +222,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/avatar1" />
+                        android:src="@drawable/avatar0" />
 
                 </androidx.cardview.widget.CardView>
 

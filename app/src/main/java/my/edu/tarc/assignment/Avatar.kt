@@ -19,7 +19,7 @@ class Avatar : DialogFragment() {
     lateinit var database: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
     private lateinit var bindingAvatar: FragmentAvatarBinding
-    var num = ""
+    var num = 0
     var username = ""
 
     override fun onCreateView(
@@ -42,39 +42,40 @@ class Avatar : DialogFragment() {
         //select avatar function
         bindingAvatar.imageViewAvatar1.setOnClickListener {
             imageAlpha(1)
-            num = "1"
+            num = 1
         }
 
         bindingAvatar.imageViewAvatar2.setOnClickListener {
             imageAlpha(2)
-            num = "2"
+            num = 2
         }
 
         bindingAvatar.imageViewAvatar3.setOnClickListener {
             imageAlpha(3)
-            num = "3"
+            num = 3
         }
 
         bindingAvatar.imageViewAvatar4.setOnClickListener {
             imageAlpha(4)
-            num = "4"
+            num = 4
         }
 
         bindingAvatar.imageViewAvatar5.setOnClickListener {
             imageAlpha(5)
-            num = "5"
+            num = 5
         }
 
         bindingAvatar.imageViewAvatar6.setOnClickListener {
             imageAlpha(6)
-            num = "6"
+            num = 6
         }
 
         bindingAvatar.buttonSelectAvatar.setOnClickListener{
             val profile = Profile()
+            updateAvatar()
             Toast.makeText(activity, "Avatar Changed", Toast.LENGTH_SHORT).show()
             dismiss()
-            profile.refresh()
+            refresh()
         }
 
         bindingAvatar.imageButtonQuit.setOnClickListener {
@@ -113,7 +114,9 @@ class Avatar : DialogFragment() {
 
     //update image to firebase
     private fun updateAvatar(){
-
+        val update = HashMap<String, Any>()
+        update["imgProfile"] = num
+        databaseReference.child(username).updateChildren(update)
     }
 
     private fun getAvatar() {
@@ -121,7 +124,7 @@ class Avatar : DialogFragment() {
         databaseReference.child(username).child("imgProfile").get().addOnSuccessListener {
             val number = it.value.toString().toInt()
             if (number == null){
-                Toast.makeText(activity,"Err, no avatar found",Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity,"Database issue",Toast.LENGTH_SHORT).show()
             }else if(number == 0) {
                 Toast.makeText(activity,"No avatar saved",Toast.LENGTH_SHORT).show()
             }else{
@@ -130,8 +133,10 @@ class Avatar : DialogFragment() {
         }
     }
 
-
-
-
+    //used at Avatar.kt & editprofile.kt
+    fun refresh() {
+        val profile = activity as MainActivity
+        profile.replaceFragment(Profile())
+    }
 
 }

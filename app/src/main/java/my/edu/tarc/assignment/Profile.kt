@@ -77,19 +77,23 @@ class Profile : Fragment(), View.OnClickListener {
         //get fullname
         databaseReference.child(username).child("fullname").get().addOnSuccessListener {
             val full_name = it.getValue(String::class.java)
-            bindingProfile.textViewFullName.text = full_name}
+            bindingProfile.textViewFullName.text = full_name
+        }
         //get email
         databaseReference.child(username).child("email").get().addOnSuccessListener {
             val email = it.getValue(String::class.java)
-            bindingProfile.textViewEmail.text = email}
+            bindingProfile.textViewEmail.text = email
+        }
         //get phone
         databaseReference.child(username).child("phone").get().addOnSuccessListener {
             val phone = it.getValue(String::class.java)
-            bindingProfile.textViewContact.text = phone}
+            bindingProfile.textViewContact.text = phone
+        }
         //get address
         databaseReference.child(username).child("address").get().addOnSuccessListener {
             val address = it.getValue(String::class.java)
-            bindingProfile.textViewAddress.text = address}
+            bindingProfile.textViewAddress.text = address
+        }
         //get treecoin
         databaseReference.child(username).child("treeCoin").get().addOnSuccessListener {
             val treecoin = it.value.toString().toInt()
@@ -101,27 +105,33 @@ class Profile : Fragment(), View.OnClickListener {
             bindingProfile.textViewGameCoin.text = gamecoin.toString()
         }
         //get image
-            //bindingProfile.imageViewAvatar.setImageURI(it.child("img").toString())
-    }
-
-    private fun getSess(){
-        val preferences = requireContext().getSharedPreferences("sess_store", Context.MODE_PRIVATE)
-        val sess_username = preferences.getString("username", "")
-        if (sess_username != ""){
-            bindingProfile.textViewUsername.text = sess_username
-        } else {
-            Toast.makeText(activity,"failed to retrieve username", Toast.LENGTH_SHORT).show()
+        databaseReference.child(username).child("imgProfile").get().addOnSuccessListener {
+            val number = it.value.toString().toInt()
+            setAvatar(number)
         }
     }
 
+    private fun getSess() {
+            val preferences =
+                requireContext().getSharedPreferences("sess_store", Context.MODE_PRIVATE)
+            val sess_username = preferences.getString("username", "")
+            if (sess_username != "") {
+                bindingProfile.textViewUsername.text = sess_username
+            } else {
+                Toast.makeText(activity, "failed to retrieve username", Toast.LENGTH_SHORT).show()
+            }
+        }
 
-    //used at Avatar.kt & editprofile.kt
-    fun refresh() {
-        val profile = activity as MainActivity
-        profile.replaceFragment(Profile())
+    private fun setAvatar(n : Int){
+        when(n){
+            1 -> bindingProfile.imageViewAvatar.setImageResource(R.drawable.avatar1)
+            2 -> bindingProfile.imageViewAvatar.setImageResource(R.drawable.avatar2)
+            3 -> bindingProfile.imageViewAvatar.setImageResource(R.drawable.avatar3)
+            4 -> bindingProfile.imageViewAvatar.setImageResource(R.drawable.avatar4)
+            5 -> bindingProfile.imageViewAvatar.setImageResource(R.drawable.avatar5)
+            6 -> bindingProfile.imageViewAvatar.setImageResource(R.drawable.avatar6)
+        }
     }
-
-
 
 
 }

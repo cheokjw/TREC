@@ -39,7 +39,7 @@ class EditProfile : DialogFragment() {
             updateInfo()
             Toast.makeText(activity,"User info updated!",Toast.LENGTH_SHORT).show()
             dismiss()
-            profile.refresh()
+            refresh()
         }
         bindingeditinfo.buttonCancel.setOnClickListener{
             dismiss()
@@ -92,6 +92,12 @@ class EditProfile : DialogFragment() {
         update["phone"] = phone
         update["address"] = address
         databaseReference.child(username).updateChildren(update)
+    }
+
+    //used at Avatar.kt & editprofile.kt
+    fun refresh() {
+        val profile = activity as MainActivity
+        profile.replaceFragment(Profile())
     }
 
 }
