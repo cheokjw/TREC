@@ -45,11 +45,6 @@ class CheckIn : Fragment() {
     var gameCoin = 0
     var treeCoin = 0
     val handler = android.os.Handler()
-    private var checkin = 0
-
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var switch: Switch
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +60,6 @@ class CheckIn : Fragment() {
         return bindingCheckIn.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity: FragmentActivity?= activity
@@ -78,28 +72,6 @@ class CheckIn : Fragment() {
 
         //Starting Point of the Check In Bar
         bindingCheckIn.progressBarCheckIn.progress = 0
-
-//        //Attempt to Reset CheckInCounter
-//        databaseReference.child(sessionUser).get().addOnSuccessListener {
-//            if (it.exists()) {
-//                var dbcheckInCounter = it.child("checkInCounter").value.toString().toInt()
-//                var checkInCounter : Int
-//
-//                checkInCounter = if (dbcheckInCounter == null){
-//                    0
-//                }
-//                else {
-//                    dbcheckInCounter as Int
-//                }
-//                resetCheckInCounter(checkInCounter)
-//                var checkinUpdate = hashMapOf<String, Any>(
-//                    "checkInCounter" to checkInCounter,
-//                )
-//                databaseReference.child(sessionUser).updateChildren(checkinUpdate)
-//            }else {
-//                Toast.makeText(activity, "User Doesn't Exists", Toast.LENGTH_SHORT).show()
-//            }
-//        }
 
         //Update the CoinBalance
         val updateCounter = object : Runnable {
@@ -394,51 +366,12 @@ class CheckIn : Fragment() {
             }
 
         }
-
-
-//  //Reminder Notification
-//            var reminder = bindingCheckIn.switchReminder.isChecked
-//            if(reminder){
-//                showNotification()
-//            }
-//        bindingCheckIn.switchReminder.setOnClickListener() {
-//
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                val channel = NotificationChannel("reminder", "Default", NotificationManager.IMPORTANCE_DEFAULT)
-//                var notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//                notificationManager.createNotificationChannel(channel)
-//            }
-//
-//            val calendar = Calendar.getInstance()
-//            calendar.set(Calendar.HOUR_OF_DAY, 3)
-//            calendar.set(Calendar.MINUTE, 39)
-//            calendar.set(Calendar.SECOND, 0)
-//
-//            val time = calendar.timeInMillis
-//            // Get the text from the EditText and convert it to a long
-//
-//            // Create an intent to the AlarmReceiver class
-//            val intent = Intent(context, Notification::class.java)
-//
-//            // Get the system service for the alarm manager
-//            val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//
-//
-//            // Show a toast message to confirm that the alarm is set
-//            Toast.makeText(context, "Reminder Set", Toast.LENGTH_SHORT).show()
-//        }
-
-
-        //TODO: setAlarm function and create variables to be stored as data set
-
         //Nav to Tree
         bindingCheckIn.buttonRewards.setOnClickListener {
             replaceFragment(Tree())
         }
     }
 
-
-    //TODO: add if checkInCounter is > 0 then stay green
     private fun saved(checkin: Int, checkInCounter: Int){
         when(checkin){
             0 -> {
@@ -599,19 +532,6 @@ class CheckIn : Fragment() {
             }
         }
     }
-
-    //Attempt to Reset Variable
-    private fun resetCheckInCounter(){
-        // Set the alarm to trigger at a specific time
-        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(requireContext(), Notification::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_MUTABLE)
-
-// Set the alarm to trigger after 24 hours
-        val triggerTime = System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24)
-        alarmManager.set(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent)
-    }
-
 
     private fun replaceFragment(fragment : Fragment){
 
