@@ -42,19 +42,6 @@ class Signup : Fragment() {
         auth = FirebaseAuth.getInstance()
         val username = bindingSignup.editTextUsernameReg.text.toString()
 
-        fun isValidEmail(email: String): Boolean {
-            val pattern = Pattern.compile(
-                "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                        "\\@" +
-                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                        "(" +
-                        "\\." +
-                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                        ")+"
-            )
-            val matcher = pattern.matcher(email)
-            return matcher.matches()
-        }
 
         bindingSignup.buttonRegister.setOnClickListener(){
             //TODO: Add registered alert
@@ -156,6 +143,21 @@ class Signup : Fragment() {
                 Log.e(TAG,"Add to FirebaseAuth (failed)", task.exception)
             }
         }
+    }
+
+
+    fun isValidEmail(email: String): Boolean {
+        val pattern = Pattern.compile(
+            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                    "\\." +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                    ")+"
+        )
+        val matcher = pattern.matcher(email)
+        return matcher.matches()
     }
 
 
