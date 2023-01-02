@@ -41,10 +41,12 @@ class CheckIn : Fragment() {
     lateinit var databaseReference: DatabaseReference
 
     private var counter = 0
-    var checked = 0
+    var toggledCounter = 1
     var gameCoin = 0
     var treeCoin = 0
+    var username =""
     val handler = android.os.Handler()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +57,50 @@ class CheckIn : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+//        getSess()
+//        database = FirebaseDatabase.getInstance()
+//        databaseReference = database.getReference().child("user").child(username)
+//
         bindingCheckIn = FragmentCheckInBinding.inflate(inflater)
+//
+//        databaseReference.child("reminderToggle").get().addOnSuccessListener {
+//            toggledCounter = it.value.toString().toInt()
+//        }.addOnFailureListener {
+//            Log.e("firebase", "Error getting data", it)
+//        }
+        if(toggledCounter == 1) {
+            val alarmManager =
+                requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
+            // Create an Intent that will be broadcast when the alarm triggers
+            val intent = Intent(requireContext(), Notification::class.java)
+
+            // Use the PendingIntent.getBroadcast() method to create a PendingIntent that will broadcast the intent
+            val pendingIntent =
+                PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_MUTABLE)
+
+            // Get the current time
+            val currentTime = Calendar.getInstance().timeInMillis
+
+            // Set the alarm to trigger at 4am
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.HOUR_OF_DAY, 1)
+            calendar.set(Calendar.MINUTE, 0)
+            calendar.set(Calendar.SECOND, 0)
+
+            // If the time has already passed, add one day to the time
+            if (calendar.timeInMillis <= currentTime) {
+                calendar.add(Calendar.DATE, 1)
+            }
+
+            // Set the alarm to trigger at the desired time
+            alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+            )
+        }
         return bindingCheckIn.root
     }
 
@@ -81,17 +125,17 @@ class CheckIn : Fragment() {
                         var dbGameCoin = it.child("gameCoin").value.toString().toInt()
                         var dbTreeCoin = it.child("treeCoin").value.toString().toInt()
 
-                        gameCoin = if (dbGameCoin == null) {
-                            0
-                        } else {
-                            dbGameCoin as Int
-                        }
-
-                        treeCoin = if (dbTreeCoin == null) {
-                            0
-                        } else {
-                            dbTreeCoin as Int
-                        }
+//                        gameCoin = if (dbGameCoin == null) {
+//                            0
+//                        } else {
+//                            dbGameCoin as Int
+//                        }
+//
+//                        treeCoin = if (dbTreeCoin == null) {
+//                            0
+//                        } else {
+//                            dbTreeCoin as Int
+//                        }
                         counterTextView.text = gameCoin.toString()
                         textViewGameCoin.text = gameCoin.toString()
                         textViewTreeCoin.text = treeCoin.toString()
@@ -133,42 +177,74 @@ class CheckIn : Fragment() {
             }
         }
 
+        //Set Switch to it's State According//
+        databaseReference.child(sessionUser).get().addOnSuccessListener {
+            if (it.exists()) {
+                var dbReminderToggle = it.child("reminderToggle").value.toString().toInt()
 
-        //Reminder Notification
-        val switch: SwitchCompat = bindingCheckIn.switchReminder
-        switch.setOnCheckedChangeListener{ _, isChecked ->
-            checked++
-            if (isChecked) {
-                val notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                var toggled : Int
 
-                val calendar = Calendar.getInstance()
-                calendar.set(Calendar.HOUR_OF_DAY, 4)
-                calendar.set(Calendar.MINUTE, 1)
-                calendar.set(Calendar.SECOND, 0)
+                toggled = if (dbReminderToggle == null){
+                    0
+                }
+                else {
+                    dbReminderToggle as Int
+                }
 
-                val notification = NotificationCompat.Builder(requireContext(), "reminder")
-                    .setSmallIcon(R.drawable.rewardlogo)
-                    .setContentTitle("Reminder")
-                    .setContentText("This is a reminder notification")
-                    .setWhen(calendar.timeInMillis)
-                    .setShowWhen(true)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .build()
+                bindingCheckIn.switchReminder.isChecked = toggled > 0
 
-                notificationManager.notify(1, notification)
+            }else {
+                Toast.makeText(activity, "User Doesn't Exists", Toast.LENGTH_SHORT).show()
+            }
+        }
 
-                // Schedule the notification to be shown at a specific time every day
-                val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-                val intent = Intent(requireContext(), Notification::class.java)
-                val pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_MUTABLE)
+        //Reminder Notification//
+        bindingCheckIn.switchReminder.setOnCheckedChangeListener{ _, isChecked ->
+            if (!isChecked) {
+                databaseReference.child(sessionUser).get().addOnSuccessListener {
+                    if (it.exists()) {
+                        var dbReminderToggle = it.child("reminderToggle").value.toString().toInt()
+                        var toggled : Int
+                        toggled = if (dbReminderToggle == null){
+                            0
+                        }
+                        else {
+                            dbReminderToggle as Int
+                        }
+                        toggled = 0
+                        toggledCounter = 0
+                        var switchUpdate = hashMapOf<String, Any>(
+                            "reminderToggle" to toggled
+                        )
+                        databaseReference.child(sessionUser).updateChildren(switchUpdate)
 
-                alarmManager.setRepeating(
-                    AlarmManager.RTC_WAKEUP,
-                    calendar.timeInMillis,
-                    AlarmManager.INTERVAL_DAY,
-                    pendingIntent
-                )
+                    }else {
+                        Toast.makeText(activity, "User Doesn't Exists", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }else{
+                databaseReference.child(sessionUser).get().addOnSuccessListener {
+                    if (it.exists()) {
+                        var dbReminderToggle = it.child("reminderToggle").value.toString().toInt()
+                        var toggled : Int
+                        toggled = if (dbReminderToggle == null){
+                            0
+                        }
+                        else {
+                            dbReminderToggle as Int
+                        }
+                        toggled = 1
+                        toggledCounter = 1
+                        var switchUpdate = hashMapOf<String, Any>(
+                            "reminderToggle" to toggled
+                        )
+                        databaseReference.child(sessionUser).updateChildren(switchUpdate)
+
+                    }else {
+                        Toast.makeText(activity, "User Doesn't Exists", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
 
@@ -533,6 +609,10 @@ class CheckIn : Fragment() {
         }
     }
 
+    private fun passingIn(oldToggle: Int){
+        toggledCounter = oldToggle
+    }
+
     private fun replaceFragment(fragment : Fragment){
 
         val fragmentManager = activity?.supportFragmentManager
@@ -542,5 +622,15 @@ class CheckIn : Fragment() {
         // in this case its the frameLayout in activity_main.xml
         fragmentTransaction?.replace(R.id.frameLayout, fragment)
         fragmentTransaction?.commit()
+    }
+
+    private fun getSess(){
+        val preferences = requireContext().getSharedPreferences("sess_store",Context.MODE_PRIVATE)
+        val sess_username = preferences.getString("username", "")
+        if (sess_username != ""){
+            username = sess_username.toString()
+        }else{
+            Toast.makeText(activity, "failed to retrieve username", Toast.LENGTH_SHORT).show()
+        }
     }
 }

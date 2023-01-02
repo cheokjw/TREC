@@ -56,7 +56,7 @@ class Signup : Fragment() {
             if(username.isNotEmpty() && fullName.isNotEmpty() && phone.isNotEmpty() && address.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty() && repass.isNotEmpty()){
                 if(pass == repass && pass.length > 6){
                     if(pass.length > 6){
-                    val isValid = isValidEmail(email)
+                        val isValid = isValidEmail(email)
                         if(isValid) {
 
                             var idSign = databaseReference.push().key
@@ -80,6 +80,7 @@ class Signup : Fragment() {
                                 checkInCounter = 0,
                                 currentPosition = 1,
                                 checkInDate = 0,
+                                reminderToggle = 0
                             )
 
                             //Here Data Inserted

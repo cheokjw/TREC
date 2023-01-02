@@ -32,20 +32,29 @@ class Notification : BroadcastReceiver() {
 //        }
         val notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 4)
-        calendar.set(Calendar.MINUTE, 1)
-        calendar.set(Calendar.SECOND, 0)
-
         val notification = NotificationCompat.Builder(context, "reminder")
             .setSmallIcon(R.drawable.rewardlogo)
             .setContentTitle("Reminder")
             .setContentText("This is a reminder notification")
-            .setWhen(calendar.timeInMillis)
-            .setShowWhen(true)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
 
         notificationManager.notify(1, notification)
+
+//        // Create a notification builder
+//        val builder = context?.let {
+//            NotificationCompat.Builder(it, "default")
+//                .setSmallIcon(R.drawable.rewardlogo)
+//                .setContentTitle("Alarm")
+//                .setContentText("This is a test alarm.")
+//                .setPriority(NotificationCompat.PRIORITY_HIGH)
+//        }
+//
+//        // Show the notification
+//        val notificationManager =
+//            context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//        if (builder != null) {
+//            notificationManager.notify(1, builder.build())
+//        }
     }
 }
