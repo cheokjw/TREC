@@ -67,7 +67,14 @@ import com.google.firebase.ktx.Firebase
 
              //login btn function
              R.id.buttonSignIn -> {
-                login()
+                 var veriEmail = Signup().isValidEmail(bindinglogin.editTextUsername.text.toString())
+                 val isValid = veriEmail
+                 if (isValid){
+                     login()
+                 }else{
+                    bindinglogin.editTextUsername.error = "PLease enter a correct email format"
+                 }
+
              }
 
 
@@ -114,33 +121,6 @@ import com.google.firebase.ktx.Firebase
 
 
 
-     //realtime database login method
-     private fun CheckUser(username: String){
-         val activityfunction = activity as LoginActivity
-         databaseReference.child(username).get().addOnSuccessListener {
-             if(it.exists()){
-                 val veripw = it.child("pass").value
-                 if(bindinglogin.editTextPassword.text.toString() == veripw){
-                     //toast msg
-                     Toast.makeText(activity, "Login Successful", Toast.LENGTH_SHORT).show()
-
-                     //create session
-                     //startSess(bindinglogin.editTextUsername.text.toString())
-
-
-                     //start mainactivity
-                     activityfunction.access()
-                 }else{
-                     Toast.makeText(activity, "Password Error", Toast.LENGTH_SHORT).show()
-                 }
-             }else{
-                 Toast.makeText(activity, "Username does not exists", Toast.LENGTH_SHORT).show()
-             }
-
-         }.addOnFailureListener{
-             Toast.makeText(activity, "Failed to get username", Toast.LENGTH_SHORT).show()
-         }
-     }
 
 
      private fun emailUser(){
@@ -169,7 +149,33 @@ import com.google.firebase.ktx.Firebase
          })
      }
 
+     //realtime database login method
+     private fun CheckUser(username: String){
+         val activityfunction = activity as LoginActivity
+         databaseReference.child(username).get().addOnSuccessListener {
+             if(it.exists()){
+                 val veripw = it.child("pass").value
+                 if(bindinglogin.editTextPassword.text.toString() == veripw){
+                     //toast msg
+                     Toast.makeText(activity, "Login Successful", Toast.LENGTH_SHORT).show()
 
+                     //create session
+                     //startSess(bindinglogin.editTextUsername.text.toString())
+
+
+                     //start mainactivity
+                     activityfunction.access()
+                 }else{
+                     Toast.makeText(activity, "Password Error", Toast.LENGTH_SHORT).show()
+                 }
+             }else{
+                 Toast.makeText(activity, "Username does not exists", Toast.LENGTH_SHORT).show()
+             }
+
+         }.addOnFailureListener{
+             Toast.makeText(activity, "Failed to get username", Toast.LENGTH_SHORT).show()
+         }
+     }
 
 
 
