@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
@@ -157,33 +158,70 @@ class CheckIn : Fragment() {
         }
 
 
-        //ResetCounter **will reset even if it's not 24 after coming back from another fragment
-//        databaseReference.child(sessionUser).get().addOnSuccessListener {
-//            if (it.exists()) {
-//                var dbCheckInCounter = it.child("checkInCounter").value.toString().toInt()
-//                var checkInCounter : Int
-//
-//                checkInCounter = if (dbCheckInCounter == null){
-//                    0
-//                }
-//                else {
-//                    dbCheckInCounter as Int
-//                }
-//                resetCheckInCounter()
-//                var counterUpdate = hashMapOf<String, Any>(
-//                    "checkInCounter" to resetCount
-//                )
-//                databaseReference.child(sessionUser).updateChildren(counterUpdate)
-//            }else {
-//                Toast.makeText(activity, "User Doesn't Exists", Toast.LENGTH_SHORT).show()
-//            }
-//        }
+        //Reminder Notification
+        val switch: SwitchCompat = bindingCheckIn.switchReminder
+        switch.setOnCheckedChangeListener{ _, isChecked ->
+            if (isChecked) {
+                // Set up the notification
+                val notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val channel = NotificationChannel(
+                        "reminder", "channel_name", NotificationManager.IMPORTANCE_DEFAULT
+                    )
+                    notificationManager.createNotificationChannel(channel)
+                }
+
+                val calendar = Calendar.getInstance()
+                calendar.set(Calendar.HOUR_OF_DAY, 10)
+                calendar.set(Calendar.MINUTE, 0)
+                calendar.set(Calendar.SECOND, 0)
+
+                val notification = NotificationCompat.Builder(requireContext(), "reminder")
+                    .setSmallIcon(R.drawable.rewardlogo)
+                    .setContentTitle("Reminder")
+                    .setContentText("This is a reminder notification")
+                    .setWhen(calendar.timeInMillis)
+                    .setShowWhen(true)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .build()
+
+                notificationManager.notify(1, notification)
+
+                // Schedule the notification to be shown at a specific time every day
+                val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+                val intent = Intent(requireContext(), Notification::class.java)
+                val pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_MUTABLE)
+
+                alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    AlarmManager.INTERVAL_DAY,
+                    pendingIntent
+                )
+            } else {
+                // Cancel the notification
+                val notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.cancel(1)
+
+                // Cancel the alarm
+                val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+                val intent = Intent(requireContext(), Notification::class.java)
+                val pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_MUTABLE)
+
+                alarmManager.cancel(pendingIntent)
+            }
+        }
+            var reminder = bindingCheckIn.switchReminder.isChecked
+            if(reminder){
+                showNotification()
+            }
 
         //Check In Button
         bindingCheckIn.buttonCheckIn.setOnClickListener {
             bindingCheckIn.notCheckedInStatus.setImageResource(R.drawable.checkedin)
-
-
             databaseReference.child(sessionUser).get().addOnSuccessListener {
                 if (it.exists()){
                     var dbCheckIn = it.child("checkin").value.toString().toInt()
