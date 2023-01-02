@@ -16,6 +16,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import my.edu.tarc.assignment.Regis.Signup_regis
 import my.edu.tarc.assignment.databinding.FragmentSignupBinding
+import java.util.regex.Pattern
 
 class Signup : Fragment() {
 
@@ -40,6 +41,20 @@ class Signup : Fragment() {
         auth = FirebaseAuth.getInstance()
         val username = bindingSignup.editTextUsernameReg.text.toString()
 
+        fun isValidEmail(email: String): Boolean {
+            val pattern = Pattern.compile(
+                "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                        "\\@" +
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                        "(" +
+                        "\\." +
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                        ")+"
+            )
+            val matcher = pattern.matcher(email)
+            return matcher.matches()
+        }
+
         bindingSignup.buttonRegister.setOnClickListener(){
             //TODO: Add registered alert
             val username = bindingSignup.editTextUsernameReg.text.toString()
@@ -51,17 +66,40 @@ class Signup : Fragment() {
             val repass = bindingSignup.editTextReEnterPassReg.text.toString()
 
             if(username.isNotEmpty() && fullName.isNotEmpty() && phone.isNotEmpty() && address.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty() && repass.isNotEmpty()){
-                if(pass == repass){
+                if(pass == repass && pass.length > 6){
+                    val isValid = isValidEmail(email)
+                    if(isValid) {
 
-                    var idSign = databaseReference.push().key
-                    var regis = Signup_regis(username, fullName, phone, address, email, pass, idSign!!,
-                        treeCoin = 0, gameCoin = 0, checkin = 0, treeProgress = 0, spray_quantity = 0,
-                        green_quantity = 0, golden_quantity = 0, quizCorrect = 0.0, imgProfile = 0, checkInCounter = 0)
+                        var idSign = databaseReference.push().key
+                        var regis = Signup_regis(
+                            username,
+                            fullName,
+                            phone,
+                            address,
+                            email,
+                            pass,
+                            idSign!!,
+                            treeCoin = 0,
+                            gameCoin = 0,
+                            checkin = 0,
+                            treeProgress = 0,
+                            spray_quantity = 0,
+                            green_quantity = 0,
+                            golden_quantity = 0,
+                            quizCorrect = 0.0,
+                            imgProfile = 0,
+                            checkInCounter = 0
+                        )
 
-                    //Here Data Inserted
-                    addToAuth()
-                    databaseReference.child(username).setValue(regis)
-                  Toast.makeText(activity, "Signup Successful", Toast.LENGTH_SHORT).show()
+                        //Here Data Inserted
+                        addToAuth()
+                        databaseReference.child(username).setValue(regis)
+                        Toast.makeText(activity, "Signup Successful", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(activity, "Invalid Email", Toast.LENGTH_SHORT).show()
+                    }
+                }else{
+                    Toast.makeText(activity, "Password is Less than 6 Characters", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -95,5 +133,7 @@ class Signup : Fragment() {
             }
         }
     }
+
+
 
 }
