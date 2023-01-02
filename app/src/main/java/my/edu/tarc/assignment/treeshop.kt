@@ -15,6 +15,7 @@ import javax.mail.*
 import javax.mail.internet.AddressException
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
+import java.util.Random
 
 
 class treeshop : Fragment() {
@@ -26,6 +27,8 @@ class treeshop : Fragment() {
     var username = ""
     var email = " "
     var name = " "
+    var random = getRandomNumber()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -112,6 +115,7 @@ class treeshop : Fragment() {
             }.addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
+            fifthvoucherSendEmail()
         }
 
         bindingTreeShop.treepricebutton.setOnClickListener {
@@ -131,6 +135,7 @@ class treeshop : Fragment() {
             }.addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
+            treeSendEmail()
         }
 
         bindingTreeShop.foodpricebutton.setOnClickListener {
@@ -151,6 +156,7 @@ class treeshop : Fragment() {
             }.addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
+            foodSendEmail()
         }
 
         bindingTreeShop.waterpricebutton.setOnClickListener {
@@ -171,6 +177,7 @@ class treeshop : Fragment() {
             }.addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
+            pollutionSendEmail()
         }
 
 
@@ -198,6 +205,11 @@ class treeshop : Fragment() {
         }
     }
 
+    fun getRandomNumber(): Int {
+        val r = Random()
+        return (10000000000 + r.nextInt(900000000)).toInt()
+    }
+
     private fun fivevoucherSendEmail() {
         try {
             val stringSenderEmail = "lowwc-wm21@student.tarc.edu.my"
@@ -217,7 +229,10 @@ class treeshop : Fragment() {
             val mimeMessage = MimeMessage(session)
             mimeMessage.addRecipient(Message.RecipientType.TO, InternetAddress(stringReceiverEmail))
             mimeMessage.subject = "TREC 5$ Voucher"
-            mimeMessage.setText("Hello " +name)
+            mimeMessage.setText("Hello " +name+ ", \n\nCongratulation!!\n\nYou have successfully received 5$ Cash Voucher.\n\nRedemption Location:" +
+                    "\nAeon Big Ampang\nLot 613, 47636.47638, Taman Dagang Permai, 68000 Ampang.\nAEON BiG Batu Pahat\nNo 1B, Jalan Persiaran Flora Utama, Taman Flora Utama, 83000 Batu Pahat, Johor Darul Takzim" +
+                    "\nAEON BiG Bukit Minyak\nNo 1,Tingkat Bukit Minyak 9, Taman Bukit Minyak, 14000 Bukit Mertajam, Penang.\n" +
+                    "AEON BiG Danau Kota\nLot PT 9834, Jln. Langkawi, Tmn. Danau Kota, Mukim Setapak, 53000 K.L.\n\n\n Voucher code: V" + random)
             val thread = Thread {
                 try {
                     Transport.send(mimeMessage)
@@ -233,5 +248,150 @@ class treeshop : Fragment() {
         }
     }
 
+    private fun fifthvoucherSendEmail() {
+        try {
+            val stringSenderEmail = "lowwc-wm21@student.tarc.edu.my"
+            val stringReceiverEmail = email
+            val stringPasswordSenderEmail = "020420100779"
+            val stringHost = "smtp.gmail.com"
+            val properties = System.getProperties()
+            properties["mail.smtp.host"] = stringHost
+            properties["mail.smtp.port"] = "465"
+            properties["mail.smtp.ssl.enable"] = "true"
+            properties["mail.smtp.auth"] = "true"
+            val session = Session.getInstance(properties, object : Authenticator() {
+                override fun getPasswordAuthentication(): PasswordAuthentication {
+                    return PasswordAuthentication(stringSenderEmail, stringPasswordSenderEmail)
+                }
+            })
+            val mimeMessage = MimeMessage(session)
+            mimeMessage.addRecipient(Message.RecipientType.TO, InternetAddress(stringReceiverEmail))
+            mimeMessage.subject = "TREC 50$ Voucher"
+            mimeMessage.setText("Hello " +name+ ", \n\nCongratulation!!\n\nYou have successfully received 50$ Cash Voucher.\n\nRedemption Location:" +
+                    "\nAeon Big Ampang\nLot 613, 47636.47638, Taman Dagang Permai, 68000 Ampang.\nAEON BiG Batu Pahat\nNo 1B, Jalan Persiaran Flora Utama, Taman Flora Utama, 83000 Batu Pahat, Johor Darul Takzim" +
+                    "\nAEON BiG Bukit Minyak\nNo 1,Tingkat Bukit Minyak 9, Taman Bukit Minyak, 14000 Bukit Mertajam, Penang.\n" +
+                    "AEON BiG Danau Kota\nLot PT 9834, Jln. Langkawi, Tmn. Danau Kota, Mukim Setapak, 53000 K.L.\n\n\n Voucher code: V" + random)
+            val thread = Thread {
+                try {
+                    Transport.send(mimeMessage)
+                } catch (e: MessagingException) {
+                    e.printStackTrace()
+                }
+            }
+            thread.start()
+        } catch (e: AddressException) {
+            e.printStackTrace()
+        } catch (e: MessagingException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun treeSendEmail() {
+        try {
+            val stringSenderEmail = "lowwc-wm21@student.tarc.edu.my"
+            val stringReceiverEmail = email
+            val stringPasswordSenderEmail = "020420100779"
+            val stringHost = "smtp.gmail.com"
+            val properties = System.getProperties()
+            properties["mail.smtp.host"] = stringHost
+            properties["mail.smtp.port"] = "465"
+            properties["mail.smtp.ssl.enable"] = "true"
+            properties["mail.smtp.auth"] = "true"
+            val session = Session.getInstance(properties, object : Authenticator() {
+                override fun getPasswordAuthentication(): PasswordAuthentication {
+                    return PasswordAuthentication(stringSenderEmail, stringPasswordSenderEmail)
+                }
+            })
+            val mimeMessage = MimeMessage(session)
+            mimeMessage.addRecipient(Message.RecipientType.TO, InternetAddress(stringReceiverEmail))
+            mimeMessage.subject = "TREC Green House"
+            mimeMessage.setText("Hello " +name+ ", \n\nThank you for your kindness!!\n\nYou have successfully Donated 1 tree. \n\nThe tree will be plant in very soon." +
+                    "\n\nYou can click the link below to know more about Global Environment Centre.\n https://www.gec.org.my")
+            val thread = Thread {
+                try {
+                    Transport.send(mimeMessage)
+                } catch (e: MessagingException) {
+                    e.printStackTrace()
+                }
+            }
+            thread.start()
+        } catch (e: AddressException) {
+            e.printStackTrace()
+        } catch (e: MessagingException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun foodSendEmail() {
+        try {
+            val stringSenderEmail = "lowwc-wm21@student.tarc.edu.my"
+            val stringReceiverEmail = email
+            val stringPasswordSenderEmail = "020420100779"
+            val stringHost = "smtp.gmail.com"
+            val properties = System.getProperties()
+            properties["mail.smtp.host"] = stringHost
+            properties["mail.smtp.port"] = "465"
+            properties["mail.smtp.ssl.enable"] = "true"
+            properties["mail.smtp.auth"] = "true"
+            val session = Session.getInstance(properties, object : Authenticator() {
+                override fun getPasswordAuthentication(): PasswordAuthentication {
+                    return PasswordAuthentication(stringSenderEmail, stringPasswordSenderEmail)
+                }
+            })
+            val mimeMessage = MimeMessage(session)
+            mimeMessage.addRecipient(Message.RecipientType.TO, InternetAddress(stringReceiverEmail))
+            mimeMessage.subject = "TREC Food Supply"
+            mimeMessage.setText("Hello " +name+ ", \n\nThank you for your kindness!!\n\nYou have successfully Donated 20$ worth of supply. \n\nSoon, the supply will be delivered." +
+                    "\n\nYou can click the link below to know more about Charity Right.\n https://www.charityright.my")
+            val thread = Thread {
+                try {
+                    Transport.send(mimeMessage)
+                } catch (e: MessagingException) {
+                    e.printStackTrace()
+                }
+            }
+            thread.start()
+        } catch (e: AddressException) {
+            e.printStackTrace()
+        } catch (e: MessagingException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun pollutionSendEmail() {
+        try {
+            val stringSenderEmail = "lowwc-wm21@student.tarc.edu.my"
+            val stringReceiverEmail = email
+            val stringPasswordSenderEmail = "020420100779"
+            val stringHost = "smtp.gmail.com"
+            val properties = System.getProperties()
+            properties["mail.smtp.host"] = stringHost
+            properties["mail.smtp.port"] = "465"
+            properties["mail.smtp.ssl.enable"] = "true"
+            properties["mail.smtp.auth"] = "true"
+            val session = Session.getInstance(properties, object : Authenticator() {
+                override fun getPasswordAuthentication(): PasswordAuthentication {
+                    return PasswordAuthentication(stringSenderEmail, stringPasswordSenderEmail)
+                }
+            })
+            val mimeMessage = MimeMessage(session)
+            mimeMessage.addRecipient(Message.RecipientType.TO, InternetAddress(stringReceiverEmail))
+            mimeMessage.subject = "TREC Water Pollution"
+            mimeMessage.setText("Hello " +name+ ", \n\nThank you for your kindness!!\n\nYou have successfully Donated 1 Cleaner." +
+                    "\n\nYou can click the link below to know more about World Health Organization.\n https://www.who.int")
+            val thread = Thread {
+                try {
+                    Transport.send(mimeMessage)
+                } catch (e: MessagingException) {
+                    e.printStackTrace()
+                }
+            }
+            thread.start()
+        } catch (e: AddressException) {
+            e.printStackTrace()
+        } catch (e: MessagingException) {
+            e.printStackTrace()
+        }
+    }
 
 }
