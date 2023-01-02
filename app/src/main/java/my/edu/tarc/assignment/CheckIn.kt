@@ -41,7 +41,7 @@ class CheckIn : Fragment() {
     lateinit var databaseReference: DatabaseReference
 
     private var counter = 0
-    var resetCount = 0
+    var checked = 0
     var gameCoin = 0
     var treeCoin = 0
     val handler = android.os.Handler()
@@ -165,11 +165,25 @@ class CheckIn : Fragment() {
         //Reminder Notification
         val switch: SwitchCompat = bindingCheckIn.switchReminder
         switch.setOnCheckedChangeListener{ _, isChecked ->
+            checked++
             if (isChecked) {
+                val notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
                 val calendar = Calendar.getInstance()
                 calendar.set(Calendar.HOUR_OF_DAY, 4)
                 calendar.set(Calendar.MINUTE, 1)
                 calendar.set(Calendar.SECOND, 0)
+
+                val notification = NotificationCompat.Builder(requireContext(), "reminder")
+                    .setSmallIcon(R.drawable.rewardlogo)
+                    .setContentTitle("Reminder")
+                    .setContentText("This is a reminder notification")
+                    .setWhen(calendar.timeInMillis)
+                    .setShowWhen(true)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .build()
+
+                notificationManager.notify(1, notification)
 
                 // Schedule the notification to be shown at a specific time every day
                 val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -420,25 +434,9 @@ class CheckIn : Fragment() {
         //Nav to Tree
         bindingCheckIn.buttonRewards.setOnClickListener {
             replaceFragment(Tree())
-//            replaceFragment(RewardsHistory())
         }
     }
 
-    private fun showNotification() {
-
-        // Build the notification
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val builder = NotificationCompat.Builder(requireContext(), "default")
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("Notification")
-                .setContentText("This is a test notification")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-            // Show the notification
-            val notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.notify(1, builder.build())
-        }
-    }
 
     //TODO: add if checkInCounter is > 0 then stay green
     private fun saved(checkin: Int, checkInCounter: Int){
