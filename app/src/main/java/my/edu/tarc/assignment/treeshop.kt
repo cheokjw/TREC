@@ -3,15 +3,18 @@ package my.edu.tarc.assignment
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import my.edu.tarc.assignment.databinding.FragmentPotionshopBinding
 import my.edu.tarc.assignment.databinding.FragmentTreeshopBinding
+import javax.mail.*
+import javax.mail.internet.AddressException
+import javax.mail.internet.InternetAddress
+import javax.mail.internet.MimeMessage
 
 
 class treeshop : Fragment() {
@@ -21,6 +24,8 @@ class treeshop : Fragment() {
     var treecoin = 0
     var gamecoin = 0
     var username = ""
+    var email = " "
+    var name = " "
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -52,6 +57,21 @@ class treeshop : Fragment() {
             Log.e("firebase", "Error getting data", it)
         }
 
+
+        //retrieve user email
+        databaseReference.child("email").get().addOnSuccessListener {
+            email = it.value.toString()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
+
+        //retrieve user name
+        databaseReference.child("fullname").get().addOnSuccessListener {
+            name = it.value.toString()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
+
         bindingTreeShop.treeGrowthButton.setOnClickListener {
             replaceFragment(Tree())
         }
@@ -72,6 +92,7 @@ class treeshop : Fragment() {
             }.addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
+            fivevoucherSendEmail()
         }
 
         bindingTreeShop.fifthyvoucherprice.setOnClickListener {
@@ -174,6 +195,41 @@ class treeshop : Fragment() {
             username = sess_username.toString()
         }else{
             Toast.makeText(activity, "failed to retrieve username", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun fivevoucherSendEmail() {
+        try {
+            val stringSenderEmail = "lowwc-wm21@student.tarc.edu.my"
+            val stringReceiverEmail = email
+            val stringPasswordSenderEmail = "020420100779"
+            val stringHost = "smtp.gmail.com"
+            val properties = System.getProperties()
+            properties["mail.smtp.host"] = stringHost
+            properties["mail.smtp.port"] = "465"
+            properties["mail.smtp.ssl.enable"] = "true"
+            properties["mail.smtp.auth"] = "true"
+            val session = Session.getInstance(properties, object : Authenticator() {
+                override fun getPasswordAuthentication(): PasswordAuthentication {
+                    return PasswordAuthentication(stringSenderEmail, stringPasswordSenderEmail)
+                }
+            })
+            val mimeMessage = MimeMessage(session)
+            mimeMessage.addRecipient(Message.RecipientType.TO, InternetAddress(stringReceiverEmail))
+            mimeMessage.subject = "TREC 5$ Voucher"
+            mimeMessage.setText("Hello " +name)
+            val thread = Thread {
+                try {
+                    Transport.send(mimeMessage)
+                } catch (e: MessagingException) {
+                    e.printStackTrace()
+                }
+            }
+            thread.start()
+        } catch (e: AddressException) {
+            e.printStackTrace()
+        } catch (e: MessagingException) {
+            e.printStackTrace()
         }
     }
 

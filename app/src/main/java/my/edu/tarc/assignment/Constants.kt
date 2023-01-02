@@ -82,7 +82,7 @@ object Constants {
             "Cigarettes",
             "Food packaging",
             3,
-            "Volunteers for the International Coastal Cleanup removed nearly two million cigarettes and cigarette filters in their most recent effort to clear litter from the world's oceans."
+            "Volunteers for the International Coastal Cleanup removed nearly two million cigarettes"
         )
         questionsList.add(que8)
 
@@ -92,7 +92,7 @@ object Constants {
             "The worst accident in US nuclear reactor history",
             "The worst oil spill in US history",
             3,
-            "coolant (the fluid that keeps a machine cool) escaped from the reactor core due to a combination of mechanical failure and human error"
+            "coolant (the fluid that keeps a machine cool) escaped from the reactor core"
         )
         questionsList.add(que9)
 
