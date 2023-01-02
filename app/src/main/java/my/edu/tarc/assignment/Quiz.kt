@@ -1,5 +1,4 @@
 package my.edu.tarc.assignment
-
 import android.app.Activity
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -52,16 +51,14 @@ class Quiz : Fragment(), View.OnClickListener {
         val sessionUser = mainActivity.getSessionUser()
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference("user")
-
+        mQuestionsList = Constants.getQuestions()
         databaseReference.child(sessionUser).get().addOnSuccessListener {
 
             if (it.exists()) {
                 mCurrentPosition = it.child("currentPosition").value.toString().toInt()
+                setQuestions()
             }
         }
-
-        mQuestionsList = Constants.getQuestions()
-        setQuestions()
         bindingQuiz.btnAnswer1.setOnClickListener(this)
         bindingQuiz.btnAnswer2.setOnClickListener(this)
         bindingQuiz.btnAnswer3.setOnClickListener(this)
@@ -317,6 +314,3 @@ class Quiz : Fragment(), View.OnClickListener {
     }
 
 }
-
-
-
