@@ -46,12 +46,26 @@ class Quiz : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         val activity: FragmentActivity? = activity
 
-            mQuestionsList = Constants.getQuestions()
-            setQuestions()
-            bindingQuiz.btnAnswer1.setOnClickListener(this)
-            bindingQuiz.btnAnswer2.setOnClickListener(this)
-            bindingQuiz.btnAnswer3.setOnClickListener(this)
-            bindingQuiz.btnAnswer4.setOnClickListener(this)
+
+        // Get data from database for current question position
+        val mainActivity: MainActivity = getActivity() as MainActivity
+        val sessionUser = mainActivity.getSessionUser()
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database.getReference("user")
+
+        databaseReference.child(sessionUser).get().addOnSuccessListener {
+
+            if (it.exists()) {
+                mCurrentPosition = it.child("currentPosition").value.toString().toInt()
+            }
+        }
+
+        mQuestionsList = Constants.getQuestions()
+        setQuestions()
+        bindingQuiz.btnAnswer1.setOnClickListener(this)
+        bindingQuiz.btnAnswer2.setOnClickListener(this)
+        bindingQuiz.btnAnswer3.setOnClickListener(this)
+        bindingQuiz.btnAnswer4.setOnClickListener(this)
 
     }
 
@@ -111,6 +125,7 @@ class Quiz : Fragment(), View.OnClickListener {
 
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
+                                databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }
 
                         }
@@ -125,6 +140,7 @@ class Quiz : Fragment(), View.OnClickListener {
                         databaseReference.child(sessionUser).get().addOnSuccessListener {
                             if (it.exists()) {
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                                databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }
                         }
                     }
@@ -164,6 +180,7 @@ class Quiz : Fragment(), View.OnClickListener {
 
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
+                                databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }
 
                         }
@@ -178,6 +195,7 @@ class Quiz : Fragment(), View.OnClickListener {
                         databaseReference.child(sessionUser).get().addOnSuccessListener {
                             if (it.exists()) {
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                                databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }
                         }
                     }
@@ -217,6 +235,7 @@ class Quiz : Fragment(), View.OnClickListener {
 
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
+                                databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }
 
                         }
@@ -231,6 +250,7 @@ class Quiz : Fragment(), View.OnClickListener {
                         databaseReference.child(sessionUser).get().addOnSuccessListener {
                             if (it.exists()) {
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                                databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }
                         }
                     }
@@ -269,6 +289,7 @@ class Quiz : Fragment(), View.OnClickListener {
 
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
+                                databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }
 
                         }
@@ -283,6 +304,7 @@ class Quiz : Fragment(), View.OnClickListener {
                         databaseReference.child(sessionUser).get().addOnSuccessListener {
                             if (it.exists()) {
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
+                                databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }
                         }
                     }

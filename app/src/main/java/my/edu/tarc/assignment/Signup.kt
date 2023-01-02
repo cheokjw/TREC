@@ -77,7 +77,8 @@ class Signup : Fragment() {
                                 golden_quantity = 0,
                                 quizCorrect = 0.0,
                                 imgProfile = 0,
-                                checkInCounter = 0
+                                checkInCounter = 0,
+                                currentPosition = 1
                             )
 
                             //Here Data Inserted
