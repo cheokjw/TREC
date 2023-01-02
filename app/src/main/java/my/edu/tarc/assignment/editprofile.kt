@@ -71,6 +71,7 @@ class EditProfile : DialogFragment() {
         databaseReference.child(username).child("email").get().addOnSuccessListener {
             val email = it.getValue(String::class.java)
             bindingeditinfo.editTextEmail.setText(email)}
+            bindingeditinfo.editTextEmail.isEnabled = false
         //get phone
         databaseReference.child(username).child("phone").get().addOnSuccessListener {
             val phone = it.getValue(String::class.java)
@@ -83,12 +84,10 @@ class EditProfile : DialogFragment() {
 
     private fun updateInfo(){
         val full_name = bindingeditinfo.editTextFullName.text.toString()
-        val email = bindingeditinfo.editTextEmail.text.toString()
         val phone = bindingeditinfo.editTextPhone.text.toString()
         val address = bindingeditinfo.editTextAddress.text.toString()
         val update = HashMap<String, Any>()
         update["fullname"] = full_name
-        update["email"] = email
         update["phone"] = phone
         update["address"] = address
         databaseReference.child(username).updateChildren(update)

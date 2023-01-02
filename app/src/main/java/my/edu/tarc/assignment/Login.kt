@@ -1,5 +1,6 @@
  package my.edu.tarc.assignment
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,12 +13,17 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.database.*
 import my.edu.tarc.assignment.databinding.FragmentLoginBinding
 import android.content.SharedPreferences
+import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
  class Login : Fragment(), View.OnClickListener {
 
      lateinit var database: FirebaseDatabase
      lateinit var databaseReference: DatabaseReference
+     private lateinit var auth: FirebaseAuth
      private lateinit var bindinglogin: FragmentLoginBinding
 
 
@@ -26,6 +32,8 @@ import android.content.SharedPreferences
          super.onCreate(savedInstanceState)
          database = FirebaseDatabase.getInstance()
          databaseReference = database.getReference().child("user")
+         auth = Firebase.auth
+
      }
 
 
@@ -82,13 +90,33 @@ import android.content.SharedPreferences
          if (username.isEmpty() || password.isEmpty()) {
              Toast.makeText(activity, "Empty Field", Toast.LENGTH_SHORT).show()
          } else {
-             CheckUser(username)
+             authLogin()
+             //CheckUser(username)
          }
      }
 
+
+
+     //firebase authentication login method
+     private fun authLogin(){
+         val email = bindinglogin.editTextUsername.text.toString()
+         val password = bindinglogin.editTextPassword.text.toString()
+         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+             if(task.isSuccessful){
+                 //Sign in success
+                 Toast.makeText(activity, "Login Successful", Toast.LENGTH_SHORT).show()
+                 emailUser()
+             }else{
+                 Toast.makeText(activity, "Login Failed", Toast.LENGTH_SHORT).show()
+             }
+         }
+     }
+
+
+
+     //realtime database login method
      private fun CheckUser(username: String){
          val activityfunction = activity as LoginActivity
-
          databaseReference.child(username).get().addOnSuccessListener {
              if(it.exists()){
                  val veripw = it.child("pass").value
@@ -97,11 +125,11 @@ import android.content.SharedPreferences
                      Toast.makeText(activity, "Login Successful", Toast.LENGTH_SHORT).show()
 
                      //create session
-                     startSess(bindinglogin.editTextUsername.text.toString())
+                     //startSess(bindinglogin.editTextUsername.text.toString())
+
 
                      //start mainactivity
                      activityfunction.access()
-
                  }else{
                      Toast.makeText(activity, "Password Error", Toast.LENGTH_SHORT).show()
                  }
@@ -114,12 +142,44 @@ import android.content.SharedPreferences
          }
      }
 
+
+     private fun emailUser(){
+         val activityfunction = activity as LoginActivity
+         val useremail = bindinglogin.editTextUsername.text.toString()
+         val emailQuery = databaseReference.orderByChild("email").equalTo(useremail)
+
+         emailQuery.addListenerForSingleValueEvent(object: ValueEventListener {
+             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                 if (dataSnapshot.exists()) {
+                     // Email is present in the database
+                     for (userSnapshot in dataSnapshot.children) {
+                         val userID = userSnapshot.key.toString()
+                         startSess(userID)
+                         activityfunction.access()
+                     }
+                 } else {
+                     // Email is not present in the database
+                     Log.e(TAG,"Error in getting userID")
+                 }
+             }
+
+             override fun onCancelled(databaseError: DatabaseError) {
+                 // Handle error
+             }
+         })
+     }
+
+
+
+
+
      private fun startSess(username: String){
          val preferences = requireContext().getSharedPreferences("sess_store", Context.MODE_PRIVATE)
          val editor = preferences.edit()
          editor.putString("username", username)
          editor.apply()
-
+         //Toast.makeText(activity,"Success",Toast.LENGTH_SHORT).show()
+         Log.d(TAG,"Username session: $username")
      }
 
 

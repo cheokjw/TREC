@@ -1,12 +1,15 @@
 package my.edu.tarc.assignment
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
@@ -18,6 +21,7 @@ class Signup : Fragment() {
 
     private lateinit var bindingSignup: FragmentSignupBinding
     private lateinit var database: FirebaseDatabase
+    private lateinit var auth: FirebaseAuth;
     private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +37,7 @@ class Signup : Fragment() {
 
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference().child("user")
+        auth = FirebaseAuth.getInstance()
         val username = bindingSignup.editTextUsernameReg.text.toString()
 
         bindingSignup.buttonRegister.setOnClickListener(){
@@ -54,8 +59,9 @@ class Signup : Fragment() {
                         green_quantity = 0, golden_quantity = 0, quizCorrect = 0.0, imgProfile = 0, checkInCounter = 0)
 
                     //Here Data Inserted
+                    addToAuth()
                     databaseReference.child(username).setValue(regis)
-                    Toast.makeText(activity, "Signup Successful", Toast.LENGTH_SHORT).show()
+                  Toast.makeText(activity, "Signup Successful", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -74,6 +80,20 @@ class Signup : Fragment() {
         val transaction: FragmentTransaction = parentFragmentManager!!.beginTransaction()
         transaction.replace(R.id.frameLayout_login, LoginFragment)
         transaction.commit()
+    }
+
+
+    private fun addToAuth(){
+        val email = bindingSignup.editTextEmailReg.text.toString()
+        val password = bindingSignup.editTextEnterPassReg.text.toString()
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                Log.d(TAG, "Added to FirebaseAuth - forgt pw purpose")
+            } else{
+                //debugging issue found
+                Log.e(TAG,"Add to FirebaseAuth (failed)", task.exception)
+            }
+        }
     }
 
 }
