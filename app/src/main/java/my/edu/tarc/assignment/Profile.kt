@@ -62,8 +62,7 @@ class Profile : Fragment(), View.OnClickListener {
             }
 
             R.id.buttonLogout -> {
-                val activityfunction = activity as MainActivity
-                activityfunction.logout()
+                alertLogout()
             }
         }
     }
@@ -136,6 +135,21 @@ class Profile : Fragment(), View.OnClickListener {
             5 -> bindingProfile.imageViewAvatar.setImageResource(R.drawable.avatar5)
             6 -> bindingProfile.imageViewAvatar.setImageResource(R.drawable.avatar6)
         }
+    }
+
+    private fun alertLogout(){
+        var logout = android.app.AlertDialog.Builder(activity)
+            .setTitle("Logout")
+            .setMessage("Are you sure you want to logout?")
+            .setPositiveButton("Yes"){_,_ ->
+                var activityfunction = activity as MainActivity
+                Toast.makeText(activity, "Logging Out ...", Toast.LENGTH_SHORT).show()
+                activityfunction.logout()
+            }
+            .setNegativeButton("No"){_,_ ->
+            }
+        val alertDialog = logout.create()
+        alertDialog.show()
     }
 
 

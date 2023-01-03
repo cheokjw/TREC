@@ -72,7 +72,7 @@ import com.google.firebase.ktx.Firebase
                  if (isValid){
                      login()
                  }else{
-                    bindinglogin.editTextUsername.error = "PLease enter a correct email format"
+                    bindinglogin.editTextUsername.error = "Please enter a correct email format"
                  }
 
              }
@@ -111,7 +111,7 @@ import com.google.firebase.ktx.Firebase
          auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
              if(task.isSuccessful){
                  //Sign in success
-                 Toast.makeText(activity, "Login Successful", Toast.LENGTH_SHORT).show()
+                 Toast.makeText(activity, "Logging In ...", Toast.LENGTH_SHORT).show()
                  emailUser()
              }else{
                  Toast.makeText(activity, "Login Failed", Toast.LENGTH_SHORT).show()
