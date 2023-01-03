@@ -148,11 +148,11 @@ class potionshop : Fragment() {
             .setMessage("Are you sure to purchase?")
             .setPositiveButton("Yes"){_,_->
                 Toast.makeText(activity, "Successfully bought 1 " + portion +" !\n " + portion +"Balance: "+ quantity , Toast.LENGTH_SHORT).show()
-                var sprayUpdate = hashMapOf<String, Any>(
+                var UpdateData = hashMapOf<String, Any>(
                     "gameCoin" to gCoin,
                     item_string to quantity
                 )
-                databaseReference.updateChildren(sprayUpdate)
+                databaseReference.updateChildren(UpdateData)
                 databaseReference.child("gameCoin").get().addOnSuccessListener {
                     gamecoin = it.value.toString().toInt()
                     bindingPotion.textViewGameCoin.text = it.value.toString()

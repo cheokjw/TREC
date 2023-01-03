@@ -1,5 +1,6 @@
 package my.edu.tarc.assignment
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -38,8 +39,7 @@ class treeshop : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_treeshop, container, false)
+
         getSess()
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference().child("user").child(username)
@@ -87,108 +87,69 @@ class treeshop : Fragment() {
         }
         bindingTreeShop.fivevoucherprice.setOnClickListener {
             if(treecoin >= 5){
-                treecoin -= 5
-                Toast.makeText(activity, "Got 1 5$-CASH VOUCHER!\n VOUCHER sent to email." , Toast.LENGTH_SHORT).show()
+                alertDialog("Got 1 5$-CASH VOUCHER!\n VOUCHER sent to email.", treecoin - 5)
                 fivevoucherSendEmail()
             }else
                 Toast.makeText(activity, "Insufficient TREE COIN!\n Go PLANT TREE!!!", Toast.LENGTH_SHORT).show()
-            var gamecoinUpdate = hashMapOf<String, Any>(
-                "treeCoin" to treecoin
-            )
-            databaseReference.updateChildren(gamecoinUpdate)
-            //retrieve tree coin
-            databaseReference.child("treeCoin").get().addOnSuccessListener {
-                treecoin = it.value.toString().toInt()
-                bindingTreeShop.textViewTreeCoin.text = it.value.toString()
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-            }
         }
 
         bindingTreeShop.fifthyvoucherprice.setOnClickListener {
             if(treecoin >= 30){
-                treecoin -= 30
-                Toast.makeText(activity, "Got 1 50$-CASH VOUCHER!\n VOUCHER sent to email." , Toast.LENGTH_SHORT).show()
+                alertDialog("Got 1 50$-CASH VOUCHER!\n VOUCHER sent to email.", treecoin - 30)
                 fifthvoucherSendEmail()
             }else
                 Toast.makeText(activity, "Insufficient TREE COIN!\n Go PLANT TREE!!!", Toast.LENGTH_SHORT).show()
-            var gamecoinUpdate = hashMapOf<String, Any>(
-                "treeCoin" to treecoin
-            )
-            databaseReference.updateChildren(gamecoinUpdate)
-            //retrieve tree coin
-            databaseReference.child("treeCoin").get().addOnSuccessListener {
-                treecoin = it.value.toString().toInt()
-                bindingTreeShop.textViewTreeCoin.text = it.value.toString()
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-            }
         }
 
         bindingTreeShop.treepricebutton.setOnClickListener {
             if(treecoin >= 5){
-                treecoin -= 5
-                Toast.makeText(activity, "Successfully donate 1 TREE!\nThank for Environmental Afforestation." , Toast.LENGTH_SHORT).show()
+                alertDialog("Successfully donate 1 TREE!\nThank for Environmental Afforestation.", treecoin - 5)
                 treeSendEmail()
             }else
                 Toast.makeText(activity, "Insufficient TREE COIN!\n Go PLANT TREE!!!", Toast.LENGTH_SHORT).show()
-            var gamecoinUpdate = hashMapOf<String, Any>(
-                "treeCoin" to treecoin
-            )
-            databaseReference.updateChildren(gamecoinUpdate)
-            //retrieve tree coin
-            databaseReference.child("treeCoin").get().addOnSuccessListener {
-                treecoin = it.value.toString().toInt()
-                bindingTreeShop.textViewTreeCoin.text = it.value.toString()
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-            }
         }
 
         bindingTreeShop.foodpricebutton.setOnClickListener {
             if(treecoin >= 1){
-                treecoin -= 1
-                bindingTreeShop.textViewTreeCoin.text = treecoin.toString()
-                Toast.makeText(activity, "Successfully donate 20$ Food Supply!\nThanks for Helping People." , Toast.LENGTH_SHORT).show()
+                alertDialog("Successfully donate 20$ Food Supply!\nThanks for Helping People.", treecoin - 1)
                 foodSendEmail()
             }else
                 Toast.makeText(activity, "Insufficient TREE COIN!\n Go PLANT TREE!!!", Toast.LENGTH_SHORT).show()
-            var gamecoinUpdate = hashMapOf<String, Any>(
-                "treeCoin" to treecoin
-            )
-            databaseReference.updateChildren(gamecoinUpdate)
-            //retrieve tree coin
-            databaseReference.child("treeCoin").get().addOnSuccessListener {
-                treecoin = it.value.toString().toInt()
-                bindingTreeShop.textViewTreeCoin.text = it.value.toString()
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-            }
+
         }
 
         bindingTreeShop.waterpricebutton.setOnClickListener {
             if(treecoin >= 2){
-                treecoin -= 2
-                bindingTreeShop.textViewTreeCoin.text = treecoin.toString()
-                Toast.makeText(activity, "Donate 1 Cleaner for Water Pollution!\nThanks for helping the SEA." , Toast.LENGTH_SHORT).show()
+                alertDialog("Donate 1 Cleaner for Water Pollution!\nThanks for helping the SEA.", treecoin - 2)
                 pollutionSendEmail()
             }else
                 Toast.makeText(activity, "Insufficient TREE COIN!\n Go PLANT TREE!!!", Toast.LENGTH_SHORT).show()
-            var gamecoinUpdate = hashMapOf<String, Any>(
-                "treeCoin" to treecoin
-            )
-            databaseReference.updateChildren(gamecoinUpdate)
-            //retrieve tree coin
-            databaseReference.child("treeCoin").get().addOnSuccessListener {
-                treecoin = it.value.toString().toInt()
-                bindingTreeShop.textViewTreeCoin.text = it.value.toString()
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-            }
         }
 
 
         return bindingTreeShop.root
+    }
+
+    private fun alertDialog(text : String, tCoin: Int){
+        var buyDialog = AlertDialog.Builder(activity)
+            .setTitle("Confirmation")
+            .setMessage("Are you sure to purchase?")
+            .setPositiveButton("Yes"){_,_->
+                Toast.makeText(activity, text , Toast.LENGTH_SHORT).show()
+                var sprayUpdate = hashMapOf<String, Any>(
+                    "treeCoin" to tCoin
+                )
+                databaseReference.updateChildren(sprayUpdate)
+                databaseReference.child("treeCoin").get().addOnSuccessListener {
+                    treecoin = it.value.toString().toInt()
+                    bindingTreeShop.textViewTreeCoin.text = it.value.toString()
+                }.addOnFailureListener {
+                    Log.e("firebase", "Error getting data", it)
+                }
+            }
+            .setNegativeButton("No"){_,_ ->
+                Toast.makeText(activity, "Please purchase again", Toast.LENGTH_SHORT).show()
+            }.create().show()
     }
 
     private fun replaceFragment(fragment : Fragment){
