@@ -50,7 +50,7 @@ class News : Fragment() {
         }
 
         bindingNews.cvCr.setOnClickListener{
-            Toast.makeText(activity, "Guiding you to GEC website", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, "Guiding you to Charity Right website", Toast.LENGTH_LONG).show()
             val url = "https://www.charityright.my"
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
