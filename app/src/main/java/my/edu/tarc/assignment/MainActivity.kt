@@ -65,4 +65,8 @@ class MainActivity : AppCompatActivity() {
         sf = getSharedPreferences("sess_store", MODE_PRIVATE)
         return sf.getString("username", null).toString()
     }
+
+    override fun onBackPressed() {
+
+    }
 }
