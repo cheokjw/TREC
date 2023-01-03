@@ -58,6 +58,10 @@ class MainActivity : AppCompatActivity() {
     fun logout(){
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
+        sf = getSharedPreferences("sess_store", MODE_PRIVATE)
+        val sf = sf.edit()
+        sf.clear()
+        sf.apply()
         finish()
     }
 
