@@ -5,12 +5,14 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_quiz"
     tools:context=".News">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvWho"
         android:layout_width="380dp"
         android:layout_height="180dp"
+        android:layout_marginTop="60dp"
         app:cardElevation="50dp"
         app:cardMaxElevation="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,6 +52,7 @@
         android:id="@+id/cvCr"
         android:layout_width="380dp"
         android:layout_height="150dp"
+        android:layout_marginTop="110dp"
         app:cardElevation="50dp"
         app:cardMaxElevation="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
