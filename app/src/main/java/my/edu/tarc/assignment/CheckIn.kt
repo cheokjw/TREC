@@ -133,17 +133,17 @@ class CheckIn : Fragment() {
                         var dbGameCoin = it.child("gameCoin").value.toString().toInt()
                         var dbTreeCoin = it.child("treeCoin").value.toString().toInt()
 
-//                        gameCoin = if (dbGameCoin == null) {
-//                            0
-//                        } else {
-//                            dbGameCoin as Int
-//                        }
-//
-//                        treeCoin = if (dbTreeCoin == null) {
-//                            0
-//                        } else {
-//                            dbTreeCoin as Int
-//                        }
+                        gameCoin = if (dbGameCoin == null) {
+                            0
+                        } else {
+                            dbGameCoin as Int
+                        }
+
+                        treeCoin = if (dbTreeCoin == null) {
+                            0
+                        } else {
+                            dbTreeCoin as Int
+                        }
                         counterTextView.text = gameCoin.toString()
                         textViewGameCoin.text = gameCoin.toString()
                         textViewTreeCoin.text = treeCoin.toString()
