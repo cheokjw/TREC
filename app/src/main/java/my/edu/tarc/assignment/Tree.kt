@@ -28,6 +28,7 @@ class Tree : Fragment() {
     var username =""
     var treecoin = 0
     var gamecoin = 0
+    var name = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +43,13 @@ class Tree : Fragment() {
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference().child("user").child(username)
         bindingTree = FragmentTreeBinding.inflate(inflater)
+        //retrieve username
+        databaseReference.child("username").get().addOnSuccessListener {
+            name = it.value.toString()
+            bindingTree.textViewUserName.text = it.value.toString()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
         //retrieve game coin
         databaseReference.child("gameCoin").get().addOnSuccessListener {
             gamecoin = it.value.toString().toInt()

@@ -33,6 +33,7 @@ class potionshop : Fragment() {
     var goldqtt = 0
     var username =""
     var treecoin = 0
+    var name = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,13 @@ class potionshop : Fragment() {
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference().child("user").child(username)
         bindingPotion = FragmentPotionshopBinding.inflate(inflater)
+        //retrieve username
+        databaseReference.child("username").get().addOnSuccessListener {
+            name = it.value.toString()
+            bindingPotion.textViewUserName.text = it.value.toString()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
         //retrieve game coin
         databaseReference.child("gameCoin").get().addOnSuccessListener {
             gamecoin = it.value.toString().toInt()

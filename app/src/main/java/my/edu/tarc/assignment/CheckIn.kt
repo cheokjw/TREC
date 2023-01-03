@@ -46,6 +46,7 @@ class CheckIn : Fragment() {
     var treeCoin = 0
     var username =""
     val handler = android.os.Handler()
+    var name =""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,11 +58,18 @@ class CheckIn : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        getSess()
-//        database = FirebaseDatabase.getInstance()
-//        databaseReference = database.getReference().child("user").child(username)
+        getSess()
+        database = FirebaseDatabase.getInstance()
+        databaseReference = database.getReference().child("user").child(username)
 //
         bindingCheckIn = FragmentCheckInBinding.inflate(inflater)
+        //retrieve username
+        databaseReference.child("username").get().addOnSuccessListener {
+            name = it.value.toString()
+            bindingCheckIn.textViewUserName.text = it.value.toString()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
 //
 //        databaseReference.child("reminderToggle").get().addOnSuccessListener {
 //            toggledCounter = it.value.toString().toInt()
@@ -294,7 +302,7 @@ class CheckIn : Fragment() {
                                 //Day 1 CheckIn
                                 saveProgress(checkin)
                                 gameCoin += 100
-                                Toast.makeText(activity, "5 Coins Added!$gameCoin", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(activity, "$100 Coins Added!", Toast.LENGTH_SHORT).show()
                                 counter++
                                 checkInCounter++
                                 checkin++
@@ -311,7 +319,7 @@ class CheckIn : Fragment() {
                                 //Day 2 CheckIn
                                 saveProgress(checkin)
                                 gameCoin += 100
-                                Toast.makeText(activity, "5 Coins Added!$gameCoin", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(activity, "$100 Coins Added!", Toast.LENGTH_SHORT).show()
                                 counter++
                                 checkInCounter++
                                 checkin++
@@ -329,7 +337,7 @@ class CheckIn : Fragment() {
                                 //Day 3 CheckIn
                                 saveProgress(checkin)
                                 gameCoin += 100
-                                Toast.makeText(activity, "5 Coins Added!$gameCoin", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(activity, "$100 Coins Added!", Toast.LENGTH_SHORT).show()
                                 counter++
                                 checkInCounter++
                                 checkin++
@@ -346,7 +354,7 @@ class CheckIn : Fragment() {
                                 //Day 4 CheckIn
                                 saveProgress(checkin)
                                 gameCoin += 100
-                                Toast.makeText(activity, "5 Coins Added!$gameCoin", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(activity, "$100 Coins Added!", Toast.LENGTH_SHORT).show()
                                 counter++
                                 checkInCounter++
                                 checkin++
@@ -363,7 +371,7 @@ class CheckIn : Fragment() {
                                 //Day 5 CheckIn
                                 saveProgress(checkin)
                                 gameCoin += 100
-                                Toast.makeText(activity, "5 Coins Added!$gameCoin", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(activity, "$100 Coins Added!", Toast.LENGTH_SHORT).show()
                                 counter++
                                 checkInCounter++
                                 checkin++
@@ -380,7 +388,7 @@ class CheckIn : Fragment() {
                                 //Day 6 CheckIn
                                 saveProgress(checkin)
                                 gameCoin += 100
-                                Toast.makeText(activity, "5 Coins Added!$gameCoin", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(activity, "$100 Coins Added!", Toast.LENGTH_SHORT).show()
                                 counter++
                                 checkInCounter++
                                 checkin++
@@ -397,7 +405,7 @@ class CheckIn : Fragment() {
                                 //Day 7 CheckIn
                                 saveProgress(checkin)
                                 gameCoin += 500
-                                Toast.makeText(activity, "5 Coins Added!$gameCoin", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(activity, "$500 Coins Added!", Toast.LENGTH_SHORT).show()
                                 counter++
                                 checkInCounter++
                                 checkin = 0

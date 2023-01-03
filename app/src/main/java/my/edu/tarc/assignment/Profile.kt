@@ -104,6 +104,11 @@ class Profile : Fragment(), View.OnClickListener {
             val gamecoin = it.value.toString().toInt()
             bindingProfile.textViewGameCoin.text = gamecoin.toString()
         }
+        //get username
+        databaseReference.child(username).child("username").get().addOnSuccessListener {
+            val nname = it.value.toString()
+            bindingProfile.textViewUserName.text = nname
+        }
         //get image
         databaseReference.child(username).child("imgProfile").get().addOnSuccessListener {
             val number = it.value.toString().toInt()

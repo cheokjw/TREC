@@ -28,6 +28,7 @@ class treeshop : Fragment() {
     var email = " "
     var name = " "
     var random = getRandomNumber()
+    var nname = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +44,13 @@ class treeshop : Fragment() {
         database = FirebaseDatabase.getInstance()
         databaseReference = database.getReference().child("user").child(username)
         bindingTreeShop = FragmentTreeshopBinding.inflate(inflater)
-
+        //retrieve username
+        databaseReference.child("username").get().addOnSuccessListener {
+            nname = it.value.toString()
+            bindingTreeShop.textViewUserName.text = it.value.toString()
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
         //retrieve game coin
         databaseReference.child("gameCoin").get().addOnSuccessListener {
             gamecoin = it.value.toString().toInt()
@@ -82,6 +89,7 @@ class treeshop : Fragment() {
             if(treecoin >= 5){
                 treecoin -= 5
                 Toast.makeText(activity, "Got 1 5$-CASH VOUCHER!\n VOUCHER sent to email." , Toast.LENGTH_SHORT).show()
+                fivevoucherSendEmail()
             }else
                 Toast.makeText(activity, "Insufficient TREE COIN!\n Go PLANT TREE!!!", Toast.LENGTH_SHORT).show()
             var gamecoinUpdate = hashMapOf<String, Any>(
@@ -95,13 +103,13 @@ class treeshop : Fragment() {
             }.addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
-            fivevoucherSendEmail()
         }
 
         bindingTreeShop.fifthyvoucherprice.setOnClickListener {
             if(treecoin >= 30){
                 treecoin -= 30
                 Toast.makeText(activity, "Got 1 50$-CASH VOUCHER!\n VOUCHER sent to email." , Toast.LENGTH_SHORT).show()
+                fifthvoucherSendEmail()
             }else
                 Toast.makeText(activity, "Insufficient TREE COIN!\n Go PLANT TREE!!!", Toast.LENGTH_SHORT).show()
             var gamecoinUpdate = hashMapOf<String, Any>(
@@ -115,13 +123,13 @@ class treeshop : Fragment() {
             }.addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
-            fifthvoucherSendEmail()
         }
 
         bindingTreeShop.treepricebutton.setOnClickListener {
             if(treecoin >= 5){
                 treecoin -= 5
                 Toast.makeText(activity, "Successfully donate 1 TREE!\nThank for Environmental Afforestation." , Toast.LENGTH_SHORT).show()
+                treeSendEmail()
             }else
                 Toast.makeText(activity, "Insufficient TREE COIN!\n Go PLANT TREE!!!", Toast.LENGTH_SHORT).show()
             var gamecoinUpdate = hashMapOf<String, Any>(
@@ -135,7 +143,6 @@ class treeshop : Fragment() {
             }.addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
-            treeSendEmail()
         }
 
         bindingTreeShop.foodpricebutton.setOnClickListener {
@@ -143,6 +150,7 @@ class treeshop : Fragment() {
                 treecoin -= 1
                 bindingTreeShop.textViewTreeCoin.text = treecoin.toString()
                 Toast.makeText(activity, "Successfully donate 20$ Food Supply!\nThanks for Helping People." , Toast.LENGTH_SHORT).show()
+                foodSendEmail()
             }else
                 Toast.makeText(activity, "Insufficient TREE COIN!\n Go PLANT TREE!!!", Toast.LENGTH_SHORT).show()
             var gamecoinUpdate = hashMapOf<String, Any>(
@@ -156,7 +164,6 @@ class treeshop : Fragment() {
             }.addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
-            foodSendEmail()
         }
 
         bindingTreeShop.waterpricebutton.setOnClickListener {
@@ -164,6 +171,7 @@ class treeshop : Fragment() {
                 treecoin -= 2
                 bindingTreeShop.textViewTreeCoin.text = treecoin.toString()
                 Toast.makeText(activity, "Donate 1 Cleaner for Water Pollution!\nThanks for helping the SEA." , Toast.LENGTH_SHORT).show()
+                pollutionSendEmail()
             }else
                 Toast.makeText(activity, "Insufficient TREE COIN!\n Go PLANT TREE!!!", Toast.LENGTH_SHORT).show()
             var gamecoinUpdate = hashMapOf<String, Any>(
@@ -177,7 +185,6 @@ class treeshop : Fragment() {
             }.addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
-            pollutionSendEmail()
         }
 
 
