@@ -106,9 +106,97 @@ object Constants {
         )
         questionsList.add(que10)
 
+        val que11: Question = Question(11, "Which of the following is NOT a greenhouse gas?",
+        "Carbon dioxide",
+            "Water vapor",
+            "Methane",
+            "Chlorofluorocarbons",
+            4,
+            "Greenhouse gases are gases that trap heat in the Earth's atmosphere"
+        )
+        questionsList.add(que11)
 
+        val que12: Question = Question(12, "What is the primary cause of ocean acidification?",
+        "Overfishing",
+        "Climate change",
+        "Pollution",
+        "Deforestation",
+        2,
+        "Ocean acidification is the process by which the ocean's pH decreases")
+        questionsList.add(que12)
 
+        val que13: Question = Question(13, "Which of the following is NOT a renewable energy source?",
+        "Solar power",
+        "Hydroelectric power",
+        "Wind power",
+        "Nuclear power",
+        4,
+            "Nuclear power, on the other hand, is generated through the use of uranium, which is a finite resource that cannot be replenished."
+        )
+        questionsList.add(que13)
 
+        val que14: Question = Question(14, "What is the primary cause of deforestation?",
+        "Urbanization",
+        "Agriculture",
+        "Logging",
+        "Natural disasters",
+        2,
+        "Agriculture is the primary cause of deforestation, as forests are often cleared to create farmland")
+        questionsList.add(que14)
+
+        val que15:Question = Question(15, "Which of the following is NOT a way to reduce your carbon footprint",
+        "Using public transportation",
+        "Planting trees",
+        "Using energy-efficient appliances",
+        "Flying in airplanes",
+        2,
+        "Some ways to reduce your carbon footprint include using public transportation, using energy-efficient appliances")
+        questionsList.add(que15)
+
+        val que16:Question = Question(16, "Which of the following is NOT a cause of soil erosion?",
+        "Overgrazing",
+        "Deforestation",
+        "Urbanization",
+        "Lack of precipitation",
+        4,
+        "Soil erosion is the process by which soil is worn away or removed from the surface of the Earth")
+        questionsList.add(que16)
+
+        val que17:Question = Question(17, "What is the main cause of climate change?",
+        "Deforestation",
+        "Overpopulation",
+        "Pollution",
+        "The sun's activity",
+        3,
+        "Climate change is primarily caused by the burning of fossil fuels, such as coal, oil, and gas")
+        questionsList.add(que17)
+
+        val que18:Question = Question(18, "What is the process called when rainwater is not absorbed by the ground and instead runs off into streams and rivers?",
+        "Flooding",
+        "Erosion",
+        "Runoff",
+        "Siltation",
+        3,
+        "Runoff occurs when rainwater is not absorbed by the ground and instead flows over the surface, carrying soil and other contaminants")
+        questionsList.add(que18)
+
+        val que19: Question = Question(19, "What is the main cause of air pollution?",
+        "Natural disasters",
+        "The use of fossil fuels",
+        "Pesticides and herbicides",
+        "All of the above",
+        2,
+        "It releases a variety of harmful pollutants into the air, including carbon dioxide, nitrogen oxides")
+        questionsList.add(que19)
+
+        val que20: Question = Question(20, "What is the process called when plants and animals become extinct?",
+        "Extinction",
+        "Endangered",
+        "Threatened",
+        "All of the above",
+        1,
+        "Extinction is the process by which plants and animals become extinct, meaning they are no longer found on Earth")
+        questionsList.add(que20)
 
 
         return questionsList

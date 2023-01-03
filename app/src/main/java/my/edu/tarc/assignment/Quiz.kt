@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import my.edu.tarc.assignment.databinding.FragmentQuizBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class Quiz : Fragment(), View.OnClickListener {
@@ -44,8 +46,6 @@ class Quiz : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity: FragmentActivity? = activity
-
-
         // Get data from database for current question position
         val mainActivity: MainActivity = getActivity() as MainActivity
         val sessionUser = mainActivity.getSessionUser()
@@ -56,6 +56,20 @@ class Quiz : Fragment(), View.OnClickListener {
 
             if (it.exists()) {
                 mCurrentPosition = it.child("currentPosition").value.toString().toInt()
+                val c = Calendar.getInstance()
+                val day = c.get(Calendar.DAY_OF_MONTH)
+                val dbQuestionDate = it.child("questionDate").value.toString().toInt()
+
+                if (dbQuestionDate != day) {
+                    val random = Random()
+                    val set = random.nextInt(2) + 1
+
+                    if(set == 1){
+                        mQuestionsList = ArrayList(mQuestionsList!!.drop(10))
+                    }else if(set == 2){
+                        mQuestionsList = ArrayList(mQuestionsList!!.dropLast(10))
+                    }
+                }
                 setQuestions()
             }
         }
@@ -119,7 +133,10 @@ class Quiz : Fragment(), View.OnClickListener {
                                 }
 
                                 gameCoin += 5
+                                val c = Calendar.getInstance()
+                                val day = c.get(Calendar.DAY_OF_MONTH)
 
+                                databaseReference.child(sessionUser).child("questionDate").setValue(day)
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
                                 databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
@@ -136,6 +153,10 @@ class Quiz : Fragment(), View.OnClickListener {
 
                         databaseReference.child(sessionUser).get().addOnSuccessListener {
                             if (it.exists()) {
+                                val c = Calendar.getInstance()
+                                val day = c.get(Calendar.DAY_OF_MONTH)
+
+                                databaseReference.child(sessionUser).child("questionDate").setValue(day)
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }
@@ -174,7 +195,9 @@ class Quiz : Fragment(), View.OnClickListener {
                                 }
 
                                 gameCoin += 5
-
+                                val c = Calendar.getInstance()
+                                val day = c.get(Calendar.DAY_OF_MONTH)
+                                databaseReference.child(sessionUser).child("questionDate").setValue(day)
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
                                 databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
@@ -191,6 +214,9 @@ class Quiz : Fragment(), View.OnClickListener {
                         Log.i("End", mCorrectPercentage.toString())
                         databaseReference.child(sessionUser).get().addOnSuccessListener {
                             if (it.exists()) {
+                                val c = Calendar.getInstance()
+                                val day = c.get(Calendar.DAY_OF_MONTH)
+                                databaseReference.child(sessionUser).child("questionDate").setValue(day)
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }
@@ -229,7 +255,9 @@ class Quiz : Fragment(), View.OnClickListener {
                                 }
 
                                 gameCoin += 5
-
+                                val c = Calendar.getInstance()
+                                val day = c.get(Calendar.DAY_OF_MONTH)
+                                databaseReference.child(sessionUser).child("questionDate").setValue(day)
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
                                 databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
@@ -246,6 +274,9 @@ class Quiz : Fragment(), View.OnClickListener {
                         Log.i("End", mCorrectPercentage.toString())
                         databaseReference.child(sessionUser).get().addOnSuccessListener {
                             if (it.exists()) {
+                                val c = Calendar.getInstance()
+                                val day = c.get(Calendar.DAY_OF_MONTH)
+                                databaseReference.child(sessionUser).child("questionDate").setValue(day)
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }
@@ -283,7 +314,9 @@ class Quiz : Fragment(), View.OnClickListener {
                                 }
 
                                 gameCoin += 5
-
+                                val c = Calendar.getInstance()
+                                val day = c.get(Calendar.DAY_OF_MONTH)
+                                databaseReference.child(sessionUser).child("questionDate").setValue(day)
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("gameCoin").setValue(gameCoin)
                                 databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
@@ -300,6 +333,9 @@ class Quiz : Fragment(), View.OnClickListener {
                         Log.i("End", mCorrectPercentage.toString())
                         databaseReference.child(sessionUser).get().addOnSuccessListener {
                             if (it.exists()) {
+                                val c = Calendar.getInstance()
+                                val day = c.get(Calendar.DAY_OF_MONTH)
+                                databaseReference.child(sessionUser).child("questionDate").setValue(day)
                                 databaseReference.child(sessionUser).child("quizCorrect").setValue(mCorrectPercentage)
                                 databaseReference.child(sessionUser).child("currentPosition").setValue(mCurrentPosition)
                             }

@@ -80,7 +80,8 @@ class Signup : Fragment() {
                                 checkInCounter = 0,
                                 currentPosition = 1,
                                 checkInDate = 0,
-                                reminderToggle = 0
+                                reminderToggle = 0,
+                                questionDate = 0,
                             )
 
                             //Here Data Inserted
