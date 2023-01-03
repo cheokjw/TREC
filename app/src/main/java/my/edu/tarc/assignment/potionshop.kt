@@ -159,8 +159,18 @@ class potionshop : Fragment() {
                 }.addOnFailureListener {
                     Log.e("firebase", "Error getting data", it)
                 }
-                databaseReference.child(item_string).get().addOnSuccessListener {
+                databaseReference.child("spray_quantity").get().addOnSuccessListener {
                     sprayqtt = it.value.toString().toInt()
+                }.addOnFailureListener {
+                    Log.e("firebase", "Error getting data", it)
+                }
+                databaseReference.child("green_quantity").get().addOnSuccessListener {
+                    greenqtt = it.value.toString().toInt()
+                }.addOnFailureListener {
+                    Log.e("firebase", "Error getting data", it)
+                }
+                databaseReference.child("golden_quantity").get().addOnSuccessListener {
+                    goldqtt = it.value.toString().toInt()
                 }.addOnFailureListener {
                     Log.e("firebase", "Error getting data", it)
                 }
