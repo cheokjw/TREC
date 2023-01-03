@@ -41,12 +41,12 @@ class CheckIn : Fragment() {
     lateinit var databaseReference: DatabaseReference
 
     private var counter = 0
-    var toggledCounter = 1
     var gameCoin = 0
     var treeCoin = 0
     var username =""
     val handler = android.os.Handler()
     var name =""
+    var dailyCheckInCount = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,12 +70,10 @@ class CheckIn : Fragment() {
         }.addOnFailureListener {
             Log.e("firebase", "Error getting data", it)
         }
-//
-//        databaseReference.child("reminderToggle").get().addOnSuccessListener {
-//            toggledCounter = it.value.toString().toInt()
-//        }.addOnFailureListener {
-//            Log.e("firebase", "Error getting data", it)
-//        }
+        //retrieve reminder state
+        databaseReference.child("reminderToggle").get().addOnSuccessListener {
+            var toggledCounter = it.value.toString().toInt()
+
         if(toggledCounter == 1) {
             val alarmManager =
                 requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -87,27 +85,22 @@ class CheckIn : Fragment() {
             val pendingIntent =
                 PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_MUTABLE)
 
-            // Get the current time
-            val currentTime = Calendar.getInstance().timeInMillis
-
             // Set the alarm to trigger at 4am
             val calendar = Calendar.getInstance()
-            calendar.set(Calendar.HOUR_OF_DAY, 1)
+            calendar.set(Calendar.HOUR_OF_DAY, 4)
             calendar.set(Calendar.MINUTE, 0)
             calendar.set(Calendar.SECOND, 0)
 
-            // If the time has already passed, add one day to the time
-            if (calendar.timeInMillis <= currentTime) {
-                calendar.add(Calendar.DATE, 1)
-            }
-
-            // Set the alarm to trigger at the desired time
+            // Setting the alarm to trigger at the desired time
             alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,
                 AlarmManager.INTERVAL_DAY,
                 pendingIntent
             )
+        }
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
         }
         return bindingCheckIn.root
     }
@@ -221,7 +214,6 @@ class CheckIn : Fragment() {
                             dbReminderToggle as Int
                         }
                         toggled = 0
-                        toggledCounter = 0
                         var switchUpdate = hashMapOf<String, Any>(
                             "reminderToggle" to toggled
                         )
@@ -243,7 +235,6 @@ class CheckIn : Fragment() {
                             dbReminderToggle as Int
                         }
                         toggled = 1
-                        toggledCounter = 1
                         var switchUpdate = hashMapOf<String, Any>(
                             "reminderToggle" to toggled
                         )
@@ -306,12 +297,15 @@ class CheckIn : Fragment() {
                                 counter++
                                 checkInCounter++
                                 checkin++
+                                dailyCheckInCount++
 
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
                                     "checkInCounter" to checkInCounter,
-                                    "checkInDate" to day
+                                    "checkInDate" to day,
+                                    "dailyCheckInCount" to dailyCheckInCount
+
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
                             }
@@ -323,12 +317,14 @@ class CheckIn : Fragment() {
                                 counter++
                                 checkInCounter++
                                 checkin++
+                                dailyCheckInCount++
 
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
                                     "checkInCounter" to checkInCounter,
-                                    "checkInDate" to day
+                                    "checkInDate" to day,
+                                    "dailyCheckInCount" to dailyCheckInCount
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
 
@@ -341,12 +337,14 @@ class CheckIn : Fragment() {
                                 counter++
                                 checkInCounter++
                                 checkin++
+                                dailyCheckInCount++
 
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
                                     "checkInCounter" to checkInCounter,
-                                    "checkInDate" to day
+                                    "checkInDate" to day,
+                                    "dailyCheckInCount" to dailyCheckInCount
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
                             }
@@ -358,12 +356,14 @@ class CheckIn : Fragment() {
                                 counter++
                                 checkInCounter++
                                 checkin++
+                                dailyCheckInCount++
 
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
                                     "checkInCounter" to checkInCounter,
-                                    "checkInDate" to day
+                                    "checkInDate" to day,
+                                    "dailyCheckInCount" to dailyCheckInCount
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
                             }
@@ -375,12 +375,14 @@ class CheckIn : Fragment() {
                                 counter++
                                 checkInCounter++
                                 checkin++
+                                dailyCheckInCount++
 
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
                                     "checkInCounter" to checkInCounter,
-                                    "checkInDate" to day
+                                    "checkInDate" to day,
+                                    "dailyCheckInCount" to dailyCheckInCount
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
                             }
@@ -392,12 +394,14 @@ class CheckIn : Fragment() {
                                 counter++
                                 checkInCounter++
                                 checkin++
+                                dailyCheckInCount++
 
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
                                     "checkInCounter" to checkInCounter,
-                                    "checkInDate" to day
+                                    "checkInDate" to day,
+                                    "dailyCheckInCount" to dailyCheckInCount
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
                             }
@@ -409,12 +413,14 @@ class CheckIn : Fragment() {
                                 counter++
                                 checkInCounter++
                                 checkin = 0
+                                dailyCheckInCount++
 
                                 var coinUpdate = hashMapOf<String, Any>(
                                     "gameCoin" to gameCoin,
                                     "checkin" to checkin,
                                     "checkInCounter" to checkInCounter,
-                                    "checkInDate" to day
+                                    "checkInDate" to day,
+                                    "dailyCheckInCount" to dailyCheckInCount
                                 )
                                 databaseReference.child(sessionUser).updateChildren(coinUpdate)
 
@@ -615,10 +621,6 @@ class CheckIn : Fragment() {
 
             }
         }
-    }
-
-    private fun passingIn(oldToggle: Int){
-        toggledCounter = oldToggle
     }
 
     private fun replaceFragment(fragment : Fragment){
